@@ -4,6 +4,10 @@ import { cn } from "@/lib/utils";
 import { ComponentPreview } from "@/components/docs/ComponentPreview";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { PropsTable } from "@/components/docs/PropsTable";
+import { DocsPager } from "@/components/docs/DocsPager";
+import { InstallationTabs } from "@/components/docs/InstallationTabs";
+import fs from "fs/promises";
+import path from "path";
 
 // UI Component imports for rendering previews
 import { Button } from "@/components/ui/Button";
@@ -27,6 +31,12 @@ import { BorderBeam } from "@/components/ui/BorderBeam";
 import { Dock, DockIcon } from "@/components/ui/Dock";
 import { Meteors } from "@/components/ui/MeteorMeteors";
 import { MagicCard } from "@/components/ui/MagicCard";
+
+import { DialogDemo } from "./DialogDemo";
+import { Switch } from "@/components/ui/Switch";
+import { Slider } from "@/components/ui/Slider";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
+import { Accordion, AccordionItem } from "@/components/ui/Accordion";
 
 export function generateStaticParams() {
   return getAllComponentSlugs().map((slug) => ({ name: slug }));
@@ -341,16 +351,61 @@ function renderPreview(slug: string) {
           </MagicCard>
         </div>
       );
+    case "dialog":
+      return <DialogDemo />;
+    case "switch":
+      return (
+        <div className="flex items-center justify-center p-12 bg-black/80 rounded-xl">
+           <Switch />
+        </div>
+      );
+    case "slider":
+      return (
+        <div className="flex items-center justify-center p-12 bg-black/80 rounded-xl w-full max-w-md">
+           <Slider defaultValue={50} max={100} step={1} />
+        </div>
+      );
+    case "tabs":
+      return (
+        <div className="flex items-center justify-center p-12 bg-black/80 rounded-xl w-full">
+            <Tabs defaultValue="account" className="w-[400px]">
+              <div className="flex justify-center mb-4">
+                <TabsList>
+                    <TabsTrigger value="account">Account</TabsTrigger>
+                    <TabsTrigger value="password">Password</TabsTrigger>
+                </TabsList>
+              </div>
+              <TabsContent value="account" className="text-center p-4 bg-white/5 rounded-xl border border-white/10">
+                <p className="text-sm text-slate-400">Make changes to your account here.</p>
+              </TabsContent>
+              <TabsContent value="password" className="text-center p-4 bg-white/5 rounded-xl border border-white/10">
+                <p className="text-sm text-slate-400">Change your password here.</p>
+              </TabsContent>
+            </Tabs>
+        </div>
+      );
+    case "accordion":
+      return (
+        <div className="flex items-center justify-center p-12 bg-black/80 rounded-xl w-full">
+             <Accordion className="w-full max-w-md">
+                <AccordionItem value="item-1" trigger="Is it accessible?">
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionItem>
+                <AccordionItem value="item-2" trigger="Is it styled?">
+                    Yes. It comes with default styles that matches the other components&apos; aesthetic.
+                </AccordionItem>
+                <AccordionItem value="item-3" trigger="Is it animated?">
+                    Yes. It&apos;s animated by default, but you can disable it if you prefer.
+                </AccordionItem>
+            </Accordion>
+        </div>
+      );
     default:
       return <p>Preview not available</p>;
   }
 }
 
 import { TableOfContents } from "@/components/docs/TableOfContents";
-
-// ... existing imports ...
-
-// ... renderPreview function ...
 
 export default async function ComponentPage({
   params,
@@ -363,6 +418,30 @@ export default async function ComponentPage({
   if (!data) {
     notFound();
   }
+
+  const slugs = getAllComponentSlugs();
+  const currentIndex = slugs.indexOf(name);
+  const prevSlug = slugs[currentIndex - 1];
+  const nextSlug = slugs[currentIndex + 1];
+  const prev = prevSlug ? getComponentData(prevSlug) : undefined;
+  const next = nextSlug ? getComponentData(nextSlug) : undefined;
+
+  // Read component source code
+  const filePath = path.join(process.cwd(), "src/components/ui", data.filename);
+  let sourceCode = "";
+  try {
+    sourceCode = await fs.readFile(filePath, "utf-8");
+  } catch (error) {
+    console.error(`Error reading file: ${filePath}`, error);
+    sourceCode = "// Source code not found";
+  }
+
+  const cliCommands = {
+    npm: `npx auralix-ui add ${data.slug}`,
+    pnpm: `pnpm dlx auralix-ui add ${data.slug}`,
+    yarn: `npx auralix-ui add ${data.slug}`,
+    bun: `bunx auralix-ui add ${data.slug}`,
+  };
 
   return (
     <div className="flex flex-col xl:flex-row gap-10">
@@ -377,6 +456,15 @@ export default async function ComponentPage({
         <section id="preview" className="scroll-mt-24">
           <h2 className="mb-4 text-xl font-semibold">Preview</h2>
           <ComponentPreview>{renderPreview(name)}</ComponentPreview>
+        </section>
+
+        {/* Installation */}
+        <section id="installation" className="scroll-mt-24">
+          <h2 className="mb-4 text-xl font-semibold">Installation</h2>
+          <InstallationTabs
+            cliCommands={cliCommands}
+            sourceCode={sourceCode}
+          />
         </section>
 
         {/* Examples */}
@@ -399,6 +487,10 @@ export default async function ComponentPage({
           <h2 className="mb-4 text-xl font-semibold">Props</h2>
           <PropsTable props={data.props} />
         </section>
+
+        <hr className="my-6 border-border" />
+        
+        <DocsPager prev={prev} next={next} />
       </div>
       
       {/* Right Sidebar */}

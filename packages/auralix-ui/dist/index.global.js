@@ -1700,18 +1700,18 @@ var AuralixUI = (() => {
         function isValidElement(object) {
           return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
         }
-        var React = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
+        var React9 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React9.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
           return null;
         };
-        React = {
+        React9 = {
           react_stack_bottom_frame: function(callStackForError) {
             return callStackForError();
           }
         };
         var specialPropKeyWarningShown;
         var didWarnAboutElementRef = {};
-        var unknownOwnerDebugStack = React.react_stack_bottom_frame.bind(
-          React,
+        var unknownOwnerDebugStack = React9.react_stack_bottom_frame.bind(
+          React9,
           UnknownOwner
         )();
         var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
@@ -1755,11 +1755,1441 @@ var AuralixUI = (() => {
     }
   });
 
+  // ../../node_modules/react/cjs/react.production.js
+  var require_react_production2 = __commonJS({
+    "../../node_modules/react/cjs/react.production.js"(exports) {
+      "use strict";
+      var REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element");
+      var REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal");
+      var REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment");
+      var REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode");
+      var REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler");
+      var REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer");
+      var REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context");
+      var REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref");
+      var REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense");
+      var REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo");
+      var REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+      var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
+      var MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
+      function getIteratorFn(maybeIterable) {
+        if (null === maybeIterable || "object" !== typeof maybeIterable) return null;
+        maybeIterable = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable["@@iterator"];
+        return "function" === typeof maybeIterable ? maybeIterable : null;
+      }
+      var ReactNoopUpdateQueue = {
+        isMounted: function() {
+          return false;
+        },
+        enqueueForceUpdate: function() {
+        },
+        enqueueReplaceState: function() {
+        },
+        enqueueSetState: function() {
+        }
+      };
+      var assign = Object.assign;
+      var emptyObject = {};
+      function Component(props, context, updater) {
+        this.props = props;
+        this.context = context;
+        this.refs = emptyObject;
+        this.updater = updater || ReactNoopUpdateQueue;
+      }
+      Component.prototype.isReactComponent = {};
+      Component.prototype.setState = function(partialState, callback) {
+        if ("object" !== typeof partialState && "function" !== typeof partialState && null != partialState)
+          throw Error(
+            "takes an object of state variables to update or a function which returns an object of state variables."
+          );
+        this.updater.enqueueSetState(this, partialState, callback, "setState");
+      };
+      Component.prototype.forceUpdate = function(callback) {
+        this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
+      };
+      function ComponentDummy() {
+      }
+      ComponentDummy.prototype = Component.prototype;
+      function PureComponent(props, context, updater) {
+        this.props = props;
+        this.context = context;
+        this.refs = emptyObject;
+        this.updater = updater || ReactNoopUpdateQueue;
+      }
+      var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
+      pureComponentPrototype.constructor = PureComponent;
+      assign(pureComponentPrototype, Component.prototype);
+      pureComponentPrototype.isPureReactComponent = true;
+      var isArrayImpl = Array.isArray;
+      function noop() {
+      }
+      var ReactSharedInternals = { H: null, A: null, T: null, S: null };
+      var hasOwnProperty = Object.prototype.hasOwnProperty;
+      function ReactElement(type, key, props) {
+        var refProp = props.ref;
+        return {
+          $$typeof: REACT_ELEMENT_TYPE,
+          type,
+          key,
+          ref: void 0 !== refProp ? refProp : null,
+          props
+        };
+      }
+      function cloneAndReplaceKey(oldElement, newKey) {
+        return ReactElement(oldElement.type, newKey, oldElement.props);
+      }
+      function isValidElement(object) {
+        return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
+      }
+      function escape(key) {
+        var escaperLookup = { "=": "=0", ":": "=2" };
+        return "$" + key.replace(/[=:]/g, function(match) {
+          return escaperLookup[match];
+        });
+      }
+      var userProvidedKeyEscapeRegex = /\/+/g;
+      function getElementKey(element, index) {
+        return "object" === typeof element && null !== element && null != element.key ? escape("" + element.key) : index.toString(36);
+      }
+      function resolveThenable(thenable) {
+        switch (thenable.status) {
+          case "fulfilled":
+            return thenable.value;
+          case "rejected":
+            throw thenable.reason;
+          default:
+            switch ("string" === typeof thenable.status ? thenable.then(noop, noop) : (thenable.status = "pending", thenable.then(
+              function(fulfilledValue) {
+                "pending" === thenable.status && (thenable.status = "fulfilled", thenable.value = fulfilledValue);
+              },
+              function(error) {
+                "pending" === thenable.status && (thenable.status = "rejected", thenable.reason = error);
+              }
+            )), thenable.status) {
+              case "fulfilled":
+                return thenable.value;
+              case "rejected":
+                throw thenable.reason;
+            }
+        }
+        throw thenable;
+      }
+      function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
+        var type = typeof children;
+        if ("undefined" === type || "boolean" === type) children = null;
+        var invokeCallback = false;
+        if (null === children) invokeCallback = true;
+        else
+          switch (type) {
+            case "bigint":
+            case "string":
+            case "number":
+              invokeCallback = true;
+              break;
+            case "object":
+              switch (children.$$typeof) {
+                case REACT_ELEMENT_TYPE:
+                case REACT_PORTAL_TYPE:
+                  invokeCallback = true;
+                  break;
+                case REACT_LAZY_TYPE:
+                  return invokeCallback = children._init, mapIntoArray(
+                    invokeCallback(children._payload),
+                    array,
+                    escapedPrefix,
+                    nameSoFar,
+                    callback
+                  );
+              }
+          }
+        if (invokeCallback)
+          return callback = callback(children), invokeCallback = "" === nameSoFar ? "." + getElementKey(children, 0) : nameSoFar, isArrayImpl(callback) ? (escapedPrefix = "", null != invokeCallback && (escapedPrefix = invokeCallback.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c) {
+            return c;
+          })) : null != callback && (isValidElement(callback) && (callback = cloneAndReplaceKey(
+            callback,
+            escapedPrefix + (null == callback.key || children && children.key === callback.key ? "" : ("" + callback.key).replace(
+              userProvidedKeyEscapeRegex,
+              "$&/"
+            ) + "/") + invokeCallback
+          )), array.push(callback)), 1;
+        invokeCallback = 0;
+        var nextNamePrefix = "" === nameSoFar ? "." : nameSoFar + ":";
+        if (isArrayImpl(children))
+          for (var i = 0; i < children.length; i++)
+            nameSoFar = children[i], type = nextNamePrefix + getElementKey(nameSoFar, i), invokeCallback += mapIntoArray(
+              nameSoFar,
+              array,
+              escapedPrefix,
+              type,
+              callback
+            );
+        else if (i = getIteratorFn(children), "function" === typeof i)
+          for (children = i.call(children), i = 0; !(nameSoFar = children.next()).done; )
+            nameSoFar = nameSoFar.value, type = nextNamePrefix + getElementKey(nameSoFar, i++), invokeCallback += mapIntoArray(
+              nameSoFar,
+              array,
+              escapedPrefix,
+              type,
+              callback
+            );
+        else if ("object" === type) {
+          if ("function" === typeof children.then)
+            return mapIntoArray(
+              resolveThenable(children),
+              array,
+              escapedPrefix,
+              nameSoFar,
+              callback
+            );
+          array = String(children);
+          throw Error(
+            "Objects are not valid as a React child (found: " + ("[object Object]" === array ? "object with keys {" + Object.keys(children).join(", ") + "}" : array) + "). If you meant to render a collection of children, use an array instead."
+          );
+        }
+        return invokeCallback;
+      }
+      function mapChildren(children, func, context) {
+        if (null == children) return children;
+        var result = [], count = 0;
+        mapIntoArray(children, result, "", "", function(child) {
+          return func.call(context, child, count++);
+        });
+        return result;
+      }
+      function lazyInitializer(payload) {
+        if (-1 === payload._status) {
+          var ctor = payload._result;
+          ctor = ctor();
+          ctor.then(
+            function(moduleObject) {
+              if (0 === payload._status || -1 === payload._status)
+                payload._status = 1, payload._result = moduleObject;
+            },
+            function(error) {
+              if (0 === payload._status || -1 === payload._status)
+                payload._status = 2, payload._result = error;
+            }
+          );
+          -1 === payload._status && (payload._status = 0, payload._result = ctor);
+        }
+        if (1 === payload._status) return payload._result.default;
+        throw payload._result;
+      }
+      var reportGlobalError = "function" === typeof reportError ? reportError : function(error) {
+        if ("object" === typeof window && "function" === typeof window.ErrorEvent) {
+          var event = new window.ErrorEvent("error", {
+            bubbles: true,
+            cancelable: true,
+            message: "object" === typeof error && null !== error && "string" === typeof error.message ? String(error.message) : String(error),
+            error
+          });
+          if (!window.dispatchEvent(event)) return;
+        } else if ("object" === typeof process && "function" === typeof process.emit) {
+          process.emit("uncaughtException", error);
+          return;
+        }
+        console.error(error);
+      };
+      var Children = {
+        map: mapChildren,
+        forEach: function(children, forEachFunc, forEachContext) {
+          mapChildren(
+            children,
+            function() {
+              forEachFunc.apply(this, arguments);
+            },
+            forEachContext
+          );
+        },
+        count: function(children) {
+          var n = 0;
+          mapChildren(children, function() {
+            n++;
+          });
+          return n;
+        },
+        toArray: function(children) {
+          return mapChildren(children, function(child) {
+            return child;
+          }) || [];
+        },
+        only: function(children) {
+          if (!isValidElement(children))
+            throw Error(
+              "React.Children.only expected to receive a single React element child."
+            );
+          return children;
+        }
+      };
+      exports.Activity = REACT_ACTIVITY_TYPE;
+      exports.Children = Children;
+      exports.Component = Component;
+      exports.Fragment = REACT_FRAGMENT_TYPE;
+      exports.Profiler = REACT_PROFILER_TYPE;
+      exports.PureComponent = PureComponent;
+      exports.StrictMode = REACT_STRICT_MODE_TYPE;
+      exports.Suspense = REACT_SUSPENSE_TYPE;
+      exports.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE = ReactSharedInternals;
+      exports.__COMPILER_RUNTIME = {
+        __proto__: null,
+        c: function(size) {
+          return ReactSharedInternals.H.useMemoCache(size);
+        }
+      };
+      exports.cache = function(fn) {
+        return function() {
+          return fn.apply(null, arguments);
+        };
+      };
+      exports.cacheSignal = function() {
+        return null;
+      };
+      exports.cloneElement = function(element, config, children) {
+        if (null === element || void 0 === element)
+          throw Error(
+            "The argument must be a React element, but you passed " + element + "."
+          );
+        var props = assign({}, element.props), key = element.key;
+        if (null != config)
+          for (propName in void 0 !== config.key && (key = "" + config.key), config)
+            !hasOwnProperty.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
+        var propName = arguments.length - 2;
+        if (1 === propName) props.children = children;
+        else if (1 < propName) {
+          for (var childArray = Array(propName), i = 0; i < propName; i++)
+            childArray[i] = arguments[i + 2];
+          props.children = childArray;
+        }
+        return ReactElement(element.type, key, props);
+      };
+      exports.createContext = function(defaultValue) {
+        defaultValue = {
+          $$typeof: REACT_CONTEXT_TYPE,
+          _currentValue: defaultValue,
+          _currentValue2: defaultValue,
+          _threadCount: 0,
+          Provider: null,
+          Consumer: null
+        };
+        defaultValue.Provider = defaultValue;
+        defaultValue.Consumer = {
+          $$typeof: REACT_CONSUMER_TYPE,
+          _context: defaultValue
+        };
+        return defaultValue;
+      };
+      exports.createElement = function(type, config, children) {
+        var propName, props = {}, key = null;
+        if (null != config)
+          for (propName in void 0 !== config.key && (key = "" + config.key), config)
+            hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config[propName]);
+        var childrenLength = arguments.length - 2;
+        if (1 === childrenLength) props.children = children;
+        else if (1 < childrenLength) {
+          for (var childArray = Array(childrenLength), i = 0; i < childrenLength; i++)
+            childArray[i] = arguments[i + 2];
+          props.children = childArray;
+        }
+        if (type && type.defaultProps)
+          for (propName in childrenLength = type.defaultProps, childrenLength)
+            void 0 === props[propName] && (props[propName] = childrenLength[propName]);
+        return ReactElement(type, key, props);
+      };
+      exports.createRef = function() {
+        return { current: null };
+      };
+      exports.forwardRef = function(render) {
+        return { $$typeof: REACT_FORWARD_REF_TYPE, render };
+      };
+      exports.isValidElement = isValidElement;
+      exports.lazy = function(ctor) {
+        return {
+          $$typeof: REACT_LAZY_TYPE,
+          _payload: { _status: -1, _result: ctor },
+          _init: lazyInitializer
+        };
+      };
+      exports.memo = function(type, compare) {
+        return {
+          $$typeof: REACT_MEMO_TYPE,
+          type,
+          compare: void 0 === compare ? null : compare
+        };
+      };
+      exports.startTransition = function(scope) {
+        var prevTransition = ReactSharedInternals.T, currentTransition = {};
+        ReactSharedInternals.T = currentTransition;
+        try {
+          var returnValue = scope(), onStartTransitionFinish = ReactSharedInternals.S;
+          null !== onStartTransitionFinish && onStartTransitionFinish(currentTransition, returnValue);
+          "object" === typeof returnValue && null !== returnValue && "function" === typeof returnValue.then && returnValue.then(noop, reportGlobalError);
+        } catch (error) {
+          reportGlobalError(error);
+        } finally {
+          null !== prevTransition && null !== currentTransition.types && (prevTransition.types = currentTransition.types), ReactSharedInternals.T = prevTransition;
+        }
+      };
+      exports.unstable_useCacheRefresh = function() {
+        return ReactSharedInternals.H.useCacheRefresh();
+      };
+      exports.use = function(usable) {
+        return ReactSharedInternals.H.use(usable);
+      };
+      exports.useActionState = function(action, initialState, permalink) {
+        return ReactSharedInternals.H.useActionState(action, initialState, permalink);
+      };
+      exports.useCallback = function(callback, deps) {
+        return ReactSharedInternals.H.useCallback(callback, deps);
+      };
+      exports.useContext = function(Context) {
+        return ReactSharedInternals.H.useContext(Context);
+      };
+      exports.useDebugValue = function() {
+      };
+      exports.useDeferredValue = function(value, initialValue) {
+        return ReactSharedInternals.H.useDeferredValue(value, initialValue);
+      };
+      exports.useEffect = function(create, deps) {
+        return ReactSharedInternals.H.useEffect(create, deps);
+      };
+      exports.useEffectEvent = function(callback) {
+        return ReactSharedInternals.H.useEffectEvent(callback);
+      };
+      exports.useId = function() {
+        return ReactSharedInternals.H.useId();
+      };
+      exports.useImperativeHandle = function(ref, create, deps) {
+        return ReactSharedInternals.H.useImperativeHandle(ref, create, deps);
+      };
+      exports.useInsertionEffect = function(create, deps) {
+        return ReactSharedInternals.H.useInsertionEffect(create, deps);
+      };
+      exports.useLayoutEffect = function(create, deps) {
+        return ReactSharedInternals.H.useLayoutEffect(create, deps);
+      };
+      exports.useMemo = function(create, deps) {
+        return ReactSharedInternals.H.useMemo(create, deps);
+      };
+      exports.useOptimistic = function(passthrough, reducer) {
+        return ReactSharedInternals.H.useOptimistic(passthrough, reducer);
+      };
+      exports.useReducer = function(reducer, initialArg, init) {
+        return ReactSharedInternals.H.useReducer(reducer, initialArg, init);
+      };
+      exports.useRef = function(initialValue) {
+        return ReactSharedInternals.H.useRef(initialValue);
+      };
+      exports.useState = function(initialState) {
+        return ReactSharedInternals.H.useState(initialState);
+      };
+      exports.useSyncExternalStore = function(subscribe, getSnapshot, getServerSnapshot) {
+        return ReactSharedInternals.H.useSyncExternalStore(
+          subscribe,
+          getSnapshot,
+          getServerSnapshot
+        );
+      };
+      exports.useTransition = function() {
+        return ReactSharedInternals.H.useTransition();
+      };
+      exports.version = "19.2.3";
+    }
+  });
+
+  // ../../node_modules/react/cjs/react.development.js
+  var require_react_development2 = __commonJS({
+    "../../node_modules/react/cjs/react.development.js"(exports, module) {
+      "use strict";
+      "production" !== process.env.NODE_ENV && (function() {
+        function defineDeprecationWarning(methodName, info) {
+          Object.defineProperty(Component.prototype, methodName, {
+            get: function() {
+              console.warn(
+                "%s(...) is deprecated in plain JavaScript React classes. %s",
+                info[0],
+                info[1]
+              );
+            }
+          });
+        }
+        function getIteratorFn(maybeIterable) {
+          if (null === maybeIterable || "object" !== typeof maybeIterable)
+            return null;
+          maybeIterable = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable["@@iterator"];
+          return "function" === typeof maybeIterable ? maybeIterable : null;
+        }
+        function warnNoop(publicInstance, callerName) {
+          publicInstance = (publicInstance = publicInstance.constructor) && (publicInstance.displayName || publicInstance.name) || "ReactClass";
+          var warningKey = publicInstance + "." + callerName;
+          didWarnStateUpdateForUnmountedComponent[warningKey] || (console.error(
+            "Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `this.state` directly or define a `state = {};` class property with the desired state in the %s component.",
+            callerName,
+            publicInstance
+          ), didWarnStateUpdateForUnmountedComponent[warningKey] = true);
+        }
+        function Component(props, context, updater) {
+          this.props = props;
+          this.context = context;
+          this.refs = emptyObject;
+          this.updater = updater || ReactNoopUpdateQueue;
+        }
+        function ComponentDummy() {
+        }
+        function PureComponent(props, context, updater) {
+          this.props = props;
+          this.context = context;
+          this.refs = emptyObject;
+          this.updater = updater || ReactNoopUpdateQueue;
+        }
+        function noop() {
+        }
+        function testStringCoercion(value) {
+          return "" + value;
+        }
+        function checkKeyStringCoercion(value) {
+          try {
+            testStringCoercion(value);
+            var JSCompiler_inline_result = false;
+          } catch (e) {
+            JSCompiler_inline_result = true;
+          }
+          if (JSCompiler_inline_result) {
+            JSCompiler_inline_result = console;
+            var JSCompiler_temp_const = JSCompiler_inline_result.error;
+            var JSCompiler_inline_result$jscomp$0 = "function" === typeof Symbol && Symbol.toStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+            JSCompiler_temp_const.call(
+              JSCompiler_inline_result,
+              "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.",
+              JSCompiler_inline_result$jscomp$0
+            );
+            return testStringCoercion(value);
+          }
+        }
+        function getComponentNameFromType(type) {
+          if (null == type) return null;
+          if ("function" === typeof type)
+            return type.$$typeof === REACT_CLIENT_REFERENCE ? null : type.displayName || type.name || null;
+          if ("string" === typeof type) return type;
+          switch (type) {
+            case REACT_FRAGMENT_TYPE:
+              return "Fragment";
+            case REACT_PROFILER_TYPE:
+              return "Profiler";
+            case REACT_STRICT_MODE_TYPE:
+              return "StrictMode";
+            case REACT_SUSPENSE_TYPE:
+              return "Suspense";
+            case REACT_SUSPENSE_LIST_TYPE:
+              return "SuspenseList";
+            case REACT_ACTIVITY_TYPE:
+              return "Activity";
+          }
+          if ("object" === typeof type)
+            switch ("number" === typeof type.tag && console.error(
+              "Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."
+            ), type.$$typeof) {
+              case REACT_PORTAL_TYPE:
+                return "Portal";
+              case REACT_CONTEXT_TYPE:
+                return type.displayName || "Context";
+              case REACT_CONSUMER_TYPE:
+                return (type._context.displayName || "Context") + ".Consumer";
+              case REACT_FORWARD_REF_TYPE:
+                var innerType = type.render;
+                type = type.displayName;
+                type || (type = innerType.displayName || innerType.name || "", type = "" !== type ? "ForwardRef(" + type + ")" : "ForwardRef");
+                return type;
+              case REACT_MEMO_TYPE:
+                return innerType = type.displayName || null, null !== innerType ? innerType : getComponentNameFromType(type.type) || "Memo";
+              case REACT_LAZY_TYPE:
+                innerType = type._payload;
+                type = type._init;
+                try {
+                  return getComponentNameFromType(type(innerType));
+                } catch (x) {
+                }
+            }
+          return null;
+        }
+        function getTaskName(type) {
+          if (type === REACT_FRAGMENT_TYPE) return "<>";
+          if ("object" === typeof type && null !== type && type.$$typeof === REACT_LAZY_TYPE)
+            return "<...>";
+          try {
+            var name = getComponentNameFromType(type);
+            return name ? "<" + name + ">" : "<...>";
+          } catch (x) {
+            return "<...>";
+          }
+        }
+        function getOwner() {
+          var dispatcher = ReactSharedInternals.A;
+          return null === dispatcher ? null : dispatcher.getOwner();
+        }
+        function UnknownOwner() {
+          return Error("react-stack-top-frame");
+        }
+        function hasValidKey(config) {
+          if (hasOwnProperty.call(config, "key")) {
+            var getter = Object.getOwnPropertyDescriptor(config, "key").get;
+            if (getter && getter.isReactWarning) return false;
+          }
+          return void 0 !== config.key;
+        }
+        function defineKeyPropWarningGetter(props, displayName) {
+          function warnAboutAccessingKey() {
+            specialPropKeyWarningShown || (specialPropKeyWarningShown = true, console.error(
+              "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
+              displayName
+            ));
+          }
+          warnAboutAccessingKey.isReactWarning = true;
+          Object.defineProperty(props, "key", {
+            get: warnAboutAccessingKey,
+            configurable: true
+          });
+        }
+        function elementRefGetterWithDeprecationWarning() {
+          var componentName = getComponentNameFromType(this.type);
+          didWarnAboutElementRef[componentName] || (didWarnAboutElementRef[componentName] = true, console.error(
+            "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
+          ));
+          componentName = this.props.ref;
+          return void 0 !== componentName ? componentName : null;
+        }
+        function ReactElement(type, key, props, owner, debugStack, debugTask) {
+          var refProp = props.ref;
+          type = {
+            $$typeof: REACT_ELEMENT_TYPE,
+            type,
+            key,
+            props,
+            _owner: owner
+          };
+          null !== (void 0 !== refProp ? refProp : null) ? Object.defineProperty(type, "ref", {
+            enumerable: false,
+            get: elementRefGetterWithDeprecationWarning
+          }) : Object.defineProperty(type, "ref", { enumerable: false, value: null });
+          type._store = {};
+          Object.defineProperty(type._store, "validated", {
+            configurable: false,
+            enumerable: false,
+            writable: true,
+            value: 0
+          });
+          Object.defineProperty(type, "_debugInfo", {
+            configurable: false,
+            enumerable: false,
+            writable: true,
+            value: null
+          });
+          Object.defineProperty(type, "_debugStack", {
+            configurable: false,
+            enumerable: false,
+            writable: true,
+            value: debugStack
+          });
+          Object.defineProperty(type, "_debugTask", {
+            configurable: false,
+            enumerable: false,
+            writable: true,
+            value: debugTask
+          });
+          Object.freeze && (Object.freeze(type.props), Object.freeze(type));
+          return type;
+        }
+        function cloneAndReplaceKey(oldElement, newKey) {
+          newKey = ReactElement(
+            oldElement.type,
+            newKey,
+            oldElement.props,
+            oldElement._owner,
+            oldElement._debugStack,
+            oldElement._debugTask
+          );
+          oldElement._store && (newKey._store.validated = oldElement._store.validated);
+          return newKey;
+        }
+        function validateChildKeys(node) {
+          isValidElement(node) ? node._store && (node._store.validated = 1) : "object" === typeof node && null !== node && node.$$typeof === REACT_LAZY_TYPE && ("fulfilled" === node._payload.status ? isValidElement(node._payload.value) && node._payload.value._store && (node._payload.value._store.validated = 1) : node._store && (node._store.validated = 1));
+        }
+        function isValidElement(object) {
+          return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
+        }
+        function escape(key) {
+          var escaperLookup = { "=": "=0", ":": "=2" };
+          return "$" + key.replace(/[=:]/g, function(match) {
+            return escaperLookup[match];
+          });
+        }
+        function getElementKey(element, index) {
+          return "object" === typeof element && null !== element && null != element.key ? (checkKeyStringCoercion(element.key), escape("" + element.key)) : index.toString(36);
+        }
+        function resolveThenable(thenable) {
+          switch (thenable.status) {
+            case "fulfilled":
+              return thenable.value;
+            case "rejected":
+              throw thenable.reason;
+            default:
+              switch ("string" === typeof thenable.status ? thenable.then(noop, noop) : (thenable.status = "pending", thenable.then(
+                function(fulfilledValue) {
+                  "pending" === thenable.status && (thenable.status = "fulfilled", thenable.value = fulfilledValue);
+                },
+                function(error) {
+                  "pending" === thenable.status && (thenable.status = "rejected", thenable.reason = error);
+                }
+              )), thenable.status) {
+                case "fulfilled":
+                  return thenable.value;
+                case "rejected":
+                  throw thenable.reason;
+              }
+          }
+          throw thenable;
+        }
+        function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
+          var type = typeof children;
+          if ("undefined" === type || "boolean" === type) children = null;
+          var invokeCallback = false;
+          if (null === children) invokeCallback = true;
+          else
+            switch (type) {
+              case "bigint":
+              case "string":
+              case "number":
+                invokeCallback = true;
+                break;
+              case "object":
+                switch (children.$$typeof) {
+                  case REACT_ELEMENT_TYPE:
+                  case REACT_PORTAL_TYPE:
+                    invokeCallback = true;
+                    break;
+                  case REACT_LAZY_TYPE:
+                    return invokeCallback = children._init, mapIntoArray(
+                      invokeCallback(children._payload),
+                      array,
+                      escapedPrefix,
+                      nameSoFar,
+                      callback
+                    );
+                }
+            }
+          if (invokeCallback) {
+            invokeCallback = children;
+            callback = callback(invokeCallback);
+            var childKey = "" === nameSoFar ? "." + getElementKey(invokeCallback, 0) : nameSoFar;
+            isArrayImpl(callback) ? (escapedPrefix = "", null != childKey && (escapedPrefix = childKey.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c) {
+              return c;
+            })) : null != callback && (isValidElement(callback) && (null != callback.key && (invokeCallback && invokeCallback.key === callback.key || checkKeyStringCoercion(callback.key)), escapedPrefix = cloneAndReplaceKey(
+              callback,
+              escapedPrefix + (null == callback.key || invokeCallback && invokeCallback.key === callback.key ? "" : ("" + callback.key).replace(
+                userProvidedKeyEscapeRegex,
+                "$&/"
+              ) + "/") + childKey
+            ), "" !== nameSoFar && null != invokeCallback && isValidElement(invokeCallback) && null == invokeCallback.key && invokeCallback._store && !invokeCallback._store.validated && (escapedPrefix._store.validated = 2), callback = escapedPrefix), array.push(callback));
+            return 1;
+          }
+          invokeCallback = 0;
+          childKey = "" === nameSoFar ? "." : nameSoFar + ":";
+          if (isArrayImpl(children))
+            for (var i = 0; i < children.length; i++)
+              nameSoFar = children[i], type = childKey + getElementKey(nameSoFar, i), invokeCallback += mapIntoArray(
+                nameSoFar,
+                array,
+                escapedPrefix,
+                type,
+                callback
+              );
+          else if (i = getIteratorFn(children), "function" === typeof i)
+            for (i === children.entries && (didWarnAboutMaps || console.warn(
+              "Using Maps as children is not supported. Use an array of keyed ReactElements instead."
+            ), didWarnAboutMaps = true), children = i.call(children), i = 0; !(nameSoFar = children.next()).done; )
+              nameSoFar = nameSoFar.value, type = childKey + getElementKey(nameSoFar, i++), invokeCallback += mapIntoArray(
+                nameSoFar,
+                array,
+                escapedPrefix,
+                type,
+                callback
+              );
+          else if ("object" === type) {
+            if ("function" === typeof children.then)
+              return mapIntoArray(
+                resolveThenable(children),
+                array,
+                escapedPrefix,
+                nameSoFar,
+                callback
+              );
+            array = String(children);
+            throw Error(
+              "Objects are not valid as a React child (found: " + ("[object Object]" === array ? "object with keys {" + Object.keys(children).join(", ") + "}" : array) + "). If you meant to render a collection of children, use an array instead."
+            );
+          }
+          return invokeCallback;
+        }
+        function mapChildren(children, func, context) {
+          if (null == children) return children;
+          var result = [], count = 0;
+          mapIntoArray(children, result, "", "", function(child) {
+            return func.call(context, child, count++);
+          });
+          return result;
+        }
+        function lazyInitializer(payload) {
+          if (-1 === payload._status) {
+            var ioInfo = payload._ioInfo;
+            null != ioInfo && (ioInfo.start = ioInfo.end = performance.now());
+            ioInfo = payload._result;
+            var thenable = ioInfo();
+            thenable.then(
+              function(moduleObject) {
+                if (0 === payload._status || -1 === payload._status) {
+                  payload._status = 1;
+                  payload._result = moduleObject;
+                  var _ioInfo = payload._ioInfo;
+                  null != _ioInfo && (_ioInfo.end = performance.now());
+                  void 0 === thenable.status && (thenable.status = "fulfilled", thenable.value = moduleObject);
+                }
+              },
+              function(error) {
+                if (0 === payload._status || -1 === payload._status) {
+                  payload._status = 2;
+                  payload._result = error;
+                  var _ioInfo2 = payload._ioInfo;
+                  null != _ioInfo2 && (_ioInfo2.end = performance.now());
+                  void 0 === thenable.status && (thenable.status = "rejected", thenable.reason = error);
+                }
+              }
+            );
+            ioInfo = payload._ioInfo;
+            if (null != ioInfo) {
+              ioInfo.value = thenable;
+              var displayName = thenable.displayName;
+              "string" === typeof displayName && (ioInfo.name = displayName);
+            }
+            -1 === payload._status && (payload._status = 0, payload._result = thenable);
+          }
+          if (1 === payload._status)
+            return ioInfo = payload._result, void 0 === ioInfo && console.error(
+              "lazy: Expected the result of a dynamic import() call. Instead received: %s\n\nYour code should look like: \n  const MyComponent = lazy(() => import('./MyComponent'))\n\nDid you accidentally put curly braces around the import?",
+              ioInfo
+            ), "default" in ioInfo || console.error(
+              "lazy: Expected the result of a dynamic import() call. Instead received: %s\n\nYour code should look like: \n  const MyComponent = lazy(() => import('./MyComponent'))",
+              ioInfo
+            ), ioInfo.default;
+          throw payload._result;
+        }
+        function resolveDispatcher() {
+          var dispatcher = ReactSharedInternals.H;
+          null === dispatcher && console.error(
+            "Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem."
+          );
+          return dispatcher;
+        }
+        function releaseAsyncTransition() {
+          ReactSharedInternals.asyncTransitions--;
+        }
+        function enqueueTask(task) {
+          if (null === enqueueTaskImpl)
+            try {
+              var requireString = ("require" + Math.random()).slice(0, 7);
+              enqueueTaskImpl = (module && module[requireString]).call(
+                module,
+                "timers"
+              ).setImmediate;
+            } catch (_err) {
+              enqueueTaskImpl = function(callback) {
+                false === didWarnAboutMessageChannel && (didWarnAboutMessageChannel = true, "undefined" === typeof MessageChannel && console.error(
+                  "This browser does not have a MessageChannel implementation, so enqueuing tasks via await act(async () => ...) will fail. Please file an issue at https://github.com/facebook/react/issues if you encounter this warning."
+                ));
+                var channel = new MessageChannel();
+                channel.port1.onmessage = callback;
+                channel.port2.postMessage(void 0);
+              };
+            }
+          return enqueueTaskImpl(task);
+        }
+        function aggregateErrors(errors) {
+          return 1 < errors.length && "function" === typeof AggregateError ? new AggregateError(errors) : errors[0];
+        }
+        function popActScope(prevActQueue, prevActScopeDepth) {
+          prevActScopeDepth !== actScopeDepth - 1 && console.error(
+            "You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. "
+          );
+          actScopeDepth = prevActScopeDepth;
+        }
+        function recursivelyFlushAsyncActWork(returnValue, resolve, reject) {
+          var queue = ReactSharedInternals.actQueue;
+          if (null !== queue)
+            if (0 !== queue.length)
+              try {
+                flushActQueue(queue);
+                enqueueTask(function() {
+                  return recursivelyFlushAsyncActWork(returnValue, resolve, reject);
+                });
+                return;
+              } catch (error) {
+                ReactSharedInternals.thrownErrors.push(error);
+              }
+            else ReactSharedInternals.actQueue = null;
+          0 < ReactSharedInternals.thrownErrors.length ? (queue = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, reject(queue)) : resolve(returnValue);
+        }
+        function flushActQueue(queue) {
+          if (!isFlushing) {
+            isFlushing = true;
+            var i = 0;
+            try {
+              for (; i < queue.length; i++) {
+                var callback = queue[i];
+                do {
+                  ReactSharedInternals.didUsePromise = false;
+                  var continuation = callback(false);
+                  if (null !== continuation) {
+                    if (ReactSharedInternals.didUsePromise) {
+                      queue[i] = callback;
+                      queue.splice(0, i);
+                      return;
+                    }
+                    callback = continuation;
+                  } else break;
+                } while (1);
+              }
+              queue.length = 0;
+            } catch (error) {
+              queue.splice(0, i + 1), ReactSharedInternals.thrownErrors.push(error);
+            } finally {
+              isFlushing = false;
+            }
+          }
+        }
+        "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
+        var REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), MAYBE_ITERATOR_SYMBOL = Symbol.iterator, didWarnStateUpdateForUnmountedComponent = {}, ReactNoopUpdateQueue = {
+          isMounted: function() {
+            return false;
+          },
+          enqueueForceUpdate: function(publicInstance) {
+            warnNoop(publicInstance, "forceUpdate");
+          },
+          enqueueReplaceState: function(publicInstance) {
+            warnNoop(publicInstance, "replaceState");
+          },
+          enqueueSetState: function(publicInstance) {
+            warnNoop(publicInstance, "setState");
+          }
+        }, assign = Object.assign, emptyObject = {};
+        Object.freeze(emptyObject);
+        Component.prototype.isReactComponent = {};
+        Component.prototype.setState = function(partialState, callback) {
+          if ("object" !== typeof partialState && "function" !== typeof partialState && null != partialState)
+            throw Error(
+              "takes an object of state variables to update or a function which returns an object of state variables."
+            );
+          this.updater.enqueueSetState(this, partialState, callback, "setState");
+        };
+        Component.prototype.forceUpdate = function(callback) {
+          this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
+        };
+        var deprecatedAPIs = {
+          isMounted: [
+            "isMounted",
+            "Instead, make sure to clean up subscriptions and pending requests in componentWillUnmount to prevent memory leaks."
+          ],
+          replaceState: [
+            "replaceState",
+            "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."
+          ]
+        };
+        for (fnName in deprecatedAPIs)
+          deprecatedAPIs.hasOwnProperty(fnName) && defineDeprecationWarning(fnName, deprecatedAPIs[fnName]);
+        ComponentDummy.prototype = Component.prototype;
+        deprecatedAPIs = PureComponent.prototype = new ComponentDummy();
+        deprecatedAPIs.constructor = PureComponent;
+        assign(deprecatedAPIs, Component.prototype);
+        deprecatedAPIs.isPureReactComponent = true;
+        var isArrayImpl = Array.isArray, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = {
+          H: null,
+          A: null,
+          T: null,
+          S: null,
+          actQueue: null,
+          asyncTransitions: 0,
+          isBatchingLegacy: false,
+          didScheduleLegacyUpdate: false,
+          didUsePromise: false,
+          thrownErrors: [],
+          getCurrentStack: null,
+          recentlyCreatedOwnerStacks: 0
+        }, hasOwnProperty = Object.prototype.hasOwnProperty, createTask = console.createTask ? console.createTask : function() {
+          return null;
+        };
+        deprecatedAPIs = {
+          react_stack_bottom_frame: function(callStackForError) {
+            return callStackForError();
+          }
+        };
+        var specialPropKeyWarningShown, didWarnAboutOldJSXRuntime;
+        var didWarnAboutElementRef = {};
+        var unknownOwnerDebugStack = deprecatedAPIs.react_stack_bottom_frame.bind(
+          deprecatedAPIs,
+          UnknownOwner
+        )();
+        var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
+        var didWarnAboutMaps = false, userProvidedKeyEscapeRegex = /\/+/g, reportGlobalError = "function" === typeof reportError ? reportError : function(error) {
+          if ("object" === typeof window && "function" === typeof window.ErrorEvent) {
+            var event = new window.ErrorEvent("error", {
+              bubbles: true,
+              cancelable: true,
+              message: "object" === typeof error && null !== error && "string" === typeof error.message ? String(error.message) : String(error),
+              error
+            });
+            if (!window.dispatchEvent(event)) return;
+          } else if ("object" === typeof process && "function" === typeof process.emit) {
+            process.emit("uncaughtException", error);
+            return;
+          }
+          console.error(error);
+        }, didWarnAboutMessageChannel = false, enqueueTaskImpl = null, actScopeDepth = 0, didWarnNoAwaitAct = false, isFlushing = false, queueSeveralMicrotasks = "function" === typeof queueMicrotask ? function(callback) {
+          queueMicrotask(function() {
+            return queueMicrotask(callback);
+          });
+        } : enqueueTask;
+        deprecatedAPIs = Object.freeze({
+          __proto__: null,
+          c: function(size) {
+            return resolveDispatcher().useMemoCache(size);
+          }
+        });
+        var fnName = {
+          map: mapChildren,
+          forEach: function(children, forEachFunc, forEachContext) {
+            mapChildren(
+              children,
+              function() {
+                forEachFunc.apply(this, arguments);
+              },
+              forEachContext
+            );
+          },
+          count: function(children) {
+            var n = 0;
+            mapChildren(children, function() {
+              n++;
+            });
+            return n;
+          },
+          toArray: function(children) {
+            return mapChildren(children, function(child) {
+              return child;
+            }) || [];
+          },
+          only: function(children) {
+            if (!isValidElement(children))
+              throw Error(
+                "React.Children.only expected to receive a single React element child."
+              );
+            return children;
+          }
+        };
+        exports.Activity = REACT_ACTIVITY_TYPE;
+        exports.Children = fnName;
+        exports.Component = Component;
+        exports.Fragment = REACT_FRAGMENT_TYPE;
+        exports.Profiler = REACT_PROFILER_TYPE;
+        exports.PureComponent = PureComponent;
+        exports.StrictMode = REACT_STRICT_MODE_TYPE;
+        exports.Suspense = REACT_SUSPENSE_TYPE;
+        exports.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE = ReactSharedInternals;
+        exports.__COMPILER_RUNTIME = deprecatedAPIs;
+        exports.act = function(callback) {
+          var prevActQueue = ReactSharedInternals.actQueue, prevActScopeDepth = actScopeDepth;
+          actScopeDepth++;
+          var queue = ReactSharedInternals.actQueue = null !== prevActQueue ? prevActQueue : [], didAwaitActCall = false;
+          try {
+            var result = callback();
+          } catch (error) {
+            ReactSharedInternals.thrownErrors.push(error);
+          }
+          if (0 < ReactSharedInternals.thrownErrors.length)
+            throw popActScope(prevActQueue, prevActScopeDepth), callback = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, callback;
+          if (null !== result && "object" === typeof result && "function" === typeof result.then) {
+            var thenable = result;
+            queueSeveralMicrotasks(function() {
+              didAwaitActCall || didWarnNoAwaitAct || (didWarnNoAwaitAct = true, console.error(
+                "You called act(async () => ...) without await. This could lead to unexpected testing behaviour, interleaving multiple act calls and mixing their scopes. You should - await act(async () => ...);"
+              ));
+            });
+            return {
+              then: function(resolve, reject) {
+                didAwaitActCall = true;
+                thenable.then(
+                  function(returnValue) {
+                    popActScope(prevActQueue, prevActScopeDepth);
+                    if (0 === prevActScopeDepth) {
+                      try {
+                        flushActQueue(queue), enqueueTask(function() {
+                          return recursivelyFlushAsyncActWork(
+                            returnValue,
+                            resolve,
+                            reject
+                          );
+                        });
+                      } catch (error$0) {
+                        ReactSharedInternals.thrownErrors.push(error$0);
+                      }
+                      if (0 < ReactSharedInternals.thrownErrors.length) {
+                        var _thrownError = aggregateErrors(
+                          ReactSharedInternals.thrownErrors
+                        );
+                        ReactSharedInternals.thrownErrors.length = 0;
+                        reject(_thrownError);
+                      }
+                    } else resolve(returnValue);
+                  },
+                  function(error) {
+                    popActScope(prevActQueue, prevActScopeDepth);
+                    0 < ReactSharedInternals.thrownErrors.length ? (error = aggregateErrors(
+                      ReactSharedInternals.thrownErrors
+                    ), ReactSharedInternals.thrownErrors.length = 0, reject(error)) : reject(error);
+                  }
+                );
+              }
+            };
+          }
+          var returnValue$jscomp$0 = result;
+          popActScope(prevActQueue, prevActScopeDepth);
+          0 === prevActScopeDepth && (flushActQueue(queue), 0 !== queue.length && queueSeveralMicrotasks(function() {
+            didAwaitActCall || didWarnNoAwaitAct || (didWarnNoAwaitAct = true, console.error(
+              "A component suspended inside an `act` scope, but the `act` call was not awaited. When testing React components that depend on asynchronous data, you must await the result:\n\nawait act(() => ...)"
+            ));
+          }), ReactSharedInternals.actQueue = null);
+          if (0 < ReactSharedInternals.thrownErrors.length)
+            throw callback = aggregateErrors(ReactSharedInternals.thrownErrors), ReactSharedInternals.thrownErrors.length = 0, callback;
+          return {
+            then: function(resolve, reject) {
+              didAwaitActCall = true;
+              0 === prevActScopeDepth ? (ReactSharedInternals.actQueue = queue, enqueueTask(function() {
+                return recursivelyFlushAsyncActWork(
+                  returnValue$jscomp$0,
+                  resolve,
+                  reject
+                );
+              })) : resolve(returnValue$jscomp$0);
+            }
+          };
+        };
+        exports.cache = function(fn) {
+          return function() {
+            return fn.apply(null, arguments);
+          };
+        };
+        exports.cacheSignal = function() {
+          return null;
+        };
+        exports.captureOwnerStack = function() {
+          var getCurrentStack = ReactSharedInternals.getCurrentStack;
+          return null === getCurrentStack ? null : getCurrentStack();
+        };
+        exports.cloneElement = function(element, config, children) {
+          if (null === element || void 0 === element)
+            throw Error(
+              "The argument must be a React element, but you passed " + element + "."
+            );
+          var props = assign({}, element.props), key = element.key, owner = element._owner;
+          if (null != config) {
+            var JSCompiler_inline_result;
+            a: {
+              if (hasOwnProperty.call(config, "ref") && (JSCompiler_inline_result = Object.getOwnPropertyDescriptor(
+                config,
+                "ref"
+              ).get) && JSCompiler_inline_result.isReactWarning) {
+                JSCompiler_inline_result = false;
+                break a;
+              }
+              JSCompiler_inline_result = void 0 !== config.ref;
+            }
+            JSCompiler_inline_result && (owner = getOwner());
+            hasValidKey(config) && (checkKeyStringCoercion(config.key), key = "" + config.key);
+            for (propName in config)
+              !hasOwnProperty.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
+          }
+          var propName = arguments.length - 2;
+          if (1 === propName) props.children = children;
+          else if (1 < propName) {
+            JSCompiler_inline_result = Array(propName);
+            for (var i = 0; i < propName; i++)
+              JSCompiler_inline_result[i] = arguments[i + 2];
+            props.children = JSCompiler_inline_result;
+          }
+          props = ReactElement(
+            element.type,
+            key,
+            props,
+            owner,
+            element._debugStack,
+            element._debugTask
+          );
+          for (key = 2; key < arguments.length; key++)
+            validateChildKeys(arguments[key]);
+          return props;
+        };
+        exports.createContext = function(defaultValue) {
+          defaultValue = {
+            $$typeof: REACT_CONTEXT_TYPE,
+            _currentValue: defaultValue,
+            _currentValue2: defaultValue,
+            _threadCount: 0,
+            Provider: null,
+            Consumer: null
+          };
+          defaultValue.Provider = defaultValue;
+          defaultValue.Consumer = {
+            $$typeof: REACT_CONSUMER_TYPE,
+            _context: defaultValue
+          };
+          defaultValue._currentRenderer = null;
+          defaultValue._currentRenderer2 = null;
+          return defaultValue;
+        };
+        exports.createElement = function(type, config, children) {
+          for (var i = 2; i < arguments.length; i++)
+            validateChildKeys(arguments[i]);
+          i = {};
+          var key = null;
+          if (null != config)
+            for (propName in didWarnAboutOldJSXRuntime || !("__self" in config) || "key" in config || (didWarnAboutOldJSXRuntime = true, console.warn(
+              "Your app (or one of its dependencies) is using an outdated JSX transform. Update to the modern JSX transform for faster performance: https://react.dev/link/new-jsx-transform"
+            )), hasValidKey(config) && (checkKeyStringCoercion(config.key), key = "" + config.key), config)
+              hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i[propName] = config[propName]);
+          var childrenLength = arguments.length - 2;
+          if (1 === childrenLength) i.children = children;
+          else if (1 < childrenLength) {
+            for (var childArray = Array(childrenLength), _i = 0; _i < childrenLength; _i++)
+              childArray[_i] = arguments[_i + 2];
+            Object.freeze && Object.freeze(childArray);
+            i.children = childArray;
+          }
+          if (type && type.defaultProps)
+            for (propName in childrenLength = type.defaultProps, childrenLength)
+              void 0 === i[propName] && (i[propName] = childrenLength[propName]);
+          key && defineKeyPropWarningGetter(
+            i,
+            "function" === typeof type ? type.displayName || type.name || "Unknown" : type
+          );
+          var propName = 1e4 > ReactSharedInternals.recentlyCreatedOwnerStacks++;
+          return ReactElement(
+            type,
+            key,
+            i,
+            getOwner(),
+            propName ? Error("react-stack-top-frame") : unknownOwnerDebugStack,
+            propName ? createTask(getTaskName(type)) : unknownOwnerDebugTask
+          );
+        };
+        exports.createRef = function() {
+          var refObject = { current: null };
+          Object.seal(refObject);
+          return refObject;
+        };
+        exports.forwardRef = function(render) {
+          null != render && render.$$typeof === REACT_MEMO_TYPE ? console.error(
+            "forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...))."
+          ) : "function" !== typeof render ? console.error(
+            "forwardRef requires a render function but was given %s.",
+            null === render ? "null" : typeof render
+          ) : 0 !== render.length && 2 !== render.length && console.error(
+            "forwardRef render functions accept exactly two parameters: props and ref. %s",
+            1 === render.length ? "Did you forget to use the ref parameter?" : "Any additional parameter will be undefined."
+          );
+          null != render && null != render.defaultProps && console.error(
+            "forwardRef render functions do not support defaultProps. Did you accidentally pass a React component?"
+          );
+          var elementType = { $$typeof: REACT_FORWARD_REF_TYPE, render }, ownName;
+          Object.defineProperty(elementType, "displayName", {
+            enumerable: false,
+            configurable: true,
+            get: function() {
+              return ownName;
+            },
+            set: function(name) {
+              ownName = name;
+              render.name || render.displayName || (Object.defineProperty(render, "name", { value: name }), render.displayName = name);
+            }
+          });
+          return elementType;
+        };
+        exports.isValidElement = isValidElement;
+        exports.lazy = function(ctor) {
+          ctor = { _status: -1, _result: ctor };
+          var lazyType = {
+            $$typeof: REACT_LAZY_TYPE,
+            _payload: ctor,
+            _init: lazyInitializer
+          }, ioInfo = {
+            name: "lazy",
+            start: -1,
+            end: -1,
+            value: null,
+            owner: null,
+            debugStack: Error("react-stack-top-frame"),
+            debugTask: console.createTask ? console.createTask("lazy()") : null
+          };
+          ctor._ioInfo = ioInfo;
+          lazyType._debugInfo = [{ awaited: ioInfo }];
+          return lazyType;
+        };
+        exports.memo = function(type, compare) {
+          null == type && console.error(
+            "memo: The first argument must be a component. Instead received: %s",
+            null === type ? "null" : typeof type
+          );
+          compare = {
+            $$typeof: REACT_MEMO_TYPE,
+            type,
+            compare: void 0 === compare ? null : compare
+          };
+          var ownName;
+          Object.defineProperty(compare, "displayName", {
+            enumerable: false,
+            configurable: true,
+            get: function() {
+              return ownName;
+            },
+            set: function(name) {
+              ownName = name;
+              type.name || type.displayName || (Object.defineProperty(type, "name", { value: name }), type.displayName = name);
+            }
+          });
+          return compare;
+        };
+        exports.startTransition = function(scope) {
+          var prevTransition = ReactSharedInternals.T, currentTransition = {};
+          currentTransition._updatedFibers = /* @__PURE__ */ new Set();
+          ReactSharedInternals.T = currentTransition;
+          try {
+            var returnValue = scope(), onStartTransitionFinish = ReactSharedInternals.S;
+            null !== onStartTransitionFinish && onStartTransitionFinish(currentTransition, returnValue);
+            "object" === typeof returnValue && null !== returnValue && "function" === typeof returnValue.then && (ReactSharedInternals.asyncTransitions++, returnValue.then(releaseAsyncTransition, releaseAsyncTransition), returnValue.then(noop, reportGlobalError));
+          } catch (error) {
+            reportGlobalError(error);
+          } finally {
+            null === prevTransition && currentTransition._updatedFibers && (scope = currentTransition._updatedFibers.size, currentTransition._updatedFibers.clear(), 10 < scope && console.warn(
+              "Detected a large number of updates inside startTransition. If this is due to a subscription please re-write it to use React provided hooks. Otherwise concurrent mode guarantees are off the table."
+            )), null !== prevTransition && null !== currentTransition.types && (null !== prevTransition.types && prevTransition.types !== currentTransition.types && console.error(
+              "We expected inner Transitions to have transferred the outer types set and that you cannot add to the outer Transition while inside the inner.This is a bug in React."
+            ), prevTransition.types = currentTransition.types), ReactSharedInternals.T = prevTransition;
+          }
+        };
+        exports.unstable_useCacheRefresh = function() {
+          return resolveDispatcher().useCacheRefresh();
+        };
+        exports.use = function(usable) {
+          return resolveDispatcher().use(usable);
+        };
+        exports.useActionState = function(action, initialState, permalink) {
+          return resolveDispatcher().useActionState(
+            action,
+            initialState,
+            permalink
+          );
+        };
+        exports.useCallback = function(callback, deps) {
+          return resolveDispatcher().useCallback(callback, deps);
+        };
+        exports.useContext = function(Context) {
+          var dispatcher = resolveDispatcher();
+          Context.$$typeof === REACT_CONSUMER_TYPE && console.error(
+            "Calling useContext(Context.Consumer) is not supported and will cause bugs. Did you mean to call useContext(Context) instead?"
+          );
+          return dispatcher.useContext(Context);
+        };
+        exports.useDebugValue = function(value, formatterFn) {
+          return resolveDispatcher().useDebugValue(value, formatterFn);
+        };
+        exports.useDeferredValue = function(value, initialValue) {
+          return resolveDispatcher().useDeferredValue(value, initialValue);
+        };
+        exports.useEffect = function(create, deps) {
+          null == create && console.warn(
+            "React Hook useEffect requires an effect callback. Did you forget to pass a callback to the hook?"
+          );
+          return resolveDispatcher().useEffect(create, deps);
+        };
+        exports.useEffectEvent = function(callback) {
+          return resolveDispatcher().useEffectEvent(callback);
+        };
+        exports.useId = function() {
+          return resolveDispatcher().useId();
+        };
+        exports.useImperativeHandle = function(ref, create, deps) {
+          return resolveDispatcher().useImperativeHandle(ref, create, deps);
+        };
+        exports.useInsertionEffect = function(create, deps) {
+          null == create && console.warn(
+            "React Hook useInsertionEffect requires an effect callback. Did you forget to pass a callback to the hook?"
+          );
+          return resolveDispatcher().useInsertionEffect(create, deps);
+        };
+        exports.useLayoutEffect = function(create, deps) {
+          null == create && console.warn(
+            "React Hook useLayoutEffect requires an effect callback. Did you forget to pass a callback to the hook?"
+          );
+          return resolveDispatcher().useLayoutEffect(create, deps);
+        };
+        exports.useMemo = function(create, deps) {
+          return resolveDispatcher().useMemo(create, deps);
+        };
+        exports.useOptimistic = function(passthrough, reducer) {
+          return resolveDispatcher().useOptimistic(passthrough, reducer);
+        };
+        exports.useReducer = function(reducer, initialArg, init) {
+          return resolveDispatcher().useReducer(reducer, initialArg, init);
+        };
+        exports.useRef = function(initialValue) {
+          return resolveDispatcher().useRef(initialValue);
+        };
+        exports.useState = function(initialState) {
+          return resolveDispatcher().useState(initialState);
+        };
+        exports.useSyncExternalStore = function(subscribe, getSnapshot, getServerSnapshot) {
+          return resolveDispatcher().useSyncExternalStore(
+            subscribe,
+            getSnapshot,
+            getServerSnapshot
+          );
+        };
+        exports.useTransition = function() {
+          return resolveDispatcher().useTransition();
+        };
+        exports.version = "19.2.3";
+        "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+      })();
+    }
+  });
+
+  // ../../node_modules/react/index.js
+  var require_react2 = __commonJS({
+    "../../node_modules/react/index.js"(exports, module) {
+      "use strict";
+      if (process.env.NODE_ENV === "production") {
+        module.exports = require_react_production2();
+      } else {
+        module.exports = require_react_development2();
+      }
+    }
+  });
+
   // src/index.ts
   var index_exports = {};
   __export(index_exports, {
+    Accordion: () => Accordion,
+    AccordionItem: () => AccordionItem,
     Alert: () => Alert,
+    AnimatedGradientText: () => AnimatedGradientText,
     Badge: () => Badge,
+    BlurText: () => BlurText,
+    BorderBeam: () => BorderBeam,
     Button: () => Button,
     Card: () => Card,
     CardContent: () => CardContent,
@@ -1767,21 +3197,42 @@ var AuralixUI = (() => {
     CardFooter: () => CardFooter,
     CardHeader: () => CardHeader,
     CardTitle: () => CardTitle,
+    Dialog: () => Dialog,
+    DialogButton: () => DialogButton,
+    Dock: () => Dock,
+    DockIcon: () => DockIcon,
+    Form: () => Form,
+    FormDescription: () => FormDescription,
+    FormError: () => FormError,
+    FormField: () => FormField,
+    FormLabel: () => FormLabel,
+    GlassCard: () => GlassCard,
     Input: () => Input,
+    MagicCard: () => MagicCard,
+    Meteors: () => Meteors,
     Modal: () => Modal,
     ModalBody: () => ModalBody,
     ModalFooter: () => ModalFooter,
     ModalHeader: () => ModalHeader,
     ModalTitle: () => ModalTitle,
+    NeonButton: () => NeonButton,
     Select: () => Select,
+    Slider: () => Slider,
+    SpotlightCard: () => SpotlightCard,
+    Switch: () => Switch,
     Table: () => Table,
     TableBody: () => TableBody,
     TableCell: () => TableCell,
     TableHead: () => TableHead,
     TableHeader: () => TableHeader,
     TableRow: () => TableRow,
+    Tabs: () => Tabs,
+    TabsContent: () => TabsContent,
+    TabsList: () => TabsList,
+    TabsTrigger: () => TabsTrigger,
     Textarea: () => Textarea,
     Tooltip: () => Tooltip,
+    TrueFocus: () => TrueFocus,
     cn: () => cn
   });
 
@@ -4278,9 +5729,9 @@ var AuralixUI = (() => {
           ref,
           disabled,
           className: cn(
-            "inline-flex items-center justify-center rounded-[2rem] font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+            "inline-flex items-center justify-center rounded-[2rem] font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:scale-[1.02] active:scale-[0.98]",
             {
-              "bg-primary text-primary-foreground hover:bg-primary/90": variant === "primary",
+              "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30": variant === "primary",
               "bg-secondary text-secondary-foreground hover:bg-secondary/80": variant === "secondary",
               "border border-border bg-transparent hover:bg-muted": variant === "outline",
               "bg-transparent hover:bg-muted": variant === "ghost",
@@ -4379,7 +5830,7 @@ var AuralixUI = (() => {
       {
         className: cn(
           "rounded-[2rem] border border-white/10 bg-background/60 p-6 backdrop-blur-md",
-          hoverable && "transition-all hover:shadow-xl hover:shadow-violet-500/10 hover:-translate-y-1",
+          hoverable && "hover-lift hover:border-violet-500/20",
           className
         ),
         children
@@ -4574,6 +6025,7 @@ var AuralixUI = (() => {
     className
   }) {
     const [isVisible, setIsVisible] = (0, import_react6.useState)(false);
+    const triggerRef = (0, import_react6.useRef)(null);
     const positionClasses = {
       top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
       bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
@@ -4589,6 +6041,7 @@ var AuralixUI = (() => {
     return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
       "div",
       {
+        ref: triggerRef,
         className: "relative inline-flex",
         onMouseEnter: () => setIsVisible(true),
         onMouseLeave: () => setIsVisible(false),
@@ -4650,15 +6103,891 @@ var AuralixUI = (() => {
     return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("tr", { className: cn("border-b border-border", className), children });
   }
   function TableHead({ children, className }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("th", { className: cn("h-12 px-4 text-left align-middle font-medium text-muted-foreground", className), children });
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+      "th",
+      {
+        className: cn(
+          "h-12 px-4 text-left align-middle font-medium text-muted-foreground",
+          className
+        ),
+        children
+      }
+    );
   }
   function TableCell({ children, className }) {
     return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("td", { className: cn("p-4 align-middle", className), children });
+  }
+
+  // src/components/Form.tsx
+  var import_jsx_runtime11 = __toESM(require_jsx_runtime());
+  function Form({ children, className, ...props }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("form", { className: cn("space-y-4", className), ...props, children });
+  }
+  function FormField({ children, className }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: cn("space-y-2", className), children });
+  }
+  function FormLabel({ children, required, className, ...props }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+      "label",
+      {
+        className: cn("text-sm font-medium text-foreground", className),
+        ...props,
+        children: [
+          children,
+          required && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "ml-1 text-destructive", children: "*" })
+        ]
+      }
+    );
+  }
+  function FormDescription({ children, className }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: cn("text-xs text-muted-foreground", className), children });
+  }
+  function FormError({ children, className }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: cn("text-xs text-destructive", className), children });
+  }
+
+  // src/components/NeonButton.tsx
+  var import_react7 = __toESM(require_react());
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime());
+  var NeonButton = (0, import_react7.forwardRef)(
+    ({ className, variant = "cyan", neonSize = "md", children, ...props }, ref) => {
+      const variants = {
+        cyan: "border-cyan-400 text-cyan-400 shadow-[0_0_10px_#22d3ee] hover:shadow-[0_0_20px_#22d3ee] hover:bg-cyan-400 hover:text-black",
+        magenta: "border-fuchsia-400 text-fuchsia-400 shadow-[0_0_10px_#e879f9] hover:shadow-[0_0_20px_#e879f9] hover:bg-fuchsia-400 hover:text-black",
+        lime: "border-lime-400 text-lime-400 shadow-[0_0_10px_#a3e635] hover:shadow-[0_0_20px_#a3e635] hover:bg-lime-400 hover:text-black",
+        violet: "border-violet-400 text-violet-400 shadow-[0_0_10px_#a78bfa] hover:shadow-[0_0_20px_#a78bfa] hover:bg-violet-400 hover:text-white"
+      };
+      const sizes = {
+        sm: "px-3 py-1 text-sm",
+        md: "px-6 py-2 text-base",
+        lg: "px-8 py-3 text-lg"
+      };
+      return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+        "button",
+        {
+          ref,
+          className: cn(
+            "relative inline-flex items-center justify-center rounded-lg border-2 bg-transparent font-bold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+            variants[variant],
+            sizes[neonSize],
+            className
+          ),
+          ...props,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "relative z-10 filter drop-shadow-sm", children }),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 hover:opacity-20 bg-current" })
+          ]
+        }
+      );
+    }
+  );
+  NeonButton.displayName = "NeonButton";
+
+  // src/components/GlassCard.tsx
+  var import_react8 = __toESM(require_react());
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime());
+  var GlassCard = (0, import_react8.forwardRef)(
+    ({ className, intensity = "medium", children, ...props }, ref) => {
+      const intensities = {
+        low: "bg-white/10 backdrop-blur-sm border-white/20",
+        medium: "bg-white/10 backdrop-blur-md border-white/30",
+        high: "bg-white/10 backdrop-blur-xl border-white/40"
+      };
+      return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
+        "div",
+        {
+          ref,
+          className: cn(
+            "rounded-xl border shadow-xl overflow-hidden relative",
+            intensities[intensity],
+            className
+          ),
+          ...props,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "absolute inset-0 opacity-5 pointer-events-none", style: { backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` } }),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "relative z-10 p-6", children })
+          ]
+        }
+      );
+    }
+  );
+  GlassCard.displayName = "GlassCard";
+
+  // src/components/BlurText.tsx
+  var import_react9 = __toESM(require_react());
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime());
+  function BlurText({
+    text,
+    className,
+    delay = 0,
+    wordDelay = 50
+  }) {
+    const [isVisible, setIsVisible] = (0, import_react9.useState)(false);
+    const ref = (0, import_react9.useRef)(null);
+    const words = text.split(" ");
+    (0, import_react9.useEffect)(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              setIsVisible(true);
+            }, delay);
+            observer.unobserve(entry.target);
+          }
+        },
+        { threshold: 0.1 }
+      );
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+      return () => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      };
+    }, [delay]);
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { ref, className: cn("inline-block", className), children: words.map((word, wordIndex) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+      "span",
+      {
+        className: "inline-block mr-[0.25em] overflow-hidden",
+        style: { verticalAlign: "top" },
+        children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+          "span",
+          {
+            className: cn(
+              "inline-block transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+              isVisible ? "opacity-100 blur-0 translate-y-0" : "opacity-0 blur-[10px] translate-y-4"
+            ),
+            style: {
+              transitionDelay: `${wordIndex * wordDelay}ms`
+            },
+            children: word
+          }
+        )
+      },
+      wordIndex
+    )) });
+  }
+
+  // src/components/SpotlightCard.tsx
+  var import_react10 = __toESM(require_react());
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime());
+  function SpotlightCard({
+    children,
+    className,
+    spotlightColor = "rgba(139, 92, 246, 0.15)",
+    // Violet-ish
+    ...props
+  }) {
+    const divRef = (0, import_react10.useRef)(null);
+    const [position, setPosition] = (0, import_react10.useState)({ x: 0, y: 0 });
+    const [opacity, setOpacity] = (0, import_react10.useState)(0);
+    const handleMouseMove = (e) => {
+      if (!divRef.current) return;
+      const rect = divRef.current.getBoundingClientRect();
+      setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    };
+    const handleMouseEnter = () => {
+      setOpacity(1);
+    };
+    const handleMouseLeave = () => {
+      setOpacity(0);
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
+      "div",
+      {
+        ref: divRef,
+        onMouseMove: handleMouseMove,
+        onMouseEnter: handleMouseEnter,
+        onMouseLeave: handleMouseLeave,
+        className: cn(
+          "relative overflow-hidden rounded-[2rem] border border-white/10 bg-background/60 backdrop-blur-md transition-colors hover:border-violet-500/20",
+          className
+        ),
+        ...props,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+            "div",
+            {
+              className: "pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300",
+              style: {
+                opacity,
+                background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`
+              }
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "relative h-full", children })
+        ]
+      }
+    );
+  }
+
+  // src/components/TrueFocus.tsx
+  var import_react11 = __toESM(require_react());
+  var import_jsx_runtime16 = __toESM(require_jsx_runtime());
+  function TrueFocus({
+    className,
+    label = "Focus me",
+    focusColor = "#8b5cf6",
+    // Violet-500
+    ...props
+  }) {
+    const [isFocused, setIsFocused] = (0, import_react11.useState)(false);
+    return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "relative group", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+        "div",
+        {
+          className: cn(
+            "absolute -inset-0.5 rounded-lg opacity-0 transition-opacity duration-300 blur-md group-hover:opacity-50",
+            isFocused ? "opacity-100" : ""
+          ),
+          style: {
+            background: isFocused ? `linear-gradient(45deg, ${focusColor}, transparent)` : "transparent"
+          }
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "relative", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          "input",
+          {
+            className: cn(
+              "flex h-10 w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm transition-all duration-300",
+              className
+            ),
+            onFocus: () => setIsFocused(true),
+            onBlur: () => setIsFocused(false),
+            placeholder: label,
+            ...props
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          "div",
+          {
+            className: cn(
+              "absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent transition-all duration-500 ease-out",
+              isFocused ? "w-full" : "w-0"
+            )
+          }
+        )
+      ] })
+    ] });
+  }
+
+  // src/components/AnimatedGradientText.tsx
+  var import_jsx_runtime17 = __toESM(require_jsx_runtime());
+  function AnimatedGradientText({
+    children,
+    className,
+    ...props
+  }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+      "div",
+      {
+        className: cn(
+          "group relative mx-auto flex max-w-fit flex-row items-center justify-center rounded-2xl bg-white/40 px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] dark:bg-black/40",
+          className
+        ),
+        ...props,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+            "div",
+            {
+              className: cn(
+                "absolute inset-0 block h-full w-full animate-shimmer bg-[linear-gradient(110deg,transparent,45%,var(--color-shimmer,rgba(167,139,250,0.5)),55%,transparent)] bg-[length:200%_100%]"
+              )
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "relative z-10", children })
+        ]
+      }
+    );
+  }
+
+  // src/components/BorderBeam.tsx
+  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
+  function BorderBeam({
+    className,
+    size = 200,
+    duration = 15,
+    anchor = 90,
+    borderWidth = 1.5,
+    colorFrom = "#ffaa40",
+    colorTo = "#9c40ff",
+    delay = 0
+  }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+      "div",
+      {
+        style: {
+          "--size": size,
+          "--duration": duration,
+          "--anchor": anchor,
+          "--border-width": borderWidth,
+          "--color-from": colorFrom,
+          "--color-to": colorTo,
+          "--delay": delay
+        },
+        className: cn(
+          "pointer-events-none absolute inset-0 rounded-[inherit] [border:calc(var(--border-width)*1px)_solid_transparent]",
+          // Mask styles
+          "![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)]",
+          // Pseudo element for the beam
+          "after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:calc(var(--delay)*1s)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-to),transparent)] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]",
+          className
+        )
+      }
+    );
+  }
+
+  // src/components/Dock.tsx
+  var import_react12 = __toESM(require_react());
+  var import_jsx_runtime19 = __toESM(require_jsx_runtime());
+  var DEFAULT_MAGNIFICATION = 60;
+  var DEFAULT_DISTANCE = 140;
+  function Dock({
+    className,
+    direction: _direction = "bottom",
+    children,
+    magnification = DEFAULT_MAGNIFICATION,
+    distance = DEFAULT_DISTANCE
+  }) {
+    const dockRef = (0, import_react12.useRef)(null);
+    const renderChildren = () => {
+      return import_react12.default.Children.map(children, (child) => {
+        if (import_react12.default.isValidElement(child)) {
+          return import_react12.default.cloneElement(child, {
+            magnification,
+            distance
+          });
+        }
+        return child;
+      });
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+      "div",
+      {
+        ref: dockRef,
+        className: cn(
+          "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto mt-8 flex h-[58px] w-max gap-2 rounded-2xl border p-2 backdrop-blur-md",
+          className
+        ),
+        children: renderChildren()
+      }
+    );
+  }
+  function DockIcon({
+    size = 40,
+    magnification = DEFAULT_MAGNIFICATION,
+    distance = DEFAULT_DISTANCE,
+    className,
+    children,
+    ...props
+  }) {
+    const ref = (0, import_react12.useRef)(null);
+    const [scale, setScale] = (0, import_react12.useState)(1);
+    import_react12.default.useEffect(() => {
+      const handleMouseMove = (e) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const dist = Math.abs(e.clientX - centerX);
+        if (dist < distance) {
+          const val = 1 + (magnification / size - 1) * Math.cos(dist / distance * Math.PI / 2);
+          setScale(val);
+        } else {
+          setScale(1);
+        }
+      };
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => {
+        window.removeEventListener("mousemove", handleMouseMove);
+      };
+    }, [distance, magnification, size]);
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+      "div",
+      {
+        ref,
+        style: {
+          width: size * scale,
+          height: size * scale,
+          transition: "width 0.1s ease-out, height 0.1s ease-out"
+        },
+        className: cn(
+          "flex aspect-square cursor-pointer items-center justify-center rounded-full bg-black/5 dark:bg-white/10 shadow-sm hover:bg-black/10 dark:hover:bg-white/20",
+          className
+        ),
+        ...props,
+        children
+      }
+    );
+  }
+
+  // src/components/MeteorMeteors.tsx
+  var import_react13 = __toESM(require_react());
+  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
+  var Meteors = ({ number = 20, className }) => {
+    const [meteors, setMeteors] = (0, import_react13.useState)([]);
+    (0, import_react13.useEffect)(() => {
+      const meteorStyles = new Array(number).fill(null).map(() => ({
+        left: Math.floor(Math.random() * 100),
+        delay: Math.random() * 0.6 + 0.2,
+        duration: Math.floor(Math.random() * 8 + 2)
+      }));
+      setMeteors(meteorStyles);
+    }, [number]);
+    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(import_jsx_runtime20.Fragment, { children: meteors.map((style, idx) => (
+      // Meteor Head
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+        "span",
+        {
+          className: cn(
+            "pointer-events-none absolute left-1/2 top-1/2 h-0.5 w-0.5 rotate-[215deg] animate-meteor rounded-[9999px] bg-slate-500 shadow-[0_0_0_1px_#ffffff10]",
+            className
+          ),
+          style: {
+            top: "-5px",
+            left: `${style.left}%`,
+            animationDelay: `${style.delay}s`,
+            animationDuration: `${style.duration}s`
+          },
+          children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "pointer-events-none absolute top-1/2 -z-10 h-[1px] w-[50px] -translate-y-1/2 bg-gradient-to-r from-slate-500 to-transparent" })
+        },
+        idx
+      )
+    )) });
+  };
+
+  // src/components/MagicCard.tsx
+  var import_react14 = __toESM(require_react());
+  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
+  function MagicCard({
+    children,
+    className,
+    gradientSize = 200,
+    gradientColor = "#262626",
+    gradientOpacity = 0.8,
+    ...props
+  }) {
+    const cardRef = (0, import_react14.useRef)(null);
+    const [position, setPosition] = (0, import_react14.useState)({ x: -gradientSize, y: -gradientSize });
+    const [opacity, setOpacity] = (0, import_react14.useState)(0);
+    const handleMouseMove = (e) => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      setOpacity(1);
+    };
+    const handleMouseLeave = () => {
+      setOpacity(0);
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(
+      "div",
+      {
+        ref: cardRef,
+        onMouseMove: handleMouseMove,
+        onMouseLeave: handleMouseLeave,
+        className: cn(
+          "group relative flex h-full w-full overflow-hidden rounded-xl border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900 text-black dark:text-white",
+          className
+        ),
+        ...props,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "relative z-10", children }),
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+            "div",
+            {
+              className: "pointer-events-none absolute -inset-px rounded-xl transition-opacity duration-300",
+              style: {
+                opacity,
+                background: `radial-gradient(${gradientSize}px circle at ${position.x}px ${position.y}px, ${gradientColor}, transparent 100%)`
+              }
+            }
+          )
+        ]
+      }
+    );
+  }
+
+  // src/components/Dialog.tsx
+  var React4 = __toESM(require_react());
+  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  function Dialog({
+    isOpen,
+    onClose,
+    title,
+    description,
+    children,
+    footer,
+    className
+  }) {
+    React4.useEffect(() => {
+      const handleKeyDown = (e) => {
+        if (e.key === "Escape") onClose();
+      };
+      if (isOpen) {
+        document.addEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "hidden";
+      }
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "unset";
+      };
+    }, [isOpen, onClose]);
+    if (!isOpen) return null;
+    return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "fixed inset-0 z-50 flex items-center justify-center p-4", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+        "div",
+        {
+          className: "absolute inset-0 bg-black/40 backdrop-blur-sm transition-all duration-300",
+          onClick: onClose
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+        "div",
+        {
+          className: cn(
+            "relative z-10 w-full max-w-sm transform overflow-hidden transition-all duration-300 animate-in fade-in zoom-in-95",
+            "rounded-[2rem]",
+            // Super rounded corners
+            "bg-white/70 dark:bg-zinc-900/70",
+            // Semi-transparent background
+            "backdrop-blur-2xl supported-[backdrop-filter]:bg-white/40",
+            // Strong blur
+            "shadow-2xl ring-1 ring-white/20 dark:ring-white/10",
+            // Subtle border ring
+            "p-6",
+            className
+          ),
+          children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "flex flex-col gap-4", children: [
+            (title || description) && /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "space-y-2", children: [
+              title && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("h2", { className: "text-lg font-semibold leading-none tracking-tight", children: title }),
+              description && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("p", { className: "text-sm text-muted-foreground leading-relaxed", children: description })
+            ] }),
+            children,
+            footer && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "flex gap-3 pt-2", children: footer })
+          ] })
+        }
+      )
+    ] });
+  }
+  function DialogButton({
+    className,
+    variant = "primary",
+    ...props
+  }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+      "button",
+      {
+        className: cn(
+          "flex-1 inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          variant === "primary" ? "bg-blue-600 text-white hover:bg-blue-700 shadow-sm" : "bg-blue-100/50 text-blue-900 hover:bg-blue-200/50 dark:bg-white/10 dark:text-white dark:hover:bg-white/20",
+          className
+        ),
+        ...props
+      }
+    );
+  }
+
+  // src/components/Switch.tsx
+  var React5 = __toESM(require_react());
+  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
+  var Switch = React5.forwardRef(
+    ({ className, checked, onCheckedChange, ...props }, ref) => {
+      const handleClick = (e) => {
+        onCheckedChange?.(!checked);
+        props.onClick?.(e);
+      };
+      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+        "button",
+        {
+          type: "button",
+          role: "switch",
+          "aria-checked": checked,
+          ref,
+          onClick: handleClick,
+          className: cn(
+            "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50",
+            "backdrop-blur-md",
+            checked ? "bg-blue-500/50" : "bg-white/10 input",
+            className
+          ),
+          ...props,
+          children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+            "span",
+            {
+              className: cn(
+                "pointer-events-none block h-5 w-5 rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)] ring-0 transition-transform",
+                checked ? "translate-x-5 bg-white" : "translate-x-0 bg-white/70"
+              )
+            }
+          )
+        }
+      );
+    }
+  );
+  Switch.displayName = "Switch";
+
+  // src/components/Slider.tsx
+  var React6 = __toESM(require_react());
+  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
+  var Slider = React6.forwardRef(
+    ({ className, value, defaultValue, min = 0, max = 100, onValueChange, ...props }, ref) => {
+      const isControlled = value !== void 0;
+      const [localValue, setLocalValue] = React6.useState(defaultValue ?? min);
+      const currentValue = (isControlled ? value : localValue) ?? min;
+      const handleChange = (e) => {
+        const newValue = Number(e.target.value);
+        if (!isControlled) {
+          setLocalValue(newValue);
+        }
+        onValueChange?.(newValue);
+        props.onChange?.(e);
+      };
+      const percentage = (currentValue - min) * 100 / (max - min);
+      return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: cn("relative flex w-full touch-none select-none items-center", className), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "relative h-2 w-full grow overflow-hidden rounded-full bg-white/10 backdrop-blur-sm", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
+          "div",
+          {
+            className: "absolute h-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-80 transition-all",
+            style: { width: `${percentage}%` }
+          }
+        ) }),
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
+          "div",
+          {
+            className: "absolute h-5 w-5 rounded-full border border-white/50 bg-white shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+            style: { left: `calc(${percentage}% - 10px)` }
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
+          "input",
+          {
+            type: "range",
+            min,
+            max,
+            value: currentValue,
+            ref,
+            onChange: handleChange,
+            className: "absolute inset-0 w-full opacity-0 cursor-pointer",
+            ...props
+          }
+        )
+      ] });
+    }
+  );
+  Slider.displayName = "Slider";
+
+  // src/components/Tabs.tsx
+  var React7 = __toESM(require_react());
+  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
+  var TabsContext = React7.createContext(null);
+  function Tabs({
+    defaultValue,
+    className,
+    children
+  }) {
+    const [activeTab, setActiveTab] = React7.useState(defaultValue);
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(TabsContext.Provider, { value: { activeTab, setActiveTab }, children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: cn("w-full", className), children }) });
+  }
+  function TabsList({
+    className,
+    children
+  }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+      "div",
+      {
+        className: cn(
+          "inline-flex h-10 items-center justify-center rounded-full bg-white/5 p-1 text-muted-foreground backdrop-blur-md",
+          className
+        ),
+        children
+      }
+    );
+  }
+  function TabsTrigger({
+    value,
+    className,
+    children
+  }) {
+    const context = React7.useContext(TabsContext);
+    if (!context) throw new Error("TabsTrigger must be used within Tabs");
+    const isActive = context.activeTab === value;
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+      "button",
+      {
+        onClick: () => context.setActiveTab(value),
+        className: cn(
+          "inline-flex items-center justify-center whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          isActive ? "bg-white/10 text-foreground shadow-lg backdrop-blur-sm" : "hover:bg-white/5 hover:text-foreground",
+          className
+        ),
+        children
+      }
+    );
+  }
+  function TabsContent({
+    value,
+    className,
+    children
+  }) {
+    const context = React7.useContext(TabsContext);
+    if (!context) throw new Error("TabsContent must be used within Tabs");
+    if (context.activeTab !== value) return null;
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+      "div",
+      {
+        className: cn(
+          "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 animate-in fade-in zoom-in-95 duration-200",
+          className
+        ),
+        children
+      }
+    );
+  }
+
+  // src/components/Accordion.tsx
+  var React8 = __toESM(require_react());
+
+  // ../../node_modules/lucide-react/dist/esm/createLucideIcon.js
+  var import_react16 = __toESM(require_react2());
+
+  // ../../node_modules/lucide-react/dist/esm/shared/src/utils.js
+  var toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+  var toCamelCase = (string) => string.replace(
+    /^([A-Z])|[\s-_]+(\w)/g,
+    (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
+  );
+  var toPascalCase = (string) => {
+    const camelCase = toCamelCase(string);
+    return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+  };
+  var mergeClasses = (...classes) => classes.filter((className, index, array) => {
+    return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+  }).join(" ").trim();
+  var hasA11yProp = (props) => {
+    for (const prop in props) {
+      if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+        return true;
+      }
+    }
+  };
+
+  // ../../node_modules/lucide-react/dist/esm/Icon.js
+  var import_react15 = __toESM(require_react2());
+
+  // ../../node_modules/lucide-react/dist/esm/defaultAttributes.js
+  var defaultAttributes = {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: 24,
+    height: 24,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2,
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  };
+
+  // ../../node_modules/lucide-react/dist/esm/Icon.js
+  var Icon = (0, import_react15.forwardRef)(
+    ({
+      color = "currentColor",
+      size = 24,
+      strokeWidth = 2,
+      absoluteStrokeWidth,
+      className = "",
+      children,
+      iconNode,
+      ...rest
+    }, ref) => (0, import_react15.createElement)(
+      "svg",
+      {
+        ref,
+        ...defaultAttributes,
+        width: size,
+        height: size,
+        stroke: color,
+        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+        className: mergeClasses("lucide", className),
+        ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
+        ...rest
+      },
+      [
+        ...iconNode.map(([tag, attrs]) => (0, import_react15.createElement)(tag, attrs)),
+        ...Array.isArray(children) ? children : [children]
+      ]
+    )
+  );
+
+  // ../../node_modules/lucide-react/dist/esm/createLucideIcon.js
+  var createLucideIcon = (iconName, iconNode) => {
+    const Component = (0, import_react16.forwardRef)(
+      ({ className, ...props }, ref) => (0, import_react16.createElement)(Icon, {
+        ref,
+        iconNode,
+        className: mergeClasses(
+          `lucide-${toKebabCase(toPascalCase(iconName))}`,
+          `lucide-${iconName}`,
+          className
+        ),
+        ...props
+      })
+    );
+    Component.displayName = toPascalCase(iconName);
+    return Component;
+  };
+
+  // ../../node_modules/lucide-react/dist/esm/icons/chevron-down.js
+  var __iconNode = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+  var ChevronDown = createLucideIcon("chevron-down", __iconNode);
+
+  // src/components/Accordion.tsx
+  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
+  var AccordionContext = React8.createContext(null);
+  function Accordion({
+    children,
+    className
+  }) {
+    const [openItem, setOpenItem] = React8.useState(null);
+    const toggleItem = (value) => {
+      setOpenItem((prev) => prev === value ? null : value);
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(AccordionContext.Provider, { value: { openItem, toggleItem }, children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: cn("space-y-2", className), children }) });
+  }
+  function AccordionItem({ value, trigger, children, className }) {
+    const context = React8.useContext(AccordionContext);
+    if (!context) throw new Error("AccordionItem must be used within Accordion");
+    const isOpen = context.openItem === value;
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: cn("rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm overflow-hidden transition-all duration-200", className), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(
+        "button",
+        {
+          onClick: () => context.toggleItem(value),
+          className: "flex w-full items-center justify-between px-4 py-4 text-left font-medium transition-all hover:bg-white/5 [&[data-state=open]>svg]:rotate-180",
+          "data-state": isOpen ? "open" : "closed",
+          children: [
+            trigger,
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(ChevronDown, { className: "h-4 w-4 shrink-0 transition-transform duration-200 text-white/50" })
+          ]
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
+        "div",
+        {
+          className: cn(
+            "overflow-hidden text-sm transition-all duration-300 ease-in-out",
+            isOpen ? "max-h-96 opacity-100 pb-4 px-4" : "max-h-0 opacity-0"
+          ),
+          children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "text-white/70 pt-2 border-t border-white/5", children })
+        }
+      )
+    ] });
   }
   return __toCommonJS(index_exports);
 })();
 /*! Bundled license information:
 
+react/cjs/react.production.js:
 react/cjs/react.production.js:
   (**
    * @license React
@@ -4670,6 +6999,7 @@ react/cjs/react.production.js:
    * LICENSE file in the root directory of this source tree.
    *)
 
+react/cjs/react.development.js:
 react/cjs/react.development.js:
   (**
    * @license React
@@ -4701,6 +7031,19 @@ react/cjs/react-jsx-runtime.development.js:
    *
    * This source code is licensed under the MIT license found in the
    * LICENSE file in the root directory of this source tree.
+   *)
+
+lucide-react/dist/esm/shared/src/utils.js:
+lucide-react/dist/esm/defaultAttributes.js:
+lucide-react/dist/esm/Icon.js:
+lucide-react/dist/esm/createLucideIcon.js:
+lucide-react/dist/esm/icons/chevron-down.js:
+lucide-react/dist/esm/lucide-react.js:
+  (**
+   * @license lucide-react v0.562.0 - ISC
+   *
+   * This source code is licensed under the ISC license.
+   * See the LICENSE file in the root directory of this source tree.
    *)
 */
 //# sourceMappingURL=index.global.js.map

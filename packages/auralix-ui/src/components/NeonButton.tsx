@@ -1,11 +1,5 @@
-import React from "react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-// Internal utility to avoid dependency issues if not present
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import React, { forwardRef } from "react";
+import { cn } from "../utils";
 
 export interface NeonButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "cyan" | "magenta" | "lime" | "violet";
@@ -13,7 +7,7 @@ export interface NeonButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   children: React.ReactNode;
 }
 
-export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>(
+export const NeonButton = forwardRef<HTMLButtonElement, NeonButtonProps>(
   ({ className, variant = "cyan", neonSize = "md", children, ...props }, ref) => {
     const variants = {
       cyan: "border-cyan-400 text-cyan-400 shadow-[0_0_10px_#22d3ee] hover:shadow-[0_0_20px_#22d3ee] hover:bg-cyan-400 hover:text-black",

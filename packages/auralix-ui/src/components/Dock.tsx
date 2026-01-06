@@ -16,7 +16,7 @@ const DEFAULT_DISTANCE = 140;
 
 export function Dock({
   className,
-  direction = "bottom",
+  direction: _direction = "bottom",
   children,
   magnification = DEFAULT_MAGNIFICATION,
   distance = DEFAULT_DISTANCE,
@@ -66,15 +66,6 @@ export function DockIcon({
   const ref = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
-  // Use a simple event listener approach for cleaner performance in this context without framer-motion
-  // Ideally, useMouseMove or similar hook would be better, but we'll infer it from parent or adding listener here.
-  // Actually, for a smoother Dock without framer-motion, we can use CSS transition for simpler hover, or RequestAnimationFrame for physics.
-  // Given the constraints and desire for "coolness", let's try a simple mousemove on the icon itself? No, it needs to be relative to the Dock.
-  
-  // Let's attach listener to the window or simpler, use CSS hover for now to ensure reliability without heavy math library, 
-  // OR implement a lightweight distance calculator.
-  
-  // Lightweight implementation:
   React.useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!ref.current) return;
@@ -92,15 +83,7 @@ export function DockIcon({
       }
     };
 
-    const handleMouseLeave = () => {
-      setScale(1);
-    };
-
     window.addEventListener("mousemove", handleMouseMove);
-    // Optimization: Only listen when dock is hovered? For now globally is easiest but maybe heavy.
-    // Better: Add listener to the parent Dock? 
-    // Let's keep it global for now but throttle if we had a util. 
-    // To solve performance, we only update if close.
     
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);

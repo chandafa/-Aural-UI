@@ -12,9 +12,48 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Auralix UI - Modern UI Component Library",
-  description: "A collection of reusable, accessible UI components built with React, TypeScript, and Tailwind CSS.",
-  keywords: ["UI", "components", "React", "TypeScript", "Tailwind CSS", "design system"],
+  metadataBase: new URL("https://auralix-ui.vercel.app"),
+  title: {
+    default: "Auralix UI - Modern UI Component Library",
+    template: "%s | Auralix UI",
+  },
+  description: "A collection of beautiful, reusable, and accessible UI components built with React, TypeScript, and Tailwind CSS. Designed for modern web applications.",
+  keywords: ["UI", "components", "React", "TypeScript", "Tailwind CSS", "design system", "Auralix", "web development", "next.js ui"],
+  authors: [
+    {
+      name: "Auralix Team",
+      url: "https://auralix-ui.vercel.app",
+    },
+  ],
+  creator: "Auralix Team",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://auralix-ui.vercel.app",
+    title: "Auralix UI - Modern UI Component Library",
+    description: "Beautiful, reusable, and accessible UI components for React and Tailwind CSS.",
+    siteName: "Auralix UI",
+    images: [
+      {
+        url: "/og-image.png", // Ensure this image exists in public folder or update path
+        width: 1200,
+        height: 630,
+        alt: "Auralix UI",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Auralix UI - Modern UI Component Library",
+    description: "Beautiful, reusable, and accessible UI components for React and Tailwind CSS.",
+    images: ["/og-image.png"],
+    creator: "@auralixui",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

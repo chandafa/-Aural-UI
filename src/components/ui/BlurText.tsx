@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-interface BlurTextProps {
+export interface BlurTextProps {
   text: string;
   className?: string;
   delay?: number;

@@ -101,6 +101,12 @@ export default function IntroductionPage() {
             <svg className="h-5 w-5 text-success mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
+            <span><strong className="text-foreground">CLI Support</strong> — Add components to your project with a single command.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <svg className="h-5 w-5 text-success mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
             <span><strong className="text-foreground">Copy & Paste</strong> — Simply copy the component code into your project.</span>
           </li>
           <li className="flex items-start gap-3">
@@ -116,10 +122,14 @@ export default function IntroductionPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Quick Start</h2>
         <p className="text-muted-foreground">
-          Get started with Auralix UI in just a few minutes. Check out our installation guide 
-          to set up your project.
+          Get started with Auralix UI by initializing a new project using our CLI.
         </p>
-        <div className="flex gap-4">
+        
+        <div className="rounded-lg border bg-card p-4 font-mono text-sm shadow-sm md:w-fit">
+          npx auralix-ui@latest init
+        </div>
+
+        <div className="flex gap-4 pt-2">
           <Link href="/docs/installation">
             <Button className="bg-gradient-to-r from-violet-500 to-purple-600 text-white">
               Installation Guide

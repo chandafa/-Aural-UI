@@ -91,7 +91,7 @@ export function Navbar() {
              {/* Links & Theme Toggle */}
             <div className="flex items-center gap-2">
               <Link
-                href="https://github.com"
+                href="https://github.com/chandafa/auralix-ui"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background/50 hover:bg-muted transition-colors"
@@ -159,7 +159,7 @@ export function Navbar() {
               ))}
               <div className="pt-4 border-t border-border">
                 <Link
-                  href="https://github.com"
+                  href="https://github.com/chandafa/auralix-ui"
                   target="_blank"
                   className="flex items-center gap-2 px-4 py-3 rounded-lg text-base font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                 >

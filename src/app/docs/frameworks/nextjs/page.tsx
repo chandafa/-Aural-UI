@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { CodeBlock } from "@/components/docs/CodeBlock";
+import { CommandWithTabs } from "@/components/docs/CommandWithTabs";
 import { Card, CardContent } from "@/components/ui/Card";
 
 export const metadata = {
   title: "NextJS - Auralix UI",
-  description: "How to install and setup Auralix UI in NextJS.",
+  description: "Install and configure Auralix UI for Next.js.",
 };
 
 export default function NextJSPage() {
@@ -16,50 +17,82 @@ export default function NextJSPage() {
         <Badge variant="info" className="mb-4">Framework guides</Badge>
         <h1 className="text-4xl font-bold tracking-tight mb-4">NextJS</h1>
         <p className="text-xl text-muted-foreground">
-          How to install and setup Auralix UI in NextJS
+          Install and configure Auralix UI for Next.js.
         </p>
       </div>
 
-      {/* Setup NextJS */}
+      {/* Create Project */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Setup NextJS</h2>
-        <CodeBlock 
-          code={`npx create-next-app@latest`}
-          language="bash"
-        />
-      </section>
-
-      {/* Setup Auralix UI */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Setup Auralix UI</h2>
-        <CodeBlock 
-          code={`npm install auralix-ui tailwindcss @tailwindcss/postcss postcss`}
-          language="bash"
-        />
-      </section>
-
-      {/* Import Styles & Configure */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Import Styles & Configure</h2>
+        <h2 className="text-2xl font-semibold">Create project</h2>
         <p className="text-muted-foreground">
-          Import the styles and add the source directive to your global CSS file (e.g. <code className="px-1.5 py-0.5 bg-muted rounded text-sm">app/globals.css</code>):
+          Run the init command to create a new Next.js project or to setup an existing one:
+        </p>
+        <CommandWithTabs 
+          commands={{
+            npm: "npx create-next-app@latest",
+            pnpm: "pnpm create next-app",
+            yarn: "yarn create next-app",
+            bun: "bun create next-app"
+          }}
+        />
+      </section>
+
+      {/* Add Components */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Add Components</h2>
+        <p className="text-muted-foreground">
+          Install the Auralix UI package to start using components in your project.
+        </p>
+        <CommandWithTabs 
+          commands={{
+            npm: "npm install auralix-ui",
+            pnpm: "pnpm add auralix-ui",
+            yarn: "yarn add auralix-ui",
+            bun: "bun add auralix-ui"
+          }}
+        />
+        <p className="text-muted-foreground text-sm">
+          This will also install necessary peer dependencies.
+        </p>
+      </section>
+
+      {/* Configure */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Configure</h2>
+        <p className="text-muted-foreground">
+            Add the following to your <code className="px-1.5 py-0.5 bg-muted rounded text-sm">app/globals.css</code>:
         </p>
         <CodeBlock 
           code={`@import "tailwindcss";
 @import "auralix-ui/styles.css";
 
-@source "../../node_modules/auralix-ui";
-
-/* Your other styles */`}
+@source "../../node_modules/auralix-ui";`}
           language="css"
         />
       </section>
 
-      {/* Done */}
+      {/* Usage */}
       <section className="space-y-4">
-        <p className="text-success font-medium">
-          Done! now you use NextJS and Auralix UI
+        <h2 className="text-2xl font-semibold">Usage</h2>
+        <p className="text-muted-foreground">
+            You can then import components like this:
         </p>
+        <div className="rounded-lg border border-border bg-muted/50 p-4">
+            <div className="text-xs font-mono text-muted-foreground mb-2">app/page.tsx</div>
+            <CodeBlock 
+                code={`import { Button } from "auralix-ui";
+
+export default function Home() {
+  return (
+    <div>
+      <Button>Click me</Button>
+    </div>
+  )
+}`}
+                language="tsx"
+                className="border-none bg-transparent p-0"
+            />
+        </div>
       </section>
 
       {/* Navigation */}

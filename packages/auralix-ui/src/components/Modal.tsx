@@ -78,7 +78,11 @@ export interface ModalHeaderProps {
 }
 
 export function ModalHeader({ children, className }: ModalHeaderProps) {
-  return <div className={cn("mb-4", className)}>{children}</div>;
+  return (
+    <div className={cn("mb-4", className)}>
+      {children}
+    </div>
+  );
 }
 
 export interface ModalTitleProps {
@@ -87,7 +91,11 @@ export interface ModalTitleProps {
 }
 
 export function ModalTitle({ children, className }: ModalTitleProps) {
-  return <h2 className={cn("text-lg font-semibold", className)}>{children}</h2>;
+  return (
+    <h2 className={cn("text-lg font-semibold", className)}>
+      {children}
+    </h2>
+  );
 }
 
 export interface ModalBodyProps {
@@ -96,7 +104,11 @@ export interface ModalBodyProps {
 }
 
 export function ModalBody({ children, className }: ModalBodyProps) {
-  return <div className={cn("text-sm text-muted-foreground", className)}>{children}</div>;
+  return (
+    <div className={cn("text-sm text-muted-foreground", className)}>
+      {children}
+    </div>
+  );
 }
 
 export interface ModalFooterProps {
@@ -105,5 +117,9 @@ export interface ModalFooterProps {
 }
 
 export function ModalFooter({ children, className }: ModalFooterProps) {
-  return <div className={cn("mt-6 flex items-center justify-end gap-2", className)}>{children}</div>;
+  return (
+    <div className={cn("mt-6 flex items-center justify-end gap-2", className)}>
+      {children}
+    </div>
+  );
 }

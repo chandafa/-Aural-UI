@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-interface TrueFocusProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TrueFocusProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   focusColor?: string;
 }

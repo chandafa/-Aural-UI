@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { CodeBlock } from "@/components/docs/CodeBlock";
+import { CommandWithTabs } from "@/components/docs/CommandWithTabs";
 import { Card, CardContent } from "@/components/ui/Card";
 
 export const metadata = {
   title: "Vite - Auralix UI",
-  description: "How to install and setup Auralix UI in Vite.",
+  description: "Install and configure Auralix UI for Vite.",
 };
 
 export default function VitePage() {
@@ -16,44 +17,47 @@ export default function VitePage() {
         <Badge variant="info" className="mb-4">Framework guides</Badge>
         <h1 className="text-4xl font-bold tracking-tight mb-4">Vite</h1>
         <p className="text-xl text-muted-foreground">
-          How to install and setup Auralix UI in Vite
+          Install and configure Auralix UI for Vite.
         </p>
       </div>
 
-      {/* Setup Vite */}
+      {/* Create Project */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Setup Vite</h2>
-        <CodeBlock 
-          code={`npm create vite@latest my-app -- --template react-ts
-cd my-app
-npm install`}
-          language="bash"
-        />
-      </section>
-
-      {/* Setup Tailwind */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Setup Tailwind CSS</h2>
-        <CodeBlock 
-          code={`npm install tailwindcss @tailwindcss/postcss postcss`}
-          language="bash"
-        />
-      </section>
-
-      {/* Setup Auralix UI */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Setup Auralix UI</h2>
-        <CodeBlock 
-          code={`npm install auralix-ui`}
-          language="bash"
-        />
-      </section>
-
-      {/* Import Styles & Configure */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Import Styles & Configure</h2>
+        <h2 className="text-2xl font-semibold">Create project</h2>
         <p className="text-muted-foreground">
-          Import the styles and add the source directive to your global CSS file (e.g. <code className="px-1.5 py-0.5 bg-muted rounded text-sm">src/index.css</code>):
+          Start by creating a new React project using Vite:
+        </p>
+        <CommandWithTabs 
+          commands={{
+            npm: "npm create vite@latest my-app -- --template react-ts",
+            pnpm: "pnpm create vite my-app --template react-ts",
+            yarn: "yarn create vite my-app --template react-ts",
+            bun: "bun create vite my-app --template react-ts"
+          }}
+        />
+      </section>
+
+      {/* Add Components */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Add Components</h2>
+        <p className="text-muted-foreground">
+          Install the Auralix UI package and its dependencies:
+        </p>
+        <CommandWithTabs 
+          commands={{
+            npm: "npm install auralix-ui",
+            pnpm: "pnpm add auralix-ui",
+            yarn: "yarn add auralix-ui",
+            bun: "bun add auralix-ui"
+          }}
+        />
+      </section>
+
+      {/* Configure */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Configure</h2>
+        <p className="text-muted-foreground">
+          Import the styles and add the source directive to your <code className="px-1.5 py-0.5 bg-muted rounded text-sm">src/index.css</code> file:
         </p>
         <CodeBlock 
           code={`@import "tailwindcss";
@@ -64,11 +68,30 @@ npm install`}
         />
       </section>
 
-      {/* Done */}
+      {/* Usage */}
       <section className="space-y-4">
-        <p className="text-success font-medium">
-          Done! now you use Vite and Auralix UI
+        <h2 className="text-2xl font-semibold">Usage</h2>
+        <p className="text-muted-foreground">
+            You can then import components like this:
         </p>
+        <div className="rounded-lg border border-border bg-muted/50 p-4">
+            <div className="text-xs font-mono text-muted-foreground mb-2">src/App.tsx</div>
+            <CodeBlock 
+                code={`import { Button } from "auralix-ui";
+
+function App() {
+  return (
+    <div>
+      <Button>Click me</Button>
+    </div>
+  )
+}
+
+export default App`}
+                language="tsx"
+                className="border-none bg-transparent p-0"
+            />
+        </div>
       </section>
 
       {/* Navigation */}
@@ -77,15 +100,15 @@ npm install`}
           <Card hoverable className="h-full">
             <CardContent className="pt-6">
               <p className="text-sm text-muted-foreground">← NextJS</p>
-              <p className="font-medium">How to install and setup Auralix UI in NextJS</p>
+              <p className="font-medium">Install and configure Next.js</p>
             </CardContent>
           </Card>
         </Link>
-        <Link href="/components/button">
+        <Link href="/docs/frameworks/laravel">
           <Card hoverable className="h-full text-right">
             <CardContent className="pt-6">
-              <p className="text-sm text-muted-foreground">Components →</p>
-              <p className="font-medium">Browse all components</p>
+              <p className="text-sm text-muted-foreground">Laravel →</p>
+              <p className="font-medium">Install and configure Laravel</p>
             </CardContent>
           </Card>
         </Link>

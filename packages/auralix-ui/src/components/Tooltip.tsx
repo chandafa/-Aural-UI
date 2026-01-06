@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, useRef, type ReactNode } from "react";
 import { cn } from "../utils";
 
 export interface TooltipProps {
@@ -17,6 +17,7 @@ export function Tooltip({
   className,
 }: TooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   const positionClasses = {
     top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
@@ -34,6 +35,7 @@ export function Tooltip({
 
   return (
     <div
+      ref={triggerRef}
       className="relative inline-flex"
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}

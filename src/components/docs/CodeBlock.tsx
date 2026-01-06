@@ -22,7 +22,7 @@ export function CodeBlock({ code, language = "tsx", className }: CodeBlockProps)
   };
 
   return (
-    <div className={cn("relative rounded-lg bg-muted", className)}>
+    <div className={cn("relative rounded-lg bg-muted overflow-auto", className)}>
       <div className="flex items-center justify-between border-b border-border px-4 py-2">
         <span className="text-xs font-medium text-muted-foreground">{language}</span>
         <button

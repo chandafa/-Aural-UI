@@ -1,17 +1,12 @@
-import React from "react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import React, { forwardRef } from "react";
+import { cn } from "../utils";
 
 export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   intensity?: "low" | "medium" | "high";
   children: React.ReactNode;
 }
 
-export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
+export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
   ({ className, intensity = "medium", children, ...props }, ref) => {
     const intensities = {
       low: "bg-white/10 backdrop-blur-sm border-white/20",
@@ -29,7 +24,7 @@ export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
         )}
         {...props}
       >
-        {/* Noise texture overlay for extra premium feel (optional, can be removed) */}
+        {/* Noise texture overlay for extra premium feel */}
         <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
         
         <div className="relative z-10 p-6">

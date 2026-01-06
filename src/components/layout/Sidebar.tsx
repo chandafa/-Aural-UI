@@ -11,6 +11,7 @@ import { docsConfig } from "@/config/docs";
 const gettingStarted = docsConfig.gettingStarted;
 const frameworkGuides = docsConfig.frameworkGuides;
 const components = docsConfig.components;
+const templates = docsConfig.templates;
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -18,6 +19,7 @@ export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [componentsOpen, setComponentsOpen] = useState(true);
   const [frameworksOpen, setFrameworksOpen] = useState(true);
+  const [templatesOpen, setTemplatesOpen] = useState(true);
 
   return (
     <>
@@ -157,6 +159,45 @@ export function Sidebar() {
                     onClick={() => setIsOpen(false)}
                   >
                     {component.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Templates */}
+          <div className="mt-4">
+            <button
+              onClick={() => setTemplatesOpen(!templatesOpen)}
+              className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            >
+              <span>Templates</span>
+              <svg 
+                className={cn("h-4 w-4 transition-transform", templatesOpen && "rotate-90")} 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor" 
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            
+            {templatesOpen && (
+              <div className="ml-3 mt-1 space-y-1 border-l border-border pl-3">
+                {templates.map((template) => (
+                  <Link
+                    key={template.href}
+                    href={template.href}
+                    className={cn(
+                      "flex items-center rounded-lg px-3 py-1.5 text-sm transition-colors",
+                      pathname === template.href
+                        ? "bg-primary text-primary-foreground font-medium"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    )}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {template.name}
                   </Link>
                 ))}
               </div>
