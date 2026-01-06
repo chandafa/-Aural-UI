@@ -44,6 +44,7 @@ __export(index_exports, {
   CardFooter: () => CardFooter,
   CardHeader: () => CardHeader,
   CardTitle: () => CardTitle,
+  CommandMenu: () => CommandMenu,
   Dialog: () => Dialog,
   DialogButton: () => DialogButton,
   Dock: () => Dock,
@@ -62,6 +63,7 @@ __export(index_exports, {
   ModalFooter: () => ModalFooter,
   ModalHeader: () => ModalHeader,
   ModalTitle: () => ModalTitle,
+  Navbar: () => Navbar,
   NeonButton: () => NeonButton,
   Select: () => Select,
   Slider: () => Slider,
@@ -1222,101 +1224,7 @@ function TabsContent({
 
 // src/components/Accordion.tsx
 var React8 = __toESM(require("react"));
-
-// ../../node_modules/lucide-react/dist/esm/createLucideIcon.js
-var import_react16 = require("react");
-
-// ../../node_modules/lucide-react/dist/esm/shared/src/utils.js
-var toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
-var toCamelCase = (string) => string.replace(
-  /^([A-Z])|[\s-_]+(\w)/g,
-  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
-);
-var toPascalCase = (string) => {
-  const camelCase = toCamelCase(string);
-  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
-};
-var mergeClasses = (...classes) => classes.filter((className, index, array) => {
-  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
-}).join(" ").trim();
-var hasA11yProp = (props) => {
-  for (const prop in props) {
-    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
-      return true;
-    }
-  }
-};
-
-// ../../node_modules/lucide-react/dist/esm/Icon.js
-var import_react15 = require("react");
-
-// ../../node_modules/lucide-react/dist/esm/defaultAttributes.js
-var defaultAttributes = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: 24,
-  height: 24,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 2,
-  strokeLinecap: "round",
-  strokeLinejoin: "round"
-};
-
-// ../../node_modules/lucide-react/dist/esm/Icon.js
-var Icon = (0, import_react15.forwardRef)(
-  ({
-    color = "currentColor",
-    size = 24,
-    strokeWidth = 2,
-    absoluteStrokeWidth,
-    className = "",
-    children,
-    iconNode,
-    ...rest
-  }, ref) => (0, import_react15.createElement)(
-    "svg",
-    {
-      ref,
-      ...defaultAttributes,
-      width: size,
-      height: size,
-      stroke: color,
-      strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-      className: mergeClasses("lucide", className),
-      ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
-      ...rest
-    },
-    [
-      ...iconNode.map(([tag, attrs]) => (0, import_react15.createElement)(tag, attrs)),
-      ...Array.isArray(children) ? children : [children]
-    ]
-  )
-);
-
-// ../../node_modules/lucide-react/dist/esm/createLucideIcon.js
-var createLucideIcon = (iconName, iconNode) => {
-  const Component = (0, import_react16.forwardRef)(
-    ({ className, ...props }, ref) => (0, import_react16.createElement)(Icon, {
-      ref,
-      iconNode,
-      className: mergeClasses(
-        `lucide-${toKebabCase(toPascalCase(iconName))}`,
-        `lucide-${iconName}`,
-        className
-      ),
-      ...props
-    })
-  );
-  Component.displayName = toPascalCase(iconName);
-  return Component;
-};
-
-// ../../node_modules/lucide-react/dist/esm/icons/chevron-down.js
-var __iconNode = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-var ChevronDown = createLucideIcon("chevron-down", __iconNode);
-
-// src/components/Accordion.tsx
+var import_lucide_react = require("lucide-react");
 var import_jsx_runtime26 = require("react/jsx-runtime");
 var AccordionContext = React8.createContext(null);
 function Accordion({
@@ -1342,7 +1250,7 @@ function AccordionItem({ value, trigger, children, className }) {
         "data-state": isOpen ? "open" : "closed",
         children: [
           trigger,
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(ChevronDown, { className: "h-4 w-4 shrink-0 transition-transform duration-200 text-white/50" })
+          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(import_lucide_react.ChevronDown, { className: "h-4 w-4 shrink-0 transition-transform duration-200 text-white/50" })
         ]
       }
     ),
@@ -1356,6 +1264,205 @@ function AccordionItem({ value, trigger, children, className }) {
         children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "text-white/70 pt-2 border-t border-white/5", children })
       }
     )
+  ] });
+}
+
+// src/components/Navbar.tsx
+var import_react15 = require("react");
+var import_jsx_runtime27 = require("react/jsx-runtime");
+function Navbar({
+  logo,
+  items = [],
+  rightAction,
+  className,
+  mobileMenuOpen: controlledMobileMenuOpen,
+  onMobileMenuToggle,
+  LinkComponent = "a"
+  // Default to anchor tag
+}) {
+  const [internalMobileMenuOpen, setInternalMobileMenuOpen] = (0, import_react15.useState)(false);
+  const isMobileMenuOpen = controlledMobileMenuOpen ?? internalMobileMenuOpen;
+  const toggleMobileMenu = () => {
+    const newState = !isMobileMenuOpen;
+    setInternalMobileMenuOpen(newState);
+    onMobileMenuToggle?.(newState);
+  };
+  const Link = LinkComponent;
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(import_jsx_runtime27.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("header", { className: cn("fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-3xl", className), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+      "div",
+      {
+        className: cn(
+          "flex items-center justify-between rounded-[2rem] transition-all duration-500",
+          "px-6 py-3",
+          // Glass effect - Standard Tailwind Dark Mode
+          "bg-white/60 dark:bg-white/5",
+          "backdrop-blur-2xl",
+          "border border-white/20 dark:border-white/10",
+          "shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+        ),
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "flex items-center gap-2 group", children: logo || /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "text-lg font-bold tracking-tight text-zinc-900 dark:text-white", children: "Brand" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "flex items-center gap-1.5", children: [
+            rightAction,
+            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+              "button",
+              {
+                className: "md:hidden h-9 w-9 inline-flex items-center justify-center rounded-full text-zinc-500 dark:text-zinc-400 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-all",
+                onClick: toggleMobileMenu,
+                "aria-label": "Menu",
+                children: isMobileMenuOpen ? /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("svg", { className: "h-4 w-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18L18 6M6 6l12 12" }) }) : /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("svg", { className: "h-4 w-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M4 6h16M4 12h16M4 18h16" }) })
+              }
+            )
+          ] })
+        ]
+      }
+    ),
+    isMobileMenuOpen && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+      "div",
+      {
+        className: cn(
+          "md:hidden mt-2 mx-2 rounded-[1.5rem] backdrop-blur-3xl overflow-hidden animate-in slide-in-from-top-2 duration-300",
+          // Use standard dark classes
+          "bg-white dark:bg-zinc-900/95",
+          "border border-black/[0.05] dark:border-white/[0.08]",
+          "shadow-2xl dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+        ),
+        children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("nav", { className: "p-2 space-y-1", children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+          Link,
+          {
+            href: item.href,
+            className: cn(
+              "block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200",
+              "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-white"
+            ),
+            onClick: () => {
+              setInternalMobileMenuOpen(false);
+              onMobileMenuToggle?.(false);
+            },
+            children: item.name
+          },
+          item.href
+        )) })
+      }
+    )
+  ] }) });
+}
+
+// src/components/CommandMenu.tsx
+var import_react16 = require("react");
+var import_jsx_runtime28 = require("react/jsx-runtime");
+function CommandMenu({
+  open,
+  onOpenChange,
+  items = [],
+  placeholder = "Type a command or search..."
+}) {
+  const [query, setQuery] = (0, import_react16.useState)("");
+  (0, import_react16.useEffect)(() => {
+    const down = (e) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        onOpenChange(!open);
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, [onOpenChange, open]);
+  const filteredItems = (0, import_react16.useMemo)(() => {
+    if (!query) return [];
+    return items.filter(
+      (item) => item.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [query, items]);
+  const runCommand = (0, import_react16.useCallback)((command) => {
+    onOpenChange(false);
+    command();
+  }, [onOpenChange]);
+  if (!open) return null;
+  return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "fixed inset-0 z-50 flex items-start justify-center pt-[15vh]", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
+      "div",
+      {
+        className: "fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity",
+        onClick: () => onOpenChange(false)
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: cn(
+      "relative w-full max-w-lg overflow-hidden transition-all duration-300",
+      "rounded-[2rem]",
+      "backdrop-blur-xl",
+      "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2",
+      // Standard Dark Mode Classes
+      "bg-white/80 dark:bg-zinc-900/80",
+      "border border-white/20 dark:border-white/10",
+      "shadow-2xl dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+    ), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: cn(
+        "flex items-center border-b px-4 pt-1",
+        "border-black/5 dark:border-white/5"
+      ), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
+          "svg",
+          {
+            className: "mr-2 h-4 w-4 shrink-0 opacity-50 text-black dark:text-white",
+            fill: "none",
+            viewBox: "0 0 24 24",
+            stroke: "currentColor",
+            strokeWidth: 2,
+            children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" })
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
+          "input",
+          {
+            className: cn(
+              "h-11 flex-1 rounded-md bg-transparent py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "text-black dark:text-white placeholder:text-zinc-500"
+            ),
+            placeholder,
+            value: query,
+            onChange: (e) => setQuery(e.target.value),
+            autoFocus: true
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "max-h-[300px] overflow-y-auto p-2", children: query === "" ? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "py-6 text-center text-sm text-zinc-500 dark:text-zinc-400", children: "Type to search..." }) : filteredItems.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "py-6 text-center text-sm text-zinc-500 dark:text-zinc-400", children: "No results found." }) : /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "space-y-1", children: filteredItems.map((item, index) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
+        "button",
+        {
+          onClick: () => runCommand(() => {
+            item.onSelect?.();
+            if (item.href) window.location.href = item.href;
+          }),
+          className: cn(
+            "flex w-full items-center rounded-md px-2 py-2 text-sm transition-colors",
+            "text-zinc-600 dark:text-zinc-300",
+            "hover:bg-black/5 dark:hover:bg-white/5",
+            "hover:text-black dark:hover:text-white"
+          ),
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: cn(
+              "flex h-6 w-6 shrink-0 items-center justify-center rounded-full mr-2",
+              "bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50"
+            ), children: item.icon || "#" }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { children: item.name }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "ml-auto text-xs text-zinc-400 dark:text-zinc-500", children: item.category })
+          ]
+        },
+        index
+      )) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: cn(
+        "border-t px-4 py-2 text-[10px] text-zinc-500 dark:text-zinc-400 flex items-center justify-end gap-2",
+        "border-black/5 dark:border-white/5 bg-black/5 dark:bg-white/5"
+      ), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { children: "Select" }),
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("kbd", { className: "bg-transparent px-1.5 rounded border border-current opacity-50", children: "\u21B5" }),
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { children: "Close" }),
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("kbd", { className: "bg-transparent px-1.5 rounded border border-current opacity-50", children: "Esc" })
+      ] })
+    ] })
   ] });
 }
 // Annotate the CommonJS export names for ESM import in node:
@@ -1374,6 +1481,7 @@ function AccordionItem({ value, trigger, children, className }) {
   CardFooter,
   CardHeader,
   CardTitle,
+  CommandMenu,
   Dialog,
   DialogButton,
   Dock,
@@ -1392,6 +1500,7 @@ function AccordionItem({ value, trigger, children, className }) {
   ModalFooter,
   ModalHeader,
   ModalTitle,
+  Navbar,
   NeonButton,
   Select,
   Slider,
@@ -1412,19 +1521,4 @@ function AccordionItem({ value, trigger, children, className }) {
   TrueFocus,
   cn
 });
-/*! Bundled license information:
-
-lucide-react/dist/esm/shared/src/utils.js:
-lucide-react/dist/esm/defaultAttributes.js:
-lucide-react/dist/esm/Icon.js:
-lucide-react/dist/esm/createLucideIcon.js:
-lucide-react/dist/esm/icons/chevron-down.js:
-lucide-react/dist/esm/lucide-react.js:
-  (**
-   * @license lucide-react v0.562.0 - ISC
-   *
-   * This source code is licensed under the ISC license.
-   * See the LICENSE file in the root directory of this source tree.
-   *)
-*/
 //# sourceMappingURL=index.js.map

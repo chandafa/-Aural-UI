@@ -1,6 +1,6 @@
 {
   "name": "auralix-ui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Modern UI component library with glass morphism effects for React",
   "author": "Auralix UI Team",
   "license": "MIT",
@@ -69,6 +69,7 @@
     "clsx": "^2.1.0",
     "commander": "^14.0.2",
     "fs-extra": "^11.3.3",
+    "lucide-react": "^0.468.0",
     "ora": "^9.0.0",
     "prompts": "^2.4.2",
     "tailwind-merge": "^2.2.0",

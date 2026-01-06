@@ -321,6 +321,40 @@ declare function Accordion({ children, className, }: {
 }): react_jsx_runtime.JSX.Element;
 declare function AccordionItem({ value, trigger, children, className }: AccordionItemProps): react_jsx_runtime.JSX.Element;
 
+interface NavItem {
+    name: string;
+    href: string;
+}
+interface NavbarProps {
+    logo?: React__default.ReactNode;
+    items?: NavItem[];
+    rightAction?: React__default.ReactNode;
+    className?: string;
+    mobileMenuOpen?: boolean;
+    onMobileMenuToggle?: (isOpen: boolean) => void;
+    /**
+     * Optional custom Link component (e.g. Next.js Link, React Router Link)
+     * Defaults to standard <a> tag
+     */
+    LinkComponent?: React__default.ElementType;
+}
+declare function Navbar({ logo, items, rightAction, className, mobileMenuOpen: controlledMobileMenuOpen, onMobileMenuToggle, LinkComponent, }: NavbarProps): react_jsx_runtime.JSX.Element;
+
+interface CommandItem {
+    category: string;
+    name: string;
+    href?: string;
+    icon?: React__default.ReactNode;
+    onSelect?: () => void;
+}
+interface CommandMenuProps {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    items?: CommandItem[];
+    placeholder?: string;
+}
+declare function CommandMenu({ open, onOpenChange, items, placeholder }: CommandMenuProps): react_jsx_runtime.JSX.Element | null;
+
 declare function cn(...inputs: ClassValue[]): string;
 
-export { Accordion, AccordionItem, Alert, type AlertProps, AnimatedGradientText, Badge, type BadgeProps, BlurText, type BlurTextProps, BorderBeam, Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardHeader, type CardHeaderProps, type CardProps, CardTitle, type CardTitleProps, Dialog, DialogButton, type DialogProps, Dock, DockIcon, Form, FormDescription, FormError, FormField, FormLabel, GlassCard, type GlassCardProps, Input, type InputProps, MagicCard, Meteors, Modal, ModalBody, type ModalBodyProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, type ModalProps, ModalTitle, type ModalTitleProps, NeonButton, type NeonButtonProps, Select, type SelectOption, type SelectProps, Slider, SpotlightCard, type SpotlightCardProps, Switch, Table, TableBody, type TableBodyProps, TableCell, type TableCellProps, TableHead, type TableHeadProps, TableHeader, type TableHeaderProps, type TableProps, TableRow, type TableRowProps, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, type TextareaProps, Tooltip, type TooltipProps, TrueFocus, type TrueFocusProps, cn };
+export { Accordion, AccordionItem, Alert, type AlertProps, AnimatedGradientText, Badge, type BadgeProps, BlurText, type BlurTextProps, BorderBeam, Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardHeader, type CardHeaderProps, type CardProps, CardTitle, type CardTitleProps, type CommandItem, CommandMenu, type CommandMenuProps, Dialog, DialogButton, type DialogProps, Dock, DockIcon, Form, FormDescription, FormError, FormField, FormLabel, GlassCard, type GlassCardProps, Input, type InputProps, MagicCard, Meteors, Modal, ModalBody, type ModalBodyProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, type ModalProps, ModalTitle, type ModalTitleProps, type NavItem, Navbar, type NavbarProps, NeonButton, type NeonButtonProps, Select, type SelectOption, type SelectProps, Slider, SpotlightCard, type SpotlightCardProps, Switch, Table, TableBody, type TableBodyProps, TableCell, type TableCellProps, TableHead, type TableHeadProps, TableHeader, type TableHeaderProps, type TableProps, TableRow, type TableRowProps, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, type TextareaProps, Tooltip, type TooltipProps, TrueFocus, type TrueFocusProps, cn };

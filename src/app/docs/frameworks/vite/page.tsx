@@ -63,9 +63,53 @@ export default function VitePage() {
           code={`@import "tailwindcss";
 @import "auralix-ui/styles.css";
 
-@source "../../node_modules/auralix-ui";`}
+@source "../../node_modules/auralix-ui/src";`}
           language="css"
         />
+      </section>
+
+      {/* Configure tsconfig */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Configure path aliases</h2>
+        <p className="text-muted-foreground">
+          Add the following to your <code className="px-1.5 py-0.5 bg-muted rounded text-sm">tsconfig.json</code> file:
+        </p>
+        <div className="rounded-lg border border-border bg-muted/50 p-4">
+          <div className="text-xs font-mono text-muted-foreground mb-2">tsconfig.json</div>
+          <CodeBlock 
+            code={`{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}`}
+            language="json"
+            className="border-none bg-transparent p-0"
+          />
+        </div>
+      </section>
+
+      {/* Add utilities */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Add utilities</h2>
+        <p className="text-muted-foreground">
+          Create a <code className="px-1.5 py-0.5 bg-muted rounded text-sm">src/lib/utils.ts</code> file with the following content:
+        </p>
+        <div className="rounded-lg border border-border bg-muted/50 p-4">
+          <div className="text-xs font-mono text-muted-foreground mb-2">src/lib/utils.ts</div>
+          <CodeBlock 
+            code={`import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}
+            language="tsx"
+            className="border-none bg-transparent p-0"
+          />
+        </div>
       </section>
 
       {/* Usage */}

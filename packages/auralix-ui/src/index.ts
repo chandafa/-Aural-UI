@@ -68,6 +68,8 @@ export { Switch } from "./components/Switch";
 export { Slider } from "./components/Slider";
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/Tabs";
 export { Accordion, AccordionItem } from "./components/Accordion";
+export { Navbar, type NavbarProps, type NavItem } from "./components/Navbar";
+export { CommandMenu, type CommandMenuProps, type CommandItem } from "./components/CommandMenu";
 
 // Utilities
 export { cn } from "./utils";

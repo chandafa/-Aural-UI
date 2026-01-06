@@ -13756,7 +13756,7 @@ export function cn(...inputs: ClassValue[]) {
       }
       spinner.succeed(source_default.green("Initialization complete!"));
       console.log(source_default.yellow("\nMake sure you have the following dependencies installed:"));
-      console.log(source_default.cyan("npm install clsx tailwind-merge framer-motion lucide-react"));
+      console.log(source_default.cyan("npm install framer-motion"));
     } catch (error2) {
       spinner.fail(source_default.red("Failed to initialize Auralix UI."));
       console.error(error2);
