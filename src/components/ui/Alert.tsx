@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 export interface AlertProps {
   children: React.ReactNode;
   variant?: "success" | "error" | "warning" | "info";
+  design?: "standard" | "solid" | "left-accent";
   title?: string;
   icon?: boolean;
   className?: string;
@@ -31,9 +32,12 @@ const icons = {
   ),
 };
 
+// ... icons ...
+
 export function Alert({
   children,
   variant = "info",
+  design = "standard", // Visual style
   title,
   icon = true,
   className,
@@ -42,17 +46,39 @@ export function Alert({
     <div
       role="alert"
       className={cn(
-        "flex gap-3 rounded-[2rem] border p-4 backdrop-blur-sm",
+        "flex gap-3 p-4 backdrop-blur-sm transition-all duration-300",
         {
-          "border-success/30 bg-success/10 text-success": variant === "success",
-          "border-destructive/30 bg-destructive/10 text-destructive": variant === "error",
-          "border-warning/30 bg-warning/10 text-warning": variant === "warning",
-          "border-info/30 bg-info/10 text-info": variant === "info",
+          // Base Colors (Severity)
+          "text-success": variant === "success",
+          "text-destructive": variant === "error",
+          "text-warning": variant === "warning",
+          "text-info": variant === "info",
+
+          // Design: Standard (Bordered + Soft Background)
+          "rounded-[2rem] border": design === "standard",
+          "border-success/30 bg-success/10": design === "standard" && variant === "success",
+          "border-destructive/30 bg-destructive/10": design === "standard" && variant === "error",
+          "border-warning/30 bg-warning/10": design === "standard" && variant === "warning",
+          "border-info/30 bg-info/10": design === "standard" && variant === "info",
+
+          // Design: Solid (Filled)
+          "rounded-[2rem] text-white shadow-lg": design === "solid",
+          "bg-success": design === "solid" && variant === "success",
+          "bg-destructive": design === "solid" && variant === "error",
+          "bg-warning": design === "solid" && variant === "warning",
+          "bg-info": design === "solid" && variant === "info",
+
+          // Design: Left Accent (Minimal)
+          "bg-white dark:bg-zinc-900 border-l-4 rounded-r-lg shadow-sm border-t-0 border-b-0 border-r-0": design === "left-accent",
+          "border-success": design === "left-accent" && variant === "success",
+          "border-destructive": design === "left-accent" && variant === "error",
+          "border-warning": design === "left-accent" && variant === "warning",
+          "border-info": design === "left-accent" && variant === "info",
         },
         className
       )}
     >
-      {icon && <div className="flex-shrink-0">{icons[variant]}</div>}
+      {icon && <div className={cn("flex-shrink-0", design === "solid" ? "text-white" : "")}>{icons[variant]}</div>}
       <div className="flex-1">
         {title && <div className="mb-1 font-semibold">{title}</div>}
         <div className="text-sm opacity-90">{children}</div>

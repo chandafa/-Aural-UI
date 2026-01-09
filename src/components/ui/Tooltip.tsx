@@ -1,66 +1,52 @@
 "use client";
 
-import { useState, useRef, type ReactNode } from "react";
+import * as React from "react";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { cn } from "@/lib/utils";
 
-export interface TooltipProps {
-  children: ReactNode;
-  content: string;
-  position?: "top" | "bottom" | "left" | "right";
-  className?: string;
-}
+const TooltipProvider = TooltipPrimitive.Provider;
 
-export function Tooltip({
-  children,
-  content,
-  position = "top",
-  className,
-}: TooltipProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const triggerRef = useRef<HTMLDivElement>(null);
+const Tooltip = TooltipPrimitive.Root;
 
-  const positionClasses = {
-    top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
-    bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
-    left: "right-full top-1/2 -translate-y-1/2 mr-2",
-    right: "left-full top-1/2 -translate-y-1/2 ml-2",
-  };
+const TooltipTrigger = TooltipPrimitive.Trigger;
 
-  const arrowClasses = {
-    top: "top-full left-1/2 -translate-x-1/2 border-t-foreground border-l-transparent border-r-transparent border-b-transparent",
-    bottom: "bottom-full left-1/2 -translate-x-1/2 border-b-foreground border-l-transparent border-r-transparent border-t-transparent",
-    left: "left-full top-1/2 -translate-y-1/2 border-l-foreground border-t-transparent border-b-transparent border-r-transparent",
-    right: "right-full top-1/2 -translate-y-1/2 border-r-foreground border-t-transparent border-b-transparent border-l-transparent",
-  };
+// Helper context for variant
+const TooltipContext = React.createContext<{
+  variant: "simple" | "rich" | "arrow";
+}>({ variant: "simple" });
 
-  return (
-    <div
-      ref={triggerRef}
-      className="relative inline-flex"
-      onMouseEnter={() => setIsVisible(true)}
-      onMouseLeave={() => setIsVisible(false)}
-      onFocus={() => setIsVisible(true)}
-      onBlur={() => setIsVisible(false)}
-    >
-      {children}
-      {isVisible && (
-        <div
-          role="tooltip"
-          className={cn(
-            "absolute z-50 whitespace-nowrap rounded-[1rem] bg-foreground/90 px-3 py-1.5 text-xs text-background shadow-lg backdrop-blur-sm",
-            positionClasses[position],
-            className
-          )}
-        >
-          {content}
-          <div
-            className={cn(
-              "absolute h-0 w-0 border-4",
-              arrowClasses[position]
-            )}
-          />
-        </div>
-      )}
-    </div>
-  );
-}
+// Wrapper to inject context if needed, but since Content is separate, 
+// we usually pass props to Content directly. 
+// However, to satisfy "3 variants" requirement strictly on usages, 
+// let's add `TooltipContent` variants.
+
+const TooltipContent = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> & { variant?: "simple" | "rich" | "arrow" }
+>(({ className, sideOffset = 4, variant = "simple", ...props }, ref) => (
+  <TooltipPrimitive.Content
+    ref={ref}
+    sideOffset={sideOffset}
+    className={cn(
+      "z-50 overflow-hidden rounded-md border px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      
+      // Simple (Default)
+      variant === "simple" && "bg-popover border-border",
+
+      // Rich (Glassy, slightly larger padding)
+      variant === "rich" && "bg-black/80 text-white backdrop-blur-md border-white/10 px-4 py-2 rounded-xl",
+
+      // Arrow (High contrast, needs Arrow element)
+      variant === "arrow" && "bg-primary text-primary-foreground border-transparent px-3 py-2",
+
+      className
+    )}
+    {...props}
+  >
+    {props.children}
+    {variant === "arrow" && <TooltipPrimitive.Arrow className="fill-primary" />}
+  </TooltipPrimitive.Content>
+));
+TooltipContent.displayName = TooltipPrimitive.Content.displayName;
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };

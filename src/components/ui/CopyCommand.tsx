@@ -1,44 +1,63 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
+import { Check, Copy } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
 
 interface CopyCommandProps {
   command: string;
+  className?: string;
+  variant?: "simple" | "boxed" | "minimal";
 }
 
-export function CopyCommand({ command }: CopyCommandProps) {
-  const [copied, setCopied] = useState(false);
+export function CopyCommand({ command, className, variant = "boxed" }: CopyCommandProps) {
+  const [hasCopied, setHasCopied] = React.useState(false);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(command);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy:", err);
-    }
-  };
+  const copyToClipboard = React.useCallback(() => {
+    navigator.clipboard.writeText(command);
+    setHasCopied(true);
+    setTimeout(() => setHasCopied(false), 2000);
+  }, [command]);
 
   return (
-    <div className="inline-flex items-center gap-2 sm:gap-3 px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-xs sm:text-sm font-mono text-muted-foreground">
-      <span className="text-foreground">▲</span>
-      <span className="hidden sm:inline">~</span>
-      <span>{command}</span>
-      <button 
-        onClick={handleCopy}
-        className="ml-2 p-1.5 hover:bg-muted rounded-lg transition-colors"
-        aria-label="Copy to clipboard"
-      >
-        {copied ? (
-          <svg className="w-4 h-4 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        ) : (
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-          </svg>
+    <div
+      className={cn(
+        "relative flex items-center justify-between",
+        // Boxed (Default)
+        variant === "boxed" && "rounded-lg border bg-muted/50 p-4 font-mono text-sm backdrop-blur-sm",
+        
+        // Simple (Just text and button)
+        variant === "simple" && "rounded-md bg-transparent p-0 font-mono text-sm gap-2",
+
+        // Minimal (Pill)
+        variant === "minimal" && "rounded-full border bg-background px-4 py-2 font-mono text-xs shadow-sm w-fit gap-4",
+        
+        className
+      )}
+    >
+      <code className={cn(
+        "flex-1 break-all",
+        variant === "minimal" && "text-muted-foreground"
+      )}>
+        {command}
+      </code>
+      <Button
+        variant="ghost"
+        size="sm"
+        className={cn(
+            "h-8 w-8 px-0",
+            variant === "minimal" && "h-6 w-6 -mr-2"
         )}
-      </button>
+        onClick={copyToClipboard}
+      >
+        {hasCopied ? (
+          <Check className="h-4 w-4 text-green-500" />
+        ) : (
+          <Copy className="h-4 w-4 text-muted-foreground" />
+        )}
+        <span className="sr-only">Copy command</span>
+      </Button>
     </div>
   );
 }

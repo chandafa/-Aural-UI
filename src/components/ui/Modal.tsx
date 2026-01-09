@@ -10,6 +10,7 @@ export interface ModalProps {
   size?: "sm" | "md" | "lg" | "xl";
   closeOnBackdrop?: boolean;
   className?: string;
+  variant?: "default" | "bottom-sheet" | "drawer";
 }
 
 export function Modal({
@@ -19,6 +20,7 @@ export function Modal({
   size = "md",
   closeOnBackdrop = true,
   className,
+  variant = "default",
 }: ModalProps) {
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -43,10 +45,13 @@ export function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className={cn("fixed inset-0 z-50 flex items-center justify-center p-4",
+      variant === "bottom-sheet" && "items-end p-0",
+      variant === "drawer" && "items-stretch justify-end p-0"
+    )}>
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-md"
+        className="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity duration-300 animate-in fade-in"
         onClick={closeOnBackdrop ? onClose : undefined}
         aria-hidden="true"
       />
@@ -56,16 +61,28 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         className={cn(
-          "relative z-10 w-full rounded-[2rem] border border-white/10 bg-background/80 p-6 shadow-2xl backdrop-blur-xl",
+          "relative z-10 w-full border border-border bg-background/80 shadow-2xl backdrop-blur-xl transition-all duration-300",
+          // Base/Default
+          variant === "default" && "rounded-[2rem] p-6 animate-in fade-in zoom-in-95",
+          
+          // Bottom Sheet
+          variant === "bottom-sheet" && "rounded-t-[2rem] p-6 pb-10 max-w-full animate-in slide-in-from-bottom duration-500",
+          
+          // Drawer
+          variant === "drawer" && "h-full max-w-md rounded-l-[2rem] p-8 animate-in slide-in-from-right duration-500",
+
           {
-            "max-w-sm": size === "sm",
-            "max-w-md": size === "md",
-            "max-w-lg": size === "lg",
-            "max-w-xl": size === "xl",
+            "max-w-sm": size === "sm" && variant !== "bottom-sheet",
+            "max-w-md": size === "md" && variant !== "bottom-sheet",
+            "max-w-lg": size === "lg" && variant !== "bottom-sheet",
+            "max-w-xl": size === "xl" && variant !== "bottom-sheet",
           },
           className
         )}
       >
+        {variant === "bottom-sheet" && (
+           <div className="mx-auto h-1.5 w-12 rounded-full bg-zinc-300/50 dark:bg-zinc-700/50 mb-4" />
+        )}
         {children}
       </div>
     </div>

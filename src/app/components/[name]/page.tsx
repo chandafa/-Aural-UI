@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Select } from "@/components/ui/Select";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/Card";
-import { Tooltip } from "@/components/ui/Tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/Tooltip";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/Table";
 import { Form, FormField, FormLabel, FormDescription } from "@/components/ui/Form";
 import { ModalDemo } from "./ModalDemo";
@@ -31,12 +31,51 @@ import { BorderBeam } from "@/components/ui/BorderBeam";
 import { Dock, DockIcon } from "@/components/ui/Dock";
 import { Meteors } from "@/components/ui/MeteorMeteors";
 import { MagicCard } from "@/components/ui/MagicCard";
+import { TracingBeam } from "@/components/ui/tracing-beam";
 
 import { DialogDemo } from "./DialogDemo";
 import { Switch } from "@/components/ui/Switch";
 import { Slider } from "@/components/ui/Slider";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { Accordion, AccordionItem } from "@/components/ui/Accordion";
+
+// New iOS-style components
+import { Checkbox } from "@/components/ui/Checkbox";
+import { RadioGroup } from "@/components/ui/Radio";
+import { SearchField } from "@/components/ui/SearchField";
+import { NumberField } from "@/components/ui/NumberField";
+import { Spinner, ActivityIndicator } from "@/components/ui/Spinner";
+import { Progress, CircularProgress } from "@/components/ui/Progress";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { Pagination } from "@/components/ui/Pagination";
+import { Popover } from "@/components/ui/Popover";
+import { Divider } from "@/components/ui/Divider";
+import { Tag, TagGroup } from "@/components/ui/Tag";
+import { Kbd, Shortcut } from "@/components/ui/Kbd";
+import { TypingAnimation } from "@/components/ui/TypingAnimation";
+import { FlipWords } from "@/components/ui/FlipWords";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { ShinyText, GradientText } from "@/components/ui/ShinyText";
+import { ExpandableCard } from "@/components/ui/ExpandableCard";
+import { FlipCard } from "@/components/ui/FlipCard";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { HoverCard, HoverCardContent } from "@/components/ui/HoverCard";
+import { GridPattern } from "@/components/ui/GridPattern";
+import { DotPattern } from "@/components/ui/DotPattern";
+import { RippleButton } from "@/components/ui/Ripple";
+import { Particles } from "@/components/ui/Particles";
+import { IPhoneMockup } from "@/components/ui/IPhoneMockup";
+import { MacBookMockup } from "@/components/ui/MacBookMockup";
+import { SafariMockup } from "@/components/ui/SafariMockup";
+import { TerminalMockup, TerminalLine } from "@/components/ui/TerminalMockup";
+import { NoData, NoSearchResults } from "@/components/ui/EmptyState";
+import { Confetti, useConfetti } from "@/components/ui/Confetti";
+import { FileTree } from "@/components/ui/FileTree";
+import { Dropdown, DropdownItem, DropdownSeparator } from "@/components/ui/Dropdown";
+import { StatusDot, StatusBadge } from "@/components/ui/StatusDot";
+
+import { ComponentVariants } from "./ComponentVariants";
+import { NewComponentPreview } from "./NewComponentPreviews";
 
 export function generateStaticParams() {
   return getAllComponentSlugs().map((slug) => ({ name: slug }));
@@ -130,7 +169,7 @@ function renderPreview(slug: string) {
     case "card":
       return (
         <div className="w-full max-w-md">
-          <Card hoverable>
+          <Card>
             <CardHeader>
               <CardTitle>Card Title</CardTitle>
               <CardDescription>This is a card description.</CardDescription>
@@ -151,25 +190,39 @@ function renderPreview(slug: string) {
       return <ModalDemo />;
     case "tooltip":
       return (
-        <div className="flex flex-wrap items-center gap-8">
-          <Tooltip content="Tooltip on top" position="top">
-            <Button variant="outline">Top</Button>
-          </Tooltip>
-          <Tooltip content="Tooltip on bottom" position="bottom">
-            <Button variant="outline">Bottom</Button>
-          </Tooltip>
-          <Tooltip content="Tooltip on left" position="left">
-            <Button variant="outline">Left</Button>
-          </Tooltip>
-          <Tooltip content="Tooltip on right" position="right">
-            <Button variant="outline">Right</Button>
-          </Tooltip>
-        </div>
+        <TooltipProvider>
+          <div className="flex flex-wrap items-center gap-8">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline">Top</Button>
+              </TooltipTrigger>
+              <TooltipContent side="top">Tooltip on top</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline">Bottom</Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">Tooltip on bottom</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline">Left</Button>
+              </TooltipTrigger>
+              <TooltipContent side="left">Tooltip on left</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline">Right</Button>
+              </TooltipTrigger>
+              <TooltipContent side="right">Tooltip on right</TooltipContent>
+            </Tooltip>
+          </div>
+        </TooltipProvider>
       );
     case "table":
       return (
         <div className="w-full max-w-2xl">
-          <Table striped hoverable>
+          <Table variant="striped">
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
@@ -359,12 +412,7 @@ function renderPreview(slug: string) {
            <Switch />
         </div>
       );
-    case "slider":
-      return (
-        <div className="flex items-center justify-center p-12 bg-black/80 rounded-xl w-full max-w-md">
-           <Slider defaultValue={50} max={100} step={1} />
-        </div>
-      );
+
     case "tabs":
       return (
         <div className="flex items-center justify-center p-12 bg-black/80 rounded-xl w-full">
@@ -400,6 +448,103 @@ function renderPreview(slug: string) {
             </Accordion>
         </div>
       );
+    case "tracing-beam":
+      return (
+        <div className="relative w-full max-w-4xl mx-auto h-[400px] overflow-y-auto bg-black/80 rounded-xl p-4">
+           <TracingBeam className="px-6">
+            <div className="max-w-2xl mx-auto antialiased pt-4 relative">
+                <div className="mb-10 text-white">
+                  <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4 border border-white/20">
+                    Badge
+                  </h2>
+                  <p className="text-xl mb-4">
+                    Lorem Ipsum Dolor Sit Amet
+                  </p>
+                  <p className="text-sm text-neutral-400">
+                    Sit duis est minim proident non nisi velit non consectetur. Esse
+                    adipisicing laboris consectetur enim ipsum reprehenderit eu deserunt.
+                  </p>
+                </div>
+                <div className="mb-10 text-white">
+                  <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4 border border-white/20">
+                    Another Section
+                  </h2>
+                  <p className="text-xl mb-4">
+                    Ex irure dolore veniam
+                  </p>
+                  <p className="text-sm text-neutral-400">
+                     Ullamco ut sunt consectetur sint qui qui do do qui do. Labore laborum culpa magna reprehenderit ea velit id esse adipisicing deserunt amet dolore.
+                  </p>
+                </div>
+                 <div className="mb-10 text-white">
+                  <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4 border border-white/20">
+                    Final Section
+                  </h2>
+                   <p className="text-sm text-neutral-400">
+                     Ullamco ut sunt consectetur sint qui qui do do qui do. Labore laborum culpa magna reprehenderit ea velit id esse adipisicing deserunt amet dolore.
+                  </p>
+                </div>
+            </div>
+          </TracingBeam>
+        </div>
+      );
+    // ============ NEW iOS-STYLE COMPONENT PREVIEWS ============
+    // These are rendered via a client component to support interactivity
+    case "checkbox":
+    case "radio":
+    case "search-field":
+    case "number-field":
+    case "spinner":
+    case "progress":
+    case "breadcrumb":
+    case "pagination":
+    case "popover":
+    case "divider":
+    case "tag":
+    case "kbd":
+    case "typing-animation":
+    case "flip-words":
+    case "text-reveal":
+    case "shiny-text":
+    case "expandable-card":
+    case "flip-card":
+    case "tilt-card":
+    case "hover-card":
+    case "grid-pattern":
+    case "dot-pattern":
+    case "ripple":
+    case "particles":
+    case "iphone-mockup":
+    case "macbook-mockup":
+    case "safari-mockup":
+    case "terminal-mockup":
+    case "empty-state":
+    case "confetti":
+    case "file-tree":
+    case "dropdown":
+    case "status-dot":
+    // Phase 1 Essentials
+    case "sheet":
+    case "carousel":
+    case "skeleton":
+    case "toast":
+    case "toggle":
+    // Phase 2 Components
+    case "combobox":
+    case "calendar":
+    case "date-picker":
+    case "input-otp":
+    case "slider":
+    case "toggle-group":
+    case "resizable":
+    // Phase 3 Components
+    case "marquee":
+    case "animated-beam":
+    case "meteors":
+    case "aurora-background":
+    case "globe":
+    case "border-beam":
+      return <NewComponentPreview slug={slug} />;
     default:
       return <p>Preview not available</p>;
   }
@@ -443,6 +588,8 @@ export default async function ComponentPage({
     bun: `bunx auralix-ui add ${data.slug}`,
   };
 
+  const hasVariants = ["button", "badge", "alert", "input", "textarea", "select", "card", "dialog", "modal", "dock", "accordion", "tabs", "switch", "slider", "tooltip", "table", "copy-command", "combobox", "calendar", "date-picker", "input-otp", "toggle-group", "resizable", "marquee", "animated-beam", "meteors", "aurora-background", "globe", "border-beam", "sheet", "carousel", "skeleton", "toast", "toggle"].includes(data.slug);
+
   return (
     <div className="flex flex-col xl:flex-row gap-10">
       <div className="flex-1 min-w-0 space-y-12">
@@ -482,10 +629,23 @@ export default async function ComponentPage({
           </div>
         </section>
 
+
         {/* Props Table */}
         <section id="props" className="scroll-mt-24">
           <h2 className="mb-4 text-xl font-semibold">Props</h2>
           <PropsTable props={data.props} />
+        </section>
+
+        {/* Variants Section */}
+        <section id="variants" className="scroll-mt-24">
+           {["button", "badge", "alert", "input", "textarea", "select", "card", "dialog", "modal", "dock", "accordion", "tabs", "switch", "slider", "tooltip", "table", "copy-command", "combobox", "calendar", "date-picker", "input-otp", "toggle-group", "resizable", "marquee", "animated-beam", "meteors", "aurora-background", "globe", "border-beam", "sheet", "carousel", "skeleton", "toast", "toggle"].includes(data.slug) && (
+              <>
+                 <h2 className="mb-6 text-xl font-semibold">Variants</h2>
+                 <div className="rounded-xl border border-border bg-background/50 p-6 md:p-12">
+                   <ComponentVariants slug={data.slug} />
+                 </div>
+              </>
+           )}
         </section>
 
         <hr className="my-6 border-border" />
@@ -496,7 +656,7 @@ export default async function ComponentPage({
       {/* Right Sidebar */}
       <div className="hidden xl:block w-64 flex-none">
         <div className="sticky top-24">
-          <TableOfContents />
+          <TableOfContents showVariants={hasVariants} />
         </div>
       </div>
     </div>

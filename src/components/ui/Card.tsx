@@ -1,22 +1,36 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export interface CardProps {
   children: React.ReactNode;
   className?: string;
   hoverable?: boolean;
+  variant?: "simple" | "glass" | "neon";
 }
 
-export function Card({ children, className, hoverable }: CardProps) {
+export function Card({ children, className, hoverable, variant = "glass" }: CardProps) {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      whileHover={hoverable ? { y: -5, transition: { duration: 0.2 } } : undefined}
       className={cn(
-        "rounded-[2rem] border border-white/10 bg-background/60 p-6 backdrop-blur-md",
-        hoverable && "hover-lift hover:border-violet-500/20",
+        "rounded-[2rem] border p-6 transition-all duration-300",
+        // Variant Styles
+        variant === "simple" && "bg-background border-border shadow-sm",
+        variant === "glass" && "bg-background/60 border-white/10 dark:border-white/5 backdrop-blur-md",
+        variant === "neon" && "bg-white dark:bg-zinc-900 border-violet-500/50 shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:shadow-[0_0_25px_rgba(139,92,246,0.3)] hover:border-violet-500",
+        // Hover effects
+        hoverable && variant !== "neon" && "hover:border-violet-500/20",
         className
       )}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 

@@ -22,12 +22,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (stored) {
       setTheme(stored);
       document.documentElement.classList.toggle("dark", stored === "dark");
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    } else {
+      // Default to dark
       setTheme("dark");
       document.documentElement.classList.add("dark");
-    } else {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
     }
   }, []);
 

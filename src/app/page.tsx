@@ -1,6 +1,11 @@
+"use client";
+
+import React, { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/Button";
+import { SpringButton } from "@/components/ui/SpringButton"; // Import SpringButton
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
 import { CopyCommand } from "@/components/ui/CopyCommand";
@@ -9,12 +14,51 @@ import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { BlurText } from "@/components/ui/BlurText";
 
 export default function HomePage() {
+  const heroRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+
+      // Initial state
+      gsap.set([titleRef.current, descRef.current, buttonsRef.current], { 
+        y: 50, 
+        opacity: 0 
+      });
+
+      tl.to(titleRef.current, { 
+        y: 0, 
+        opacity: 1, 
+        duration: 1, 
+        ease: "power3.out" 
+      })
+      .to(descRef.current, { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: "power3.out" 
+      }, "-=0.6")
+      .to(buttonsRef.current, { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: "back.out(1.7)" 
+      }, "-=0.4");
+      
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative min-h-[95vh] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-16 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[95vh] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-16 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Main Blobs - Animated */}
@@ -42,42 +86,41 @@ export default function HomePage() {
             </Badge>
           </ScrollAnimation>
           
-          <ScrollAnimation animation="fade-up" delay={100}>
+          <div ref={titleRef} className="opacity-0">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
               The UI Library for{" "}
               <span className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-text-shimmer bg-[length:200%_auto]">
                 <BlurText text="Modern Web" delay={500} />
               </span>
             </h1>
-          </ScrollAnimation>
+          </div>
           
-          <ScrollAnimation animation="fade-up" delay={200}>
+          <div ref={descRef} className="opacity-0">
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 px-4">
               Build beautiful applications with{" "}
               <strong className="text-foreground font-semibold">high-quality components</strong>{" "}
               using the power of React and Tailwind CSS.
             </p>
-          </ScrollAnimation>
+          </div>
           
-          <ScrollAnimation animation="fade-up" delay={300}>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-10 px-4">
-              <Link href="/docs/installation" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto min-w-[170px] bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 border-none relative overflow-hidden group">
-                  <span className="relative z-10">Get Started</span>
-                  <div className="absolute inset-0 -translate-x-full group-hover:animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                </Button>
-              </Link>
-              <Link href="/components/button" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto min-w-[170px] hover:border-violet-500/30">
-                  Components
-                </Button>
-              </Link>
-            </div>
-          </ScrollAnimation>
+          <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-10 px-4 opacity-0">
+            <Link href="/docs/installation" className="w-full sm:w-auto">
+              {/* Use SpringButton for the primary CTA */}
+              <SpringButton size="lg" className="w-full sm:w-auto min-w-[170px] bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 border-none relative overflow-hidden group">
+                <span className="relative z-10">Get Started</span>
+                <div className="absolute inset-0 -translate-x-full group-hover:animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              </SpringButton>
+            </Link>
+            <Link href="/components/button" className="w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto min-w-[170px] hover:border-violet-500/30">
+                Components
+              </Button>
+            </Link>
+          </div>
           
           {/* NPM Command */}
-          <ScrollAnimation animation="fade-up" delay={400}>
-            <CopyCommand command="npm install auralix-ui" />
+          <ScrollAnimation animation="fade-up" delay={800}>
+            <CopyCommand command="npm install auralix-ui" className="w-fit mx-auto" />
           </ScrollAnimation>
         </div>
       </section>

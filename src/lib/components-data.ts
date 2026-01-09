@@ -698,29 +698,7 @@ const [checked, setChecked] = useState(false);
         },
     ],
   },
-  slider: {
-    name: "Slider",
-    slug: "slider",
-    filename: "Slider.tsx",
-    description: "A range slider with a glassy track and glowing thumb.",
-    props: [
-        { name: "value", type: "number", default: "0", description: "The current value." },
-        { name: "min", type: "number", default: "0", description: "The minimum value." },
-        { name: "max", type: "number", default: "100", description: "The maximum value." },
-        { name: "onValueChange", type: "(value: number) => void", default: "-", description: "Event handler called when the value changes." },
-    ],
-    examples: [
-        {
-            title: "Volume Slider",
-            code: `import { Slider } from "@/components/ui/Slider";
-import { useState } from "react";
 
-const [val, setVal] = useState(50);
-
-<Slider value={val} onValueChange={setVal} max={100} />`,
-        },
-    ],
-  },
   tabs: {
     name: "Tabs",
     slug: "tabs",
@@ -769,6 +747,1052 @@ const [val, setVal] = useState(50);
 </Accordion>`,
         },
     ],
+  },
+  "tracing-beam": {
+    name: "Tracing Beam",
+    slug: "tracing-beam",
+    filename: "tracing-beam.tsx",
+    description: "A beam that follows the path of an SVG as the user scrolls.",
+    props: [
+      { name: "children", type: "ReactNode", default: "-", description: "Content to be traced." },
+      { name: "className", type: "string", default: "-", description: "Additional CSS classes." },
+    ],
+    examples: [
+        {
+            title: "Basic Usage",
+            code: `import { TracingBeam } from "@/components/ui/tracing-beam";
+
+<TracingBeam className="px-6">
+  <div className="max-w-2xl mx-auto antialiased pt-4 relative">
+    {/* Your content here */}
+    <div className="mb-10">
+      <h2>Title</h2>
+      <p>Description...</p>
+    </div>
+  </div>
+</TracingBeam>`,
+        },
+    ],
+  },
+  // ============== NEW iOS-STYLE COMPONENTS ==============
+  checkbox: {
+    name: "Checkbox",
+    slug: "checkbox",
+    filename: "Checkbox.tsx",
+    description: "iOS-style checkbox with smooth checkmark animation.",
+    props: [
+      { name: "checked", type: "boolean", default: "false", description: "Whether the checkbox is checked." },
+      { name: "onChange", type: "(checked: boolean) => void", default: "-", description: "Callback when checked state changes." },
+      { name: "label", type: "string", default: "-", description: "Label text for the checkbox." },
+      { name: "description", type: "string", default: "-", description: "Optional description text." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size of the checkbox." },
+      { name: "disabled", type: "boolean", default: "false", description: "Whether the checkbox is disabled." },
+    ],
+    examples: [
+      {
+        title: "Basic Checkbox",
+        code: `import { Checkbox } from "@/components/ui/Checkbox";
+
+<Checkbox label="Accept terms" />`,
+      },
+      {
+        title: "With Description",
+        code: `<Checkbox 
+  label="Marketing emails" 
+  description="Receive updates about new features" 
+/>`,
+      },
+    ],
+  },
+  radio: {
+    name: "Radio",
+    slug: "radio",
+    filename: "Radio.tsx",
+    description: "iOS-style radio group with dot fill animation.",
+    props: [
+      { name: "options", type: "RadioOption[]", default: "[]", description: "Array of options {value, label, description?}." },
+      { name: "value", type: "string", default: "-", description: "Currently selected value." },
+      { name: "onChange", type: "(value: string) => void", default: "-", description: "Callback when selection changes." },
+      { name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"', description: "Layout direction." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size of the radio buttons." },
+    ],
+    examples: [
+      {
+        title: "Basic Radio Group",
+        code: `import { RadioGroup } from "@/components/ui/Radio";
+
+<RadioGroup 
+  options={[
+    { value: "1", label: "Option 1" },
+    { value: "2", label: "Option 2" },
+  ]}
+  value={selected}
+  onChange={setSelected}
+/>`,
+      },
+    ],
+  },
+  "search-field": {
+    name: "SearchField",
+    slug: "search-field",
+    filename: "SearchField.tsx",
+    description: "Spotlight-inspired search input with clear button.",
+    props: [
+      { name: "value", type: "string", default: "-", description: "Input value." },
+      { name: "onChange", type: "(value: string) => void", default: "-", description: "Callback on value change." },
+      { name: "onSearch", type: "(value: string) => void", default: "-", description: "Callback on Enter press." },
+      { name: "placeholder", type: "string", default: '"Search..."', description: "Placeholder text." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size of the input." },
+      { name: "loading", type: "boolean", default: "false", description: "Show loading indicator." },
+    ],
+    examples: [
+      {
+        title: "Basic Search",
+        code: `import { SearchField } from "@/components/ui/SearchField";
+
+<SearchField placeholder="Search..." onSearch={(q) => console.log(q)} />`,
+      },
+    ],
+  },
+  "number-field": {
+    name: "NumberField",
+    slug: "number-field",
+    filename: "NumberField.tsx",
+    description: "iOS-style stepper with increment/decrement buttons.",
+    props: [
+      { name: "value", type: "number", default: "0", description: "Current value." },
+      { name: "onChange", type: "(value: number) => void", default: "-", description: "Callback on value change." },
+      { name: "min", type: "number", default: "-", description: "Minimum value." },
+      { name: "max", type: "number", default: "-", description: "Maximum value." },
+      { name: "step", type: "number", default: "1", description: "Step increment." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size of the stepper." },
+    ],
+    examples: [
+      {
+        title: "Quantity Stepper",
+        code: `import { NumberField } from "@/components/ui/NumberField";
+
+<NumberField value={qty} onChange={setQty} min={0} max={10} />`,
+      },
+    ],
+  },
+  spinner: {
+    name: "Spinner",
+    slug: "spinner",
+    filename: "Spinner.tsx",
+    description: "iOS activity indicator and circular spinner.",
+    props: [
+      { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "Size of the spinner." },
+      { name: "color", type: '"default" | "primary" | "white"', default: '"default"', description: "Color variant." },
+    ],
+    examples: [
+      {
+        title: "Basic Spinner",
+        code: `import { Spinner, ActivityIndicator } from "@/components/ui/Spinner";
+
+<Spinner />
+<ActivityIndicator />`,
+      },
+    ],
+  },
+  progress: {
+    name: "Progress",
+    slug: "progress",
+    filename: "Progress.tsx",
+    description: "Linear and circular progress indicators.",
+    props: [
+      { name: "value", type: "number", default: "0", description: "Progress value (0-100)." },
+      { name: "variant", type: '"default" | "gradient" | "striped"', default: '"default"', description: "Visual variant." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size of the progress bar." },
+      { name: "showValue", type: "boolean", default: "false", description: "Show percentage value." },
+    ],
+    examples: [
+      {
+        title: "Linear Progress",
+        code: `import { LinearProgress, CircularProgress } from "@/components/ui/Progress";
+
+<LinearProgress value={75} />
+<CircularProgress value={50} showValue />`,
+      },
+    ],
+  },
+  breadcrumb: {
+    name: "Breadcrumb",
+    slug: "breadcrumb",
+    filename: "Breadcrumb.tsx",
+    description: "Minimal breadcrumb navigation.",
+    props: [
+      { name: "items", type: "BreadcrumbItem[]", default: "[]", description: "Array of {label, href?}." },
+      { name: "separator", type: '"chevron" | "slash" | "dot"', default: '"chevron"', description: "Separator style." },
+    ],
+    examples: [
+      {
+        title: "Basic Breadcrumb",
+        code: `import { Breadcrumb } from "@/components/ui/Breadcrumb";
+
+<Breadcrumb items={[
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products" },
+  { label: "Details" },
+]} />`,
+      },
+    ],
+  },
+  pagination: {
+    name: "Pagination",
+    slug: "pagination",
+    filename: "Pagination.tsx",
+    description: "Clean page navigation with dynamic ellipsis.",
+    props: [
+      { name: "currentPage", type: "number", default: "-", description: "Current active page." },
+      { name: "totalPages", type: "number", default: "-", description: "Total number of pages." },
+      { name: "onPageChange", type: "(page: number) => void", default: "-", description: "Callback when page changes." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size of pagination buttons." },
+    ],
+    examples: [
+      {
+        title: "Basic Pagination",
+        code: `import { Pagination } from "@/components/ui/Pagination";
+
+<Pagination 
+  currentPage={page} 
+  totalPages={10} 
+  onPageChange={setPage} 
+/>`,
+      },
+    ],
+  },
+  popover: {
+    name: "Popover",
+    slug: "popover",
+    filename: "Popover.tsx",
+    description: "Floating popover with backdrop blur.",
+    props: [
+      { name: "trigger", type: "ReactNode", default: "-", description: "Element that triggers the popover." },
+      { name: "children", type: "ReactNode", default: "-", description: "Popover content." },
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "Popover position." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment." },
+    ],
+    examples: [
+      {
+        title: "Basic Popover",
+        code: `import { Popover } from "@/components/ui/Popover";
+
+<Popover trigger={<Button>Open</Button>}>
+  <p>Popover content here</p>
+</Popover>`,
+      },
+    ],
+  },
+  divider: {
+    name: "Divider",
+    slug: "divider",
+    filename: "Divider.tsx",
+    description: "Subtle divider line with optional label.",
+    props: [
+      { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Divider direction." },
+      { name: "variant", type: '"solid" | "dashed" | "dotted"', default: '"solid"', description: "Line style." },
+      { name: "label", type: "string", default: "-", description: "Optional center label." },
+    ],
+    examples: [
+      {
+        title: "Divider with Label",
+        code: `import { Divider } from "@/components/ui/Divider";
+
+<Divider />
+<Divider label="OR" />`,
+      },
+    ],
+  },
+  tag: {
+    name: "Tag",
+    slug: "tag",
+    filename: "Tag.tsx",
+    description: "Removable tag/chip component.",
+    props: [
+      { name: "variant", type: '"default" | "primary" | "success" | "warning" | "error"', default: '"default"', description: "Color variant." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size." },
+      { name: "removable", type: "boolean", default: "false", description: "Show remove button." },
+      { name: "onRemove", type: "() => void", default: "-", description: "Callback on remove." },
+    ],
+    examples: [
+      {
+        title: "Tags",
+        code: `import { Tag, TagGroup } from "@/components/ui/Tag";
+
+<TagGroup>
+  <Tag>React</Tag>
+  <Tag variant="primary" removable>TypeScript</Tag>
+</TagGroup>`,
+      },
+    ],
+  },
+  kbd: {
+    name: "Kbd",
+    slug: "kbd",
+    filename: "Kbd.tsx",
+    description: "Keyboard shortcut display with macOS-style symbols.",
+    props: [
+      { name: "children", type: "ReactNode", default: "-", description: "Key label." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size." },
+    ],
+    examples: [
+      {
+        title: "Keyboard Shortcuts",
+        code: `import { Kbd, Shortcut } from "@/components/ui/Kbd";
+
+<Kbd>⌘</Kbd>
+<Shortcut keys={["cmd", "k"]} />`,
+      },
+    ],
+  },
+  "typing-animation": {
+    name: "TypingAnimation",
+    slug: "typing-animation",
+    filename: "TypingAnimation.tsx",
+    description: "Typewriter text animation with blinking cursor.",
+    props: [
+      { name: "text", type: "string", default: "-", description: "Text to type." },
+      { name: "duration", type: "number", default: "100", description: "Delay between characters (ms)." },
+      { name: "delay", type: "number", default: "0", description: "Initial delay before typing." },
+      { name: "cursor", type: "boolean", default: "true", description: "Show blinking cursor." },
+    ],
+    examples: [
+      {
+        title: "Typing Effect",
+        code: `import { TypingAnimation } from "@/components/ui/TypingAnimation";
+
+<TypingAnimation text="Hello, World!" duration={100} />`,
+      },
+    ],
+  },
+  "flip-words": {
+    name: "FlipWords",
+    slug: "flip-words",
+    filename: "FlipWords.tsx",
+    description: "Word rotation animation with fade and 3D flip variants.",
+    props: [
+      { name: "words", type: "string[]", default: "-", description: "Array of words to cycle through." },
+      { name: "duration", type: "number", default: "3000", description: "Duration per word (ms)." },
+    ],
+    examples: [
+      {
+        title: "Flip Words",
+        code: `import { FlipWords } from "@/components/ui/FlipWords";
+
+<div>Build <FlipWords words={["amazing", "beautiful", "modern"]} /> apps</div>`,
+      },
+    ],
+  },
+  "text-reveal": {
+    name: "TextReveal",
+    slug: "text-reveal",
+    filename: "TextReveal.tsx",
+    description: "Scroll-triggered text reveal effect.",
+    props: [
+      { name: "children", type: "string", default: "-", description: "Text to reveal." },
+    ],
+    examples: [
+      {
+        title: "Scroll Reveal",
+        code: `import { TextReveal } from "@/components/ui/TextReveal";
+
+<TextReveal>This text reveals on scroll</TextReveal>`,
+      },
+    ],
+  },
+  "shiny-text": {
+    name: "ShinyText",
+    slug: "shiny-text",
+    filename: "ShinyText.tsx",
+    description: "Shimmer and gradient text effects.",
+    props: [
+      { name: "children", type: "string", default: "-", description: "Text content." },
+      { name: "shimmerWidth", type: "number", default: "100", description: "Width of shimmer effect." },
+      { name: "duration", type: "number", default: "2", description: "Animation duration (s)." },
+    ],
+    examples: [
+      {
+        title: "Shiny Text",
+        code: `import { ShinyText, GradientText } from "@/components/ui/ShinyText";
+
+<ShinyText>Premium Feature</ShinyText>
+<GradientText>Magic Gradient</GradientText>`,
+      },
+    ],
+  },
+  "expandable-card": {
+    name: "ExpandableCard",
+    slug: "expandable-card",
+    filename: "ExpandableCard.tsx",
+    description: "Click-to-expand card with smooth height animation.",
+    props: [
+      { name: "title", type: "string", default: "-", description: "Card title." },
+      { name: "description", type: "string", default: "-", description: "Optional description." },
+      { name: "children", type: "ReactNode", default: "-", description: "Expandable content." },
+      { name: "defaultExpanded", type: "boolean", default: "false", description: "Initial expanded state." },
+    ],
+    examples: [
+      {
+        title: "Expandable Card",
+        code: `import { ExpandableCard } from "@/components/ui/ExpandableCard";
+
+<ExpandableCard title="Click to expand">
+  <p>Hidden content revealed on click.</p>
+</ExpandableCard>`,
+      },
+    ],
+  },
+  "flip-card": {
+    name: "FlipCard",
+    slug: "flip-card",
+    filename: "FlipCard.tsx",
+    description: "3D flip card with hover and click triggers.",
+    props: [
+      { name: "front", type: "ReactNode", default: "-", description: "Front face content." },
+      { name: "back", type: "ReactNode", default: "-", description: "Back face content." },
+      { name: "flipOnHover", type: "boolean", default: "true", description: "Flip on mouse hover." },
+      { name: "flipOnClick", type: "boolean", default: "false", description: "Flip on click." },
+    ],
+    examples: [
+      {
+        title: "Flip Card",
+        code: `import { FlipCard } from "@/components/ui/FlipCard";
+
+<FlipCard 
+  front={<div>Front</div>} 
+  back={<div>Back</div>} 
+/>`,
+      },
+    ],
+  },
+  "tilt-card": {
+    name: "TiltCard",
+    slug: "tilt-card",
+    filename: "TiltCard.tsx",
+    description: "Mouse-follow 3D tilt effect with optional glare.",
+    props: [
+      { name: "children", type: "ReactNode", default: "-", description: "Card content." },
+      { name: "maxTilt", type: "number", default: "15", description: "Maximum tilt angle in degrees." },
+      { name: "scale", type: "number", default: "1.02", description: "Scale on hover." },
+      { name: "glare", type: "boolean", default: "true", description: "Show glare effect." },
+    ],
+    examples: [
+      {
+        title: "Tilt Card",
+        code: `import { TiltCard } from "@/components/ui/TiltCard";
+
+<TiltCard className="p-6">
+  <h3>Hover over me!</h3>
+</TiltCard>`,
+      },
+    ],
+  },
+  "hover-card": {
+    name: "HoverCard",
+    slug: "hover-card",
+    filename: "HoverCard.tsx",
+    description: "Rich hover preview card with delay support.",
+    props: [
+      { name: "trigger", type: "ReactNode", default: "-", description: "Element that triggers the card." },
+      { name: "children", type: "ReactNode", default: "-", description: "Card content." },
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "Position." },
+      { name: "openDelay", type: "number", default: "200", description: "Delay before opening (ms)." },
+    ],
+    examples: [
+      {
+        title: "Hover Preview",
+        code: `import { HoverCard, HoverCardContent } from "@/components/ui/HoverCard";
+
+<HoverCard trigger={<span>@username</span>}>
+  <HoverCardContent 
+    title="John Doe" 
+    subtitle="@johndoe"
+    stats={[{ label: "Followers", value: 1234 }]}
+  />
+</HoverCard>`,
+      },
+    ],
+  },
+  "grid-pattern": {
+    name: "GridPattern",
+    slug: "grid-pattern",
+    filename: "GridPattern.tsx",
+    description: "Subtle grid background pattern.",
+    props: [
+      { name: "size", type: "number", default: "40", description: "Grid cell size in pixels." },
+      { name: "fade", type: "boolean", default: "true", description: "Apply radial fade mask." },
+      { name: "squares", type: "[number, number][]", default: "-", description: "Highlighted square positions." },
+    ],
+    examples: [
+      {
+        title: "Grid Background",
+        code: `import { GridPattern } from "@/components/ui/GridPattern";
+
+<div className="relative h-64">
+  <GridPattern />
+</div>`,
+      },
+    ],
+  },
+  "dot-pattern": {
+    name: "DotPattern",
+    slug: "dot-pattern",
+    filename: "DotPattern.tsx",
+    description: "Dot background pattern with mouse-interactive variant.",
+    props: [
+      { name: "size", type: "number", default: "24", description: "Spacing between dots." },
+      { name: "radius", type: "number", default: "1", description: "Dot radius." },
+      { name: "fade", type: "boolean", default: "true", description: "Apply radial fade." },
+    ],
+    examples: [
+      {
+        title: "Dot Background",
+        code: `import { DotPattern, AnimatedDotPattern } from "@/components/ui/DotPattern";
+
+<div className="relative h-64">
+  <DotPattern />
+</div>`,
+      },
+    ],
+  },
+  ripple: {
+    name: "Ripple",
+    slug: "ripple",
+    filename: "Ripple.tsx",
+    description: "Click ripple effect and ripple button.",
+    props: [
+      { name: "color", type: "string", default: '"#007AFF"', description: "Ripple color." },
+      { name: "duration", type: "number", default: "600", description: "Animation duration (ms)." },
+    ],
+    examples: [
+      {
+        title: "Ripple Button",
+        code: `import { RippleButton } from "@/components/ui/Ripple";
+
+<RippleButton>Click me</RippleButton>`,
+      },
+    ],
+  },
+  particles: {
+    name: "Particles",
+    slug: "particles",
+    filename: "Particles.tsx",
+    description: "Floating particles effect with glowing variant.",
+    props: [
+      { name: "quantity", type: "number", default: "50", description: "Number of particles." },
+      { name: "color", type: "string", default: '"#007AFF"', description: "Particle color." },
+    ],
+    examples: [
+      {
+        title: "Particles Background",
+        code: `import { Particles, GlowingParticles } from "@/components/ui/Particles";
+
+<div className="relative h-64">
+  <Particles quantity={30} />
+</div>`,
+      },
+    ],
+  },
+  "iphone-mockup": {
+    name: "IPhoneMockup",
+    slug: "iphone-mockup",
+    filename: "IPhoneMockup.tsx",
+    description: "iPhone device frame with Dynamic Island.",
+    props: [
+      { name: "children", type: "ReactNode", default: "-", description: "Screen content." },
+      { name: "variant", type: '"silver" | "space-gray" | "gold"', default: '"space-gray"', description: "Device color." },
+      { name: "showNotch", type: "boolean", default: "true", description: "Show Dynamic Island." },
+      { name: "showStatusBar", type: "boolean", default: "true", description: "Show status bar." },
+    ],
+    examples: [
+      {
+        title: "iPhone Preview",
+        code: `import { IPhoneMockup } from "@/components/ui/IPhoneMockup";
+
+<IPhoneMockup>
+  <div className="bg-white h-full">
+    Your app content
+  </div>
+</IPhoneMockup>`,
+      },
+    ],
+  },
+  "macbook-mockup": {
+    name: "MacBookMockup",
+    slug: "macbook-mockup",
+    filename: "MacBookMockup.tsx",
+    description: "MacBook laptop frame mockup.",
+    props: [
+      { name: "children", type: "ReactNode", default: "-", description: "Screen content." },
+      { name: "variant", type: '"silver" | "space-gray"', default: '"space-gray"', description: "Device color." },
+    ],
+    examples: [
+      {
+        title: "MacBook Preview",
+        code: `import { MacBookMockup } from "@/components/ui/MacBookMockup";
+
+<MacBookMockup>
+  <img src="/screenshot.png" alt="App" />
+</MacBookMockup>`,
+      },
+    ],
+  },
+  "safari-mockup": {
+    name: "SafariMockup",
+    slug: "safari-mockup",
+    filename: "SafariMockup.tsx",
+    description: "Safari browser window mockup with title bar.",
+    props: [
+      { name: "url", type: "string", default: '"example.com"', description: "URL to display." },
+      { name: "children", type: "ReactNode", default: "-", description: "Page content." },
+    ],
+    examples: [
+      {
+        title: "Safari Window",
+        code: `import { SafariMockup } from "@/components/ui/SafariMockup";
+
+<SafariMockup url="auralix-ui.dev">
+  <div className="p-4">Website content</div>
+</SafariMockup>`,
+      },
+    ],
+  },
+  "terminal-mockup": {
+    name: "TerminalMockup",
+    slug: "terminal-mockup",
+    filename: "TerminalMockup.tsx",
+    description: "Terminal window mockup with typing animation.",
+    props: [
+      { name: "children", type: "ReactNode", default: "-", description: "Terminal content." },
+      { name: "title", type: "string", default: '"Terminal"', description: "Window title." },
+    ],
+    examples: [
+      {
+        title: "Terminal Window",
+        code: `import { TerminalMockup, TerminalLine } from "@/components/ui/TerminalMockup";
+
+<TerminalMockup>
+  <TerminalLine command="npm install auralix-ui" />
+  <TerminalLine output="+ auralix-ui@1.0.0" />
+</TerminalMockup>`,
+      },
+    ],
+  },
+  "empty-state": {
+    name: "EmptyState",
+    slug: "empty-state",
+    filename: "EmptyState.tsx",
+    description: "Empty data placeholder with pre-built variants.",
+    props: [
+      { name: "icon", type: "ReactNode", default: "-", description: "Icon to display." },
+      { name: "title", type: "string", default: "-", description: "Title text." },
+      { name: "description", type: "string", default: "-", description: "Description text." },
+      { name: "action", type: "ReactNode", default: "-", description: "Action button." },
+    ],
+    examples: [
+      {
+        title: "Empty States",
+        code: `import { NoData, NoSearchResults, ErrorState } from "@/components/ui/EmptyState";
+
+<NoData />
+<NoSearchResults />
+<ErrorState action={<Button>Retry</Button>} />`,
+      },
+    ],
+  },
+  confetti: {
+    name: "Confetti",
+    slug: "confetti",
+    filename: "Confetti.tsx",
+    description: "Celebration confetti effect.",
+    props: [
+      { name: "active", type: "boolean", default: "false", description: "Trigger confetti." },
+      { name: "duration", type: "number", default: "3000", description: "Effect duration (ms)." },
+      { name: "particleCount", type: "number", default: "50", description: "Number of particles." },
+    ],
+    examples: [
+      {
+        title: "Celebrate",
+        code: `import { Confetti, useConfetti } from "@/components/ui/Confetti";
+
+const { active, fire } = useConfetti();
+
+<Button onClick={fire}>Celebrate!</Button>
+<Confetti active={active} />`,
+      },
+    ],
+  },
+  "file-tree": {
+    name: "FileTree",
+    slug: "file-tree",
+    filename: "FileTree.tsx",
+    description: "File tree view with expand/collapse.",
+    props: [
+      { name: "data", type: "FileTreeNode[]", default: "-", description: "Tree structure data." },
+      { name: "onSelect", type: "(node: FileTreeNode) => void", default: "-", description: "Callback on node select." },
+    ],
+    examples: [
+      {
+        title: "File Tree",
+        code: `import { FileTree } from "@/components/ui/FileTree";
+
+<FileTree data={[
+  { name: "src", type: "folder", children: [
+    { name: "index.ts", type: "file" },
+  ]},
+]} />`,
+      },
+    ],
+  },
+  dropdown: {
+    name: "Dropdown",
+    slug: "dropdown",
+    filename: "Dropdown.tsx",
+    description: "iOS-style dropdown menu.",
+    props: [
+      { name: "trigger", type: "ReactNode", default: "-", description: "Trigger element." },
+      { name: "children", type: "ReactNode", default: "-", description: "Menu items." },
+      { name: "align", type: '"start" | "center" | "end"', default: '"start"', description: "Alignment." },
+    ],
+    examples: [
+      {
+        title: "Dropdown Menu",
+        code: `import { Dropdown, DropdownItem, DropdownSeparator } from "@/components/ui/Dropdown";
+
+<Dropdown trigger={<Button>Options</Button>}>
+  <DropdownItem>Edit</DropdownItem>
+  <DropdownItem>Duplicate</DropdownItem>
+  <DropdownSeparator />
+  <DropdownItem destructive>Delete</DropdownItem>
+</Dropdown>`,
+      },
+    ],
+  },
+  "status-dot": {
+    name: "StatusDot",
+    slug: "status-dot",
+    filename: "StatusDot.tsx",
+    description: "Status indicator dots with pulse animation.",
+    props: [
+      { name: "status", type: '"online" | "offline" | "away" | "busy" | "default"', default: '"default"', description: "Status type." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Dot size." },
+      { name: "pulse", type: "boolean", default: "false", description: "Animate with pulse." },
+    ],
+    examples: [
+      {
+        title: "Status Indicators",
+        code: `import { StatusDot, StatusBadge } from "@/components/ui/StatusDot";
+
+<StatusDot status="online" pulse />
+<StatusBadge status="away" />`,
+      },
+    ],
+  },
+  skeleton: {
+    name: "Skeleton",
+    slug: "skeleton",
+    filename: "Skeleton.tsx",
+    description: "Loading placeholder for content that is still loading.",
+    props: [
+      { name: "className", type: "string", default: "-", description: "Additional class names." },
+    ],
+    examples: [
+      {
+        title: "Default Skeleton",
+        code: `import { Skeleton } from "@/components/ui/Skeleton";
+
+<Skeleton className="w-[100px] h-[20px] rounded-full" />
+<Skeleton className="w-[200px] h-[20px] rounded-full" />`,
+      },
+    ],
+  },
+  toast: {
+    name: "Toast",
+    slug: "toast",
+    filename: "Toast.tsx",
+    description: "Notification message displayed temporarily.",
+    props: [
+      { name: "type", type: '"success" | "error" | "info" | "warning"', default: '"default"', description: "The type of toast." },
+      { name: "message", type: "string", default: "-", description: "The message content." },
+      { name: "duration", type: "number", default: "3000", description: "Duration in ms." },
+    ],
+    examples: [
+      {
+        title: "Show Toast",
+        code: `import { useToast } from "@/components/ui/Toast";
+
+const { toast } = useToast();
+<Button onClick={() => toast("Success!", "success")}>Show Toast</Button>`,
+      },
+    ],
+  },
+  sheet: {
+    name: "Sheet",
+    slug: "sheet",
+    filename: "Sheet.tsx",
+    description: "A slide-out drawer component for navigation or details.",
+    props: [
+      { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"right"', description: "The side to slide from." },
+    ],
+    examples: [
+      {
+        title: "Right Sheet",
+        code: `import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
+
+<Sheet>
+  <SheetTrigger>Open</SheetTrigger>
+  <SheetContent>Content here</SheetContent>
+</Sheet>`,
+      },
+    ],
+  },
+  carousel: {
+    name: "Carousel",
+    slug: "carousel",
+    filename: "Carousel.tsx",
+    description: "A swipeable content slider with support for auto-play and controls.",
+    props: [
+      { name: "items", type: "ReactNode[]", default: "[]", description: "Array of items to display." },
+      { name: "autoPlay", type: "boolean", default: "false", description: "Enable auto-play." },
+      { name: "showControls", type: "boolean", default: "true", description: "Show prev/next buttons." },
+    ],
+    examples: [
+      {
+        title: "Image Carousel",
+        code: `import { Carousel } from "@/components/ui/Carousel";
+
+<Carousel items={[<img src="1.jpg" />, <img src="2.jpg" />]} />`,
+      },
+    ],
+  },
+  toggle: {
+    name: "Toggle",
+    slug: "toggle",
+    filename: "Toggle.tsx",
+    description: "A two-state button that can be either on or off.",
+    props: [
+      { name: "pressed", type: "boolean", default: "false", description: "The controlled state." },
+      { name: "onPressedChange", type: "(pressed: boolean) => void", default: "-", description: "Callback when state changes." },
+      { name: "variant", type: '"default" | "outline"', default: '"default"', description: "Visual variant." },
+    ],
+    examples: [
+      {
+        title: "Toggle Button",
+        code: `import { Toggle } from "@/components/ui/Toggle";
+
+<Toggle>Bold</Toggle>`,
+      },
+    ],
+  },
+  combobox: {
+    name: "Combobox",
+    slug: "combobox",
+    filename: "Combobox.tsx",
+    description: "Autocomplete input and command palette with a list of suggestions.",
+    props: [
+        { name: "options", type: "{ value: string, label: string }[]", default: "[]", description: "Options to display." },
+        { name: "value", type: "string", default: "-", description: "Selected value." },
+    ],
+    examples: [
+        {
+            title: "Default Combobox",
+            code: `import { Combobox } from "@/components/ui/Combobox";
+
+<Combobox
+  options={[
+    { value: "next.js", label: "Next.js" },
+    { value: "sveltekit", label: "SvelteKit" },
+    { value: "astro", label: "Astro" },
+  ]}
+/>`,
+        },
+    ],
+  },
+  calendar: {
+    name: "Calendar",
+    slug: "calendar",
+    filename: "Calendar.tsx",
+    description: "A date field component to select a single date.",
+    props: [
+        { name: "mode", type: '"single" | "range" | "multiple"', default: '"single"', description: "Selection mode." },
+        { name: "selected", type: "Date | Date[] | DateRange", default: "-", description: "Selected date(s)." },
+    ],
+    examples: [
+        {
+            title: "Calendar Demo",
+            code: `import { Calendar } from "@/components/ui/Calendar";
+
+<Calendar mode="single" className="rounded-md border" />`,
+        },
+    ],
+  },
+  "date-picker": {
+    name: "Date Picker",
+    slug: "date-picker",
+    filename: "DatePicker.tsx",
+    description: "A date picker component with a calendar popover.",
+    props: [
+        { name: "date", type: "Date", default: "-", description: "Selected date." },
+    ],
+    examples: [
+        {
+            title: "Date Picker Demo",
+            code: `import { DatePicker } from "@/components/ui/DatePicker";
+
+const [date, setDate] = React.useState<Date>();
+<DatePicker date={date} setDate={setDate} />`,
+        },
+    ],
+  },
+  "input-otp": {
+    name: "Input OTP",
+    slug: "input-otp",
+    filename: "InputOTP.tsx",
+    description: "Accessible one-time password input.",
+    props: [
+        { name: "maxLength", type: "number", default: "6", description: "Number of characters." },
+    ],
+    examples: [
+        {
+            title: "OTP Input",
+            code: `import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/InputOTP";
+
+<InputOTP maxLength={6}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+  </InputOTPGroup>
+</InputOTP>`,
+        },
+    ],
+  },
+  slider: {
+    name: "Slider",
+    slug: "slider",
+    filename: "Slider.tsx",
+    description: "An input where the user selects a value from within a given range.",
+    props: [
+        { name: "defaultValue", type: "number[]", default: "[0]", description: "Default value." },
+        { name: "max", type: "number", default: "100", description: "Maximum value." },
+    ],
+    examples: [
+        {
+            title: "Slider Demo",
+            code: `import { Slider } from "@/components/ui/Slider";
+
+<Slider defaultValue={[33]} max={100} step={1} />`,
+        },
+    ],
+  },
+  "toggle-group": {
+    name: "Toggle Group",
+    slug: "toggle-group",
+    filename: "ToggleGroup.tsx",
+    description: "A set of two-state buttons that can be toggled on or off.",
+    props: [
+        { name: "type", type: '"single" | "multiple"', default: '"single"', description: "Selection type." },
+    ],
+    examples: [
+        {
+            title: "Toggle Group Demo",
+            code: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/ToggleGroup";
+
+<ToggleGroup type="single">
+  <ToggleGroupItem value="a">A</ToggleGroupItem>
+  <ToggleGroupItem value="b">B</ToggleGroupItem>
+</ToggleGroup>`,
+        },
+    ],
+  },
+  resizable: {
+    name: "Resizable",
+    slug: "resizable",
+    filename: "Resizable.tsx",
+    description: "Accessible resizable panel groups and layouts.",
+    props: [
+        { name: "direction", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Layout direction." },
+    ],
+    examples: [
+        {
+            title: "Resizable Layout",
+            code: `import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/Resizable";
+
+<ResizablePanelGroup direction="horizontal">
+  <ResizablePanel>One</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel>Two</ResizablePanel>
+</ResizablePanelGroup>`,
+        },
+    ],
+  },
+
+  marquee: {
+    name: "Marquee",
+    slug: "marquee",
+    filename: "Marquee.tsx",
+    description: "An infinite scrolling component for text or images.",
+    props: [
+        { name: "reverse", type: "boolean", default: "false", description: "Reverse direction." },
+        { name: "pauseOnHover", type: "boolean", default: "false", description: "Pause animation on hover." },
+        { name: "vertical", type: "boolean", default: "false", description: "Vertical scrolling." },
+        { name: "repeat", type: "number", default: "4", description: "Number of repeats." },
+    ],
+    examples: [
+        {
+            title: "Horizontal Marquee",
+            code: `import { Marquee } from "@/components/ui/Marquee";
+
+<Marquee className="[--duration:20s]">
+  {/* content */}
+</Marquee>`,
+        },
+    ],
+  },
+  "animated-beam": {
+    name: "Animated Beam",
+    slug: "animated-beam",
+    filename: "AnimatedBeam.tsx",
+    description: "An animated beam of light connecting two elements.",
+    props: [
+        { name: "containerRef", type: "RefObject", default: "-", description: "Container ref." },
+        { name: "fromRef", type: "RefObject", default: "-", description: "Source element ref." },
+        { name: "toRef", type: "RefObject", default: "-", description: "Target element ref." },
+        { name: "duration", type: "number", default: "random", description: "Animation duration." },
+    ],
+    examples: [],
+  },
+  meteors: {
+    name: "Meteors",
+    slug: "meteors",
+    filename: "Meteors.tsx",
+    description: "A background effect with falling meteors.",
+    props: [
+        { name: "number", type: "number", default: "20", description: "Number of meteors." },
+    ],
+    examples: [],
+  },
+  "aurora-background": {
+    name: "Aurora Background",
+    slug: "aurora-background",
+    filename: "AuroraBackground.tsx",
+    description: "A subtle, animated aurora background gradient.",
+    props: [
+         { name: "showRadialGradient", type: "boolean", default: "true", description: "Show radial gradient." },
+    ],
+    examples: [],
+  },
+
+  globe: {
+    name: "Globe",
+    slug: "globe",
+    filename: "Globe.tsx",
+    description: "An interactive, auto-rotating 3D globe.",
+    props: [
+        { name: "globeConfig", type: "object", default: "-", description: "Configuration for cobe globe." },
+    ],
+    examples: [],
   },
 };
 

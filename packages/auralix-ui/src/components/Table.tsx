@@ -1,97 +1,160 @@
+"use client";
+
+import * as React from "react";
 import { cn } from "../utils";
 
-export interface TableProps {
-  children: React.ReactNode;
-  className?: string;
-  striped?: boolean;
-  hoverable?: boolean;
-}
+const TableContext = React.createContext<{
+  variant: "simple" | "striped" | "bordered";
+} | null>(null);
 
-export function Table({ children, className, striped, hoverable }: TableProps) {
+function Table({
+  className,
+  variant = "simple",
+  ...props
+}: React.HTMLAttributes<HTMLTableElement> & { variant?: "simple" | "striped" | "bordered" }) {
   return (
-    <div className="w-full overflow-hidden rounded-[2rem] border border-white/10 bg-background/60 backdrop-blur-md">
-      <div className="w-full overflow-x-auto">
+    <TableContext.Provider value={{ variant }}>
+      <div className={cn(
+        "relative w-full overflow-auto",
+        variant === "bordered" && "rounded-lg border",
+        className
+      )}>
         <table
           className={cn(
             "w-full caption-bottom text-sm",
-            striped && "[&_tbody_tr:nth-child(even)]:bg-muted/30",
-            hoverable && "[&_tbody_tr]:transition-colors [&_tbody_tr:hover]:bg-muted/50",
-            className
+            variant === "striped" && "overflow-hidden rounded-lg",
           )}
-        >
-          {children}
-        </table>
+          {...props}
+        />
       </div>
-    </div>
+    </TableContext.Provider>
   );
 }
+Table.displayName = "Table";
 
-export interface TableHeaderProps {
-  children: React.ReactNode;
-  className?: string;
-}
+const TableHeader = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />
+));
+TableHeader.displayName = "TableHeader";
 
-export function TableHeader({ children, className }: TableHeaderProps) {
+const TableBody = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tbody
+    ref={ref}
+    className={cn("[&_tr:last-child]:border-0", className)}
+    {...props}
+  />
+));
+TableBody.displayName = "TableBody";
+
+const TableFooter = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tfoot
+    ref={ref}
+    className={cn(
+      "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
+      className
+    )}
+    {...props}
+  />
+));
+TableFooter.displayName = "TableFooter";
+
+const TableRow = React.forwardRef<
+  HTMLTableRowElement,
+  React.HTMLAttributes<HTMLTableRowElement>
+>(({ className, ...props }, ref) => {
+  const context = React.useContext(TableContext);
+  const variant = context?.variant || "simple";
+  
   return (
-    <thead className={cn("border-b border-border", className)}>
-      {children}
-    </thead>
-  );
-}
-
-export interface TableBodyProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function TableBody({ children, className }: TableBodyProps) {
-  return (
-    <tbody className={cn("[&_tr:last-child]:border-0", className)}>
-      {children}
-    </tbody>
-  );
-}
-
-export interface TableRowProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function TableRow({ children, className }: TableRowProps) {
-  return (
-    <tr className={cn("border-b border-border", className)}>
-      {children}
-    </tr>
-  );
-}
-
-export interface TableHeadProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function TableHead({ children, className }: TableHeadProps) {
-  return (
-    <th
+    <tr
+      ref={ref}
       className={cn(
-        "h-12 px-4 text-left align-middle font-medium text-muted-foreground",
+        "transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+        
+        // Simple/Bordered: Bottom border
+        (variant === "simple" || variant === "bordered") && "border-b border-border",
+        
+        // Striped: Alternating colors, no border usually, or subtle border
+        variant === "striped" && "border-none odd:bg-black/5 dark:odd:bg-white/5 even:bg-transparent hover:bg-black/5 dark:hover:bg-white/10",
+        
         className
       )}
-    >
-      {children}
-    </th>
+      {...props}
+    />
   );
-}
+});
+TableRow.displayName = "TableRow";
 
-export interface TableCellProps {
-  children: React.ReactNode;
-  className?: string;
-}
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => {
+  const context = React.useContext(TableContext);
+  const variant = context?.variant || "simple";
 
-export function TableCell({ children, className }: TableCellProps) {
   return (
-    <td className={cn("p-4 align-middle", className)}>
-      {children}
-    </td>
+    <th
+      ref={ref}
+      className={cn(
+        "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+        variant === "bordered" && "border-r border-border last:border-r-0 bg-muted/50",
+        className
+      )}
+      {...props}
+    />
   );
-}
+});
+TableHead.displayName = "TableHead";
+
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => {
+  const context = React.useContext(TableContext);
+  const variant = context?.variant || "simple";
+
+  return (
+    <td
+      ref={ref}
+      className={cn(
+        "p-4 align-middle [&:has([role=checkbox])]:pr-0",
+        variant === "bordered" && "border-r border-border last:border-r-0",
+        className
+      )}
+      {...props}
+    />
+  );
+});
+TableCell.displayName = "TableCell";
+
+const TableCaption = React.forwardRef<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>(({ className, ...props }, ref) => (
+  <caption
+    ref={ref}
+    className={cn("mt-4 text-sm text-muted-foreground", className)}
+    {...props}
+  />
+));
+TableCaption.displayName = "TableCaption";
+
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+};

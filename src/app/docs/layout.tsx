@@ -10,7 +10,7 @@ export default function DocsLayout({
     <div className="min-h-screen bg-background">
       <Navbar />
       <Sidebar />
-      <main className="pl-0 pt-16 md:pl-64">
+      <main className="pl-0 md:pl-64">
         <div className="mx-auto max-w-4xl px-4 py-8 md:px-8">
           {children}
         </div>

@@ -16,6 +16,10 @@ const items: ToCItem[] = [
     url: "#preview",
   },
   {
+    title: "Installation",
+    url: "#installation",
+  },
+  {
     title: "Usage",
     url: "#usage",
   },
@@ -23,9 +27,13 @@ const items: ToCItem[] = [
     title: "Props",
     url: "#props",
   },
+  {
+    title: "Variants",
+    url: "#variants",
+  },
 ];
 
-export function TableOfContents() {
+export function TableOfContents({ showVariants = true }: { showVariants?: boolean }) {
   const [activeHash, setActiveHash] = useState("");
 
   useEffect(() => {
@@ -40,19 +48,24 @@ export function TableOfContents() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const filteredItems = items.filter(item => {
+    if (item.url === "#variants" && !showVariants) return false;
+    return true;
+  });
+
   return (
-    <div className="space-y-2">
-      <p className="font-medium text-sm">On this page</p>
-      <ul className="m-0 list-none space-y-2">
-        {items.map((item) => (
-          <li key={item.url} className="mt-0 pt-2">
+    <div className="space-y-3">
+      <p className="font-medium text-sm text-foreground">On this page</p>
+      <ul className="m-0 list-none space-y-0 border-l border-border">
+        {filteredItems.map((item) => (
+          <li key={item.url} className="mt-0">
             <a
               href={item.url}
               className={cn(
-                "inline-block no-underline transition-colors hover:text-foreground text-sm",
+                "block border-l-2 py-1 pl-4 text-sm transition-all duration-200 -ml-[1px]",
                 activeHash === item.url
-                  ? "font-medium text-foreground"
-                  : "text-muted-foreground"
+                  ? "border-blue-500 text-blue-500 font-medium"
+                  : "border-transparent text-muted-foreground hover:border-muted-foreground/50 hover:text-foreground"
               )}
               onClick={() => setActiveHash(item.url)}
             >
