@@ -1,36 +1,186 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auralix UI
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+![Auralix UI](https://img.shields.io/badge/Auralix_UI-Modern_Component_Library-8B5CF6?style=for-the-badge&logo=react&logoColor=white)
+
+[![npm version](https://img.shields.io/npm/v/auralix-ui.svg?style=flat-square&color=8B5CF6)](https://www.npmjs.com/package/auralix-ui)
+[![npm downloads](https://img.shields.io/npm/dm/auralix-ui.svg?style=flat-square&color=A855F7)](https://www.npmjs.com/package/auralix-ui)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
+**Beautiful, accessible, and highly customizable React UI components for modern web applications.**
+
+[Documentation](https://auralix-ui.netlify.app) · [Components](https://auralix-ui.netlify.app/components/button) · [GitHub](https://github.com/chandafa/auralix-ui)
+
+</div>
+
+---
+
+## ✨ Features
+
+- 🎨 **87+ Components** — Buttons, Cards, Modals, Tooltips, and more
+- 🌙 **Dark Mode** — Built-in support with seamless theme switching
+- ⚡ **High Performance** — Optimized animations with GSAP, Framer Motion, React Spring & Anime.js
+- 📱 **Responsive** — Mobile-first design that works on all devices
+- ♿ **Accessible** — WCAG compliant with full keyboard navigation
+- 🔧 **Customizable** — Built with Tailwind CSS for easy styling
+- 📦 **Tree-shakeable** — Import only what you need
+- 💎 **TypeScript** — Full type safety and IntelliSense support
+
+---
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
-npm run dev
+npm install auralix-ui
 # or
-yarn dev
+yarn add auralix-ui
 # or
-pnpm dev
-# or
-bun dev
+pnpm add auralix-ui
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```tsx
+import { Button, Card, Modal } from "auralix-ui";
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+export default function App() {
+  return (
+    <Card>
+      <h2>Welcome to Auralix UI</h2>
+      <Button variant="gradient" size="lg">
+        Get Started
+      </Button>
+    </Card>
+  );
+}
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Available Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<table>
+<tr>
+<td>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Layout**
 
-## Deploy on Vercel
+- Accordion
+- Card
+- Divider
+- Resizable
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+</td>
+<td>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Forms**
+
+- Button
+- Input
+- Select
+- Checkbox
+- Switch
+- Slider
+
+</td>
+<td>
+
+**Feedback**
+
+- Alert
+- Modal
+- Toast
+- Tooltip
+- Progress
+
+</td>
+<td>
+
+**Data Display**
+
+- Avatar
+- Badge
+- Table
+- Tabs
+- Tag
+
+</td>
+</tr>
+</table>
+
+[View all 87+ components →](https://auralix-ui.netlify.app/components/button)
+
+---
+
+## 🎨 Theming
+
+Auralix UI uses CSS variables for theming. Customize colors easily:
+
+```css
+:root {
+  --primary: #8b5cf6;
+  --background: #ffffff;
+  --foreground: #09090b;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+}
+```
+
+---
+
+## 🔧 Requirements
+
+- React 18+
+- Tailwind CSS 4+
+- TypeScript (recommended)
+
+---
+
+## 📖 Documentation
+
+Visit [auralix-ui.netlify.app](https://auralix-ui.netlify.app) for:
+
+- 📚 Complete API reference
+- 💡 Usage examples
+- 🎨 Theming guide
+- 📦 Installation tutorials
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+```bash
+# Clone the repository
+git clone https://github.com/chandafa/auralix-ui.git
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+---
+
+## 📄 License
+
+MIT © [Auralix Team](https://github.com/chandafa)
+
+---
+
+<div align="center">
+
+**Built with ❤️ using React, TypeScript, and Tailwind CSS**
+
+[⬆ Back to top](#auralix-ui)
+
+</div>

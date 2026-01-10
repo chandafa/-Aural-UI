@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import "./animations.css";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -12,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://auralix-ui.vercel.app"),
+  metadataBase: new URL("https://auralix-ui.netlify.app"),
   title: {
     default: "Auralix UI - Modern UI Component Library",
     template: "%s | Auralix UI",
@@ -22,14 +23,14 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Auralix Team",
-      url: "https://auralix-ui.vercel.app",
+      url: "https://auralix-ui.netlify.app",
     },
   ],
   creator: "Auralix Team",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://auralix-ui.vercel.app",
+    url: "https://auralix-ui.netlify.app",
     title: "Auralix UI - Modern UI Component Library",
     description: "Beautiful, reusable, and accessible UI components for React and Tailwind CSS.",
     siteName: "Auralix UI",
@@ -49,10 +50,13 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
     creator: "@auralixui",
   },
+  verification: {
+    google: "1q7Qf0Fo93c80c4CqAhvmKo2qYA3Iln4JWPkHKWySlU",
+  },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 };
 
@@ -67,6 +71,20 @@ export default function RootLayout({
         className={`${poppins.variable} font-sans antialiased`}
         style={{ fontFamily: "var(--font-poppins), -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif" }}
       >
+         <JsonLd<any>
+          json={{
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Auralix UI",
+            url: "https://auralix-ui.netlify.app",
+            description: "Modern UI Component Library for React and Tailwind CSS",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://auralix-ui.netlify.app/docs?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }}
+        />
         <ThemeProvider>
           {children}
         </ThemeProvider>

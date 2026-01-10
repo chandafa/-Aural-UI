@@ -73,6 +73,11 @@ function ToastDemo() {
   );
 }
 
+function DatePickerDemo() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  return <DatePicker date={date} setDate={setDate} />;
+}
+
 const AnimatedBeamPreview = () => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const div1Ref = React.useRef<HTMLDivElement>(null);
@@ -282,11 +287,23 @@ export function NewComponentPreview({ slug }: NewComponentPreviewProps) {
       );
     case "flip-card":
       return (
-        <div className="w-64 h-40">
-          <FlipCard
-            front={<div className="flex items-center justify-center h-full p-6 text-xl font-bold">Hover to flip</div>}
-            back={<div className="flex items-center justify-center h-full p-6 text-xl font-bold bg-primary text-primary-foreground">Back side!</div>}
-          />
+        <div className="flex items-center justify-center p-8">
+          <div className="w-[300px] h-[200px]">
+             <FlipCard
+                front={
+                  <div className="flex flex-col items-center justify-center h-full p-6 text-center bg-zinc-900 border border-zinc-800 rounded-2xl">
+                    <h3 className="text-xl font-bold mb-2">Hover Me</h3>
+                    <p className="text-sm text-zinc-400">Backface hidden 3D flip effect</p>
+                  </div>
+                }
+                back={
+                  <div className="flex flex-col items-center justify-center h-full p-6 text-center bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl">
+                    <h3 className="text-xl font-bold text-white mb-2">Hello World!</h3>
+                    <p className="text-sm text-white/80">This content was hidden behind</p>
+                  </div>
+                }
+             />
+          </div>
         </div>
       );
     case "tilt-card":
@@ -385,10 +402,15 @@ export function NewComponentPreview({ slug }: NewComponentPreviewProps) {
       );
     case "confetti":
       return (
-        <div className="text-center relative">
-          <p className="text-muted-foreground mb-4">Click the button to see confetti!</p>
-          <Button variant="primary" onClick={fireConfetti}>🎉 Celebrate</Button>
-          <Confetti active={confettiActive} />
+        <div className="relative w-full h-[400px] flex flex-col items-center justify-center border rounded-lg bg-zinc-950 overflow-hidden">
+          <Confetti active={confettiActive} className="absolute inset-0" />
+          <div className="z-10 text-center space-y-4">
+            <h3 className="text-2xl font-bold text-white">Congratulations!</h3>
+            <p className="text-zinc-400">Click the button to celebrate.</p>
+            <Button onClick={fireConfetti} className="bg-white text-black hover:bg-zinc-200">
+              🎉 Celebrate
+            </Button>
+          </div>
         </div>
       );
     case "file-tree":
@@ -530,9 +552,9 @@ export function NewComponentPreview({ slug }: NewComponentPreviewProps) {
     case "date-picker":
       return (
          // Simplified preview since it requires state, usually managed in parent
-         <div className="w-[240px]">
-             <DatePicker setDate={() => {}} />
-         </div>
+         <div className="w-[300px] h-[350px] flex items-start justify-center pt-10">
+              <DatePickerDemo />
+          </div>
       );
     case "input-otp":
       return (
@@ -587,19 +609,25 @@ export function NewComponentPreview({ slug }: NewComponentPreviewProps) {
       );
     case "marquee":
       return (
-        <div className="relative flex h-[150px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+        <div className="relative flex h-[300px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
           <Marquee pauseOnHover className="[--duration:20s]">
-            {["Next.js", "React", "Tailwind", "Framer Motion", "Typescript"].map((item) => (
-                <div key={item} className="mx-4 font-semibold">{item}</div>
+            {["Google", "Microsoft", "Apple", "Amazon", "Netflix", "Meta"].map((item) => (
+               <div key={item} className="mx-8 flex items-center gap-2 rounded-lg border bg-white/5 px-4 py-2">
+                 <div className="h-6 w-6 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500" />
+                 <span className="font-semibold">{item}</span>
+               </div>
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover className="[--duration:20s] mt-4">
-             {["Shadcn", "Aceternity", "Magic UI", "Radix UI", "CVA"].map((item) => (
-                <div key={item} className="mx-4 font-semibold">{item}</div>
+          <Marquee reverse pauseOnHover className="[--duration:20s] mt-8">
+             {["Next.js", "React", "TypeScript", "TailwindCSS", "Framer Motion", "Vite"].map((item) => (
+               <div key={item} className="mx-8 flex items-center gap-2 rounded-lg border bg-white/5 px-4 py-2">
+                 <div className="h-6 w-6 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500" />
+                 <span className="font-semibold">{item}</span>
+               </div>
             ))}
           </Marquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background dark:from-background"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-background dark:from-background"></div>
         </div>
       );
     case "meteors":

@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllComponentSlugs } from "@/lib/components-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://auralix-ui.vercel.app";
+  const baseUrl = "https://auralix-ui.netlify.app";
   const componentSlugs = getAllComponentSlugs();
 
   // Static routes

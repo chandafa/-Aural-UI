@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface DropdownProps {
@@ -41,9 +42,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
   }, []);
 
   const alignClasses = {
-    start: "left-0",
-    center: "left-1/2 -translate-x-1/2",
-    end: "right-0",
+    start: "left-0 origin-top-left",
+    center: "left-1/2 -translate-x-1/2 origin-top",
+    end: "right-0 origin-top-right",
   };
 
   return (
@@ -52,21 +53,36 @@ export const Dropdown: React.FC<DropdownProps> = ({
         {trigger}
       </div>
 
-      {isOpen && (
-        <div
-          className={cn(
-            "absolute z-50 mt-2 min-w-[180px]",
-            "rounded-xl border border-border/50 bg-background/95 backdrop-blur-xl",
-            "shadow-lg shadow-black/10 dark:shadow-black/30",
-            "py-1 animate-in fade-in-0 zoom-in-95 duration-150",
-            "dark:bg-zinc-900/95 dark:border-zinc-800",
-            alignClasses[align],
-            className
-          )}
-        >
-          {children}
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -5 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1, 
+              y: 0,
+              transition: { type: "spring", stiffness: 300, damping: 25 }
+            }}
+            exit={{ 
+              opacity: 0, 
+              scale: 0.95, 
+              y: -5,
+              transition: { duration: 0.15 }
+            }}
+            className={cn(
+              "absolute z-50 mt-2 min-w-[180px]",
+              "rounded-xl border border-border/50 bg-background/95 backdrop-blur-xl",
+              "shadow-lg shadow-black/10 dark:shadow-black/30",
+              "py-1",
+              "dark:bg-zinc-900/95 dark:border-zinc-800",
+              alignClasses[align],
+              className
+            )}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

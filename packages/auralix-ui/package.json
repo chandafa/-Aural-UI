@@ -1,20 +1,42 @@
 {
   "name": "auralix-ui",
-  "version": "1.1.0",
-  "description": "Modern UI component library with glass morphism effects for React",
-  "author": "Auralix UI Team",
+  "version": "1.2.0",
+  "description": "Beautiful, accessible React UI components with Tailwind CSS, dark mode, and smooth GSAP/Framer Motion animations. 87+ production-ready components.",
+  "author": "Auralix Team <auralix@example.com>",
   "license": "MIT",
   "keywords": [
     "react",
+    "react-components",
     "ui",
-    "components",
+    "ui-components",
+    "ui-library",
+    "component-library",
     "tailwindcss",
+    "tailwind",
     "glass-morphism",
-    "typescript"
+    "glassmorphism",
+    "typescript",
+    "nextjs",
+    "next",
+    "design-system",
+    "framer-motion",
+    "gsap",
+    "animation",
+    "dark-mode",
+    "accessible",
+    "wcag",
+    "button",
+    "modal",
+    "card",
+    "tooltip"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chandafa/auralix-ui.git"
+  },
+  "homepage": "https://auralix-ui.netlify.app",
+  "bugs": {
+    "url": "https://github.com/chandafa/auralix-ui/issues"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

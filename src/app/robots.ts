@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://auralix-ui.vercel.app/sitemap.xml",
+    sitemap: "https://auralix-ui.netlify.app/sitemap.xml",
   };
 }
